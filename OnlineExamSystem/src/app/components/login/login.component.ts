@@ -29,8 +29,8 @@ export class LoginComponent implements OnInit {
       this.userCate = [
         {value: 'admin', label: '超级管理员'},
         {value: 'manager', label: '学校管理员'},
-        {value: 'jiaoshi', label: '教师'},
-        {value: 'xuesheng', label: '学生'}
+        {value: 'teacher', label: '教师'},
+        {value: 'student', label: '学生'}
       ];
     })
   }
