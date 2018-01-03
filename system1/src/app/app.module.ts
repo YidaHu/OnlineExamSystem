@@ -10,6 +10,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
 import {LoginServeService} from "./serve/login-serve.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { MainComponent } from './components/main/main.component';
+import { MainsComponent } from './components/mains/mains.component';
 
 
 
@@ -17,7 +19,9 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
   declarations: [
     AppComponent,
     LoginComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    MainComponent,
+    MainsComponent
   ],
   imports: [
     BrowserModule,

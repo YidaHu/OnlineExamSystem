@@ -1,0 +1,129 @@
+<div class="header">
+  <div class="header_s">苏州科技大学后台系统</div>
+  <div class="header_admin">
+    <nz-dropdown>
+      <a class="ant-dropdown-link clearfix" nz-dropdown>
+        <img class="img_admin" src="../../assets/imgs/admin1.jpg" alt=""><i class="anticon anticon-down"></i>
+      </a>
+      <ul nz-menu>
+        <li nz-menu-item>
+          <a target="_blank" rel="noopener noreferrer" href="javascript:void(0)">用户信息</a>
+        </li>
+        <li nz-menu-item>
+          <a target="_blank" rel="noopener noreferrer" href="javascript:void(0)">修改密码</a>
+        </li>
+        <li nz-menu-item>
+          <a target="_blank" rel="noopener noreferrer" href="javascript:void(0)">退出登录</a>
+        </li>
+      </ul>
+    </nz-dropdown>
+  </div>
+</div>
+<div class="container clearfix">
+  <div class="con_left">
+    <div  style="width: 240px;">
+      <button nz-button [nzType]="'primary'"
+              (click)="toggleCollapsed()"
+              style="margin-bottom: 10px;">
+        <i class="anticon"
+           [class.anticon-menu-unfold]="isCollapsed"
+           [class.anticon-menu-fold]="!isCollapsed">
+        </i>
+      </button>
+      <ul nz-menu [nzMode]="'inline'" nzTheme='dark' [nzInlineCollapsed]="isCollapsed">
+        <!--<li nz-menu-item>-->
+        <li nz-submenu>
+          <span title>
+            <i class="anticon anticon-mail"></i>
+            <span>信息查询</span>
+          </span>
+          <ul>
+            <li nz-menu-item>成绩查询</li>
+            <li nz-menu-item>学生查询</li>
+            <li nz-menu-item>教师查询</li>
+          </ul>
+        </li>
+        <li nz-submenu>
+          <span title>
+            <i class="anticon anticon-appstore"></i>
+            <span>信息管理</span>
+          </span>
+          <ul>
+            <li nz-menu-item>管理员管理</li>
+            <li nz-menu-item>学校管理员管理</li>
+            <li nz-menu-item>学校管理</li>
+            <li nz-menu-item>学院管理</li>
+            <li nz-menu-item>专业管理</li>
+            <li nz-menu-item>班级管理</li>
+            <li nz-menu-item>课程管理</li>
+            <li nz-menu-item>教师管理</li>
+            <li nz-menu-item>学生管理</li>
+          </ul>
+        </li>
+        <li nz-submenu>
+          <span title>
+            <i class="anticon anticon-setting"></i>
+            <span>权限管理</span>
+          </span>
+          <ul>
+            <li nz-menu-item>权限设置</li>
+            <li nz-menu-item>推动消息</li>
+          </ul>
+        </li>
+        <li nz-submenu>
+          <span title>
+            <i class="anticon anticon-setting"></i>
+            <span>考试设计</span>
+          </span>
+          <ul>
+            <li nz-menu-item>在线组卷</li>
+            <li nz-menu-item>考试安排</li>
+            <li nz-menu-item>组卷里是</li>
+          </ul>
+        </li>
+        <li nz-submenu>
+          <span title>
+            <i class="anticon anticon-setting"></i>
+            <span>题目管理</span>
+          </span>
+          <ul>
+            <li nz-menu-item>错题列表</li>
+            <li nz-menu-item>诊断报告</li>
+            <li nz-menu-item>上传题目</li>
+          </ul>
+        </li>
+        <li nz-submenu>
+          <span title>
+            <i class="anticon anticon-setting"></i>
+            <span>数据分析</span>
+          </span>
+          <ul>
+            <li nz-menu-item>得分分析</li>
+            <li nz-menu-item>知识点分析</li>
+            <li nz-menu-item>题目分析</li>
+            <li nz-menu-item>成绩分析</li>
+          </ul>
+        </li>
+        <li nz-submenu>
+          <span title>
+            <i class="anticon anticon-setting"></i>
+            <span>统计报表</span>
+          </span>
+          <ul>
+            <li nz-menu-item>成绩报表</li>
+            <li nz-menu-item>任务报表</li>
+          </ul>
+        </li>
+        <li nz-menu-item>
+          <span title>
+            <i class="anticon anticon-setting"></i>
+            <span>进入考试</span>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="con_right">
+    <router-outlet></router-outlet>
+  </div>
+</div>

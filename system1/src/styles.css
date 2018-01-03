@@ -46,3 +46,10 @@ html, body {
   height:100%;
   width:100%;
 }
+.clearfix:after, .clearfix:before{
+  content: '';
+  height:0;
+  display: block;
+  clear: both;
+  overflow: hidden;
+}

@@ -16,7 +16,7 @@
     </div>
     <div nz-form-item>
       <div nz-form-control>
-        <nz-input formControlName="userName" [nzPlaceHolder]="'请输入用户名'" [nzSize]="'large'">
+        <nz-input formControlName="userName"  (click)="fouces()"  [nzPlaceHolder]="'请输入用户名'" [nzSize]="'large'">
           <ng-template #prefix>
             <i class="anticon anticon-user"></i>
           </ng-template>
@@ -26,7 +26,7 @@
     </div>
     <div nz-form-item>
       <div nz-form-control>
-        <nz-input formControlName="password" [nzType]="'password'" [nzPlaceHolder]="'请输入密码'" [nzSize]="'large'">
+        <nz-input formControlName="password" (click)="fouces()" [nzType]="'password'" [nzPlaceHolder]="'请输入密码'" [nzSize]="'large'">
           <ng-template #prefix>
             <i class="anticon anticon-lock"></i>
           </ng-template>
@@ -34,6 +34,8 @@
         <div nz-form-explain *ngIf="validateForm.controls.password.dirty&&validateForm.controls.password.hasError('required')">请输入密码!</div>
       </div>
     </div>
+    <div class="errorInfo"  *ngIf="errorInfo">用户名或密码错误!</div>
+
     <div nz-form-item>
       <div nz-form-control>
         <label nz-checkbox formControlName="remember">

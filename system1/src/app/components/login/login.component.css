@@ -32,3 +32,10 @@
   width:100%;
   text-align: center;
 }
+.errorInfo {
+  color: red;
+  width:100%;
+  text-align: center;
+  margin-top: -13px;
+}
+

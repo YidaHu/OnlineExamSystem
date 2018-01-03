@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 
 @Injectable()
@@ -7,7 +7,10 @@ export class LoginServeService {
 
   constructor(private http: HttpClient) { }
   login( params, callback ) {
-    this.http.post('url', JSON.stringify(params)).subscribe( data => {
+    this.http.post('/api', params, {
+
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+    }).subscribe( data => {
       callback(data);
     })
   }
