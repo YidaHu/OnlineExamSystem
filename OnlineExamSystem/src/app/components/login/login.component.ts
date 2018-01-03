@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   validateForm: FormGroup;
   private userCate = [];
   private errorInfo = false;
+
   constructor(private fb: FormBuilder, private loginServeService: LoginServeService, private router: Router) {
 
   }
@@ -24,26 +25,28 @@ export class LoginComponent implements OnInit {
       password: [null, [Validators.required]],
       remember: [true],
     });
-    setTimeout( () => {
+    setTimeout(() => {
       this.userCate = [
-        { value: 'jiaoshi', label: '教师' },
-        { value: 'admin', label: '管理员' },
-        { value: 'xuesheng', label: '学生' }
+        {value: 'admin', label: '超级管理员'},
+        {value: 'manager', label: '学校管理员'},
+        {value: 'jiaoshi', label: '教师'},
+        {value: 'xuesheng', label: '学生'}
       ];
     })
   }
+
   fouces() {
     this.errorInfo = false;
   }
 
   _submitForm() {
     console.log(this.validateForm.controls)
-    if(this.validateForm.valid){
+    if (this.validateForm.valid) {
       console.log(this.validateForm.value)
       this.loginServeService.login(this.validateForm.value, data => {
-        if(data.success){
+        if (data.success) {
           this.router.navigate(['main']);
-        }else{
+        } else {
           this.errorInfo = true;
         }
       });

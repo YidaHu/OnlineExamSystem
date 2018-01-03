@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('online-exam-system App', () => {
+describe('system App', () => {
   let page: AppPage;
 
   beforeEach(() => {
