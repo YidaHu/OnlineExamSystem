@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 @Component({
-  selector: 'app-mains',
+  selector: 'app-school-department-manage',
   templateUrl: './school-manage.component.html',
   styleUrls: ['./school-manage.component.css']
 })

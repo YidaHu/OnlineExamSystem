@@ -49,15 +49,15 @@
             <span>信息管理</span>
           </span>
           <ul>
-            <li nz-menu-item>管理员管理</li>
-            <li nz-menu-item>学校管理员管理</li>
+            <li nz-menu-item [routerLink]="['./admin-manage']">管理员管理</li>
+            <li nz-menu-item [routerLink]="['./leadership-manage']">学校管理员管理</li>
             <li nz-menu-item [routerLink]="['./school-manage']">学校管理</li>
             <li nz-menu-item [routerLink]="['./department-manage']">学院管理</li>
-            <li nz-menu-item>专业管理</li>
-            <li nz-menu-item>班级管理</li>
-            <li nz-menu-item>课程管理</li>
-            <li nz-menu-item>教师管理</li>
-            <li nz-menu-item>学生管理</li>
+            <li nz-menu-item [routerLink]="['./major-manage']">专业管理</li>
+            <li nz-menu-item [routerLink]="['./class-manage']">班级管理</li>
+            <li nz-menu-item [routerLink]="['./course-manage']">课程管理</li>
+            <li nz-menu-item [routerLink]="['./teacher-manage']">教师管理</li>
+            <li nz-menu-item [routerLink]="['./student-manage']">学生管理</li>
           </ul>
         </li>
         <li nz-submenu>

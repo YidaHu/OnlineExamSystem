@@ -14,6 +14,13 @@ import { MainComponent } from './components/main/main.component';
 import { MainsComponent } from './components/mains/mains.component';
 import { DepartmentManagementComponent } from './components/information-manage/department-manage/department-manage.component';
 import {SchoolManagementComponent} from './components/information-manage/school-manage/school-manage.component';
+import { AdminManageComponent } from './components/information-manage/admin-manage/admin-manage.component';
+import { ClassManageComponent } from './components/information-manage/class-manage/class-manage.component';
+import { CourseManageComponent } from './components/information-manage/course-manage/course-manage.component';
+import { LeadershipManageComponent } from './components/information-manage/leadership-manage/leadership-manage.component';
+import { MajorManageComponent } from './components/information-manage/major-manage/major-manage.component';
+import { StudentManageComponent } from './components/information-manage/student-manage/student-manage.component';
+import { TeacherManageComponent } from './components/information-manage/teacher-manage/teacher-manage.component';
 
 
 @NgModule({
@@ -24,7 +31,14 @@ import {SchoolManagementComponent} from './components/information-manage/school-
     MainComponent,
     MainsComponent,
     DepartmentManagementComponent,
-    SchoolManagementComponent
+    SchoolManagementComponent,
+    AdminManageComponent,
+    ClassManageComponent,
+    CourseManageComponent,
+    LeadershipManageComponent,
+    MajorManageComponent,
+    StudentManageComponent,
+    TeacherManageComponent,
   ],
   imports: [
     BrowserModule,
