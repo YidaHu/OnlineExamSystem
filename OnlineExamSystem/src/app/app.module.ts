@@ -1,19 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { HttpClientModule} from "@angular/common/http";
-import { AppRoutingModule } from './app-routing.module';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {HttpClientModule} from "@angular/common/http";
+import {AppRoutingModule} from './app-routing.module';
 
-import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
-import { ErrorPageComponent } from './components/error-page/error-page.component';
+import {AppComponent} from './app.component';
+import {LoginComponent} from './components/login/login.component';
+import {ErrorPageComponent} from './components/error-page/error-page.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
 import {LoginServeService} from "./serve/login-serve.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { MainComponent } from './components/main/main.component';
 import { MainsComponent } from './components/mains/mains.component';
-import { CollegeManageComponent } from './components/college-manage/college-manage.component';
-
+import { DepartmentManagementComponent } from './components/information-manage/department-manage/department-manage.component';
+import {SchoolManagementComponent} from './components/information-manage/school-manage/school-manage.component';
 
 
 @NgModule({
@@ -23,7 +23,8 @@ import { CollegeManageComponent } from './components/college-manage/college-mana
     ErrorPageComponent,
     MainComponent,
     MainsComponent,
-    CollegeManageComponent
+    DepartmentManagementComponent,
+    SchoolManagementComponent
   ],
   imports: [
     BrowserModule,
@@ -39,4 +40,5 @@ import { CollegeManageComponent } from './components/college-manage/college-mana
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

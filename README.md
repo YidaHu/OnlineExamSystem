@@ -1,11 +1,11 @@
 # OnlineExamSystem
 
 
-##OnlineExamSystem run server
+##OnlineExamSystem 
 
-* run npm start
+> ​	
 
 ##NodeJs
 
-* node server.js
+> ​	
 
