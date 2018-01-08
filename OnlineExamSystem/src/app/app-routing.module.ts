@@ -4,11 +4,13 @@ import { LoginComponent } from './components/login/login.component';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import {MainComponent} from "./components/main/main.component";
 import {MainsComponent} from "./components/mains/mains.component";
+import {CollegeManageComponent} from "./components/college-manage/college-manage.component";
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'main', component: MainComponent, children:[
-    {path: '', component: MainsComponent}
+    {path: '', component: MainsComponent},
+    {path: 'college', component: CollegeManageComponent}
   ]},
 
   { path: '**', component: ErrorPageComponent }

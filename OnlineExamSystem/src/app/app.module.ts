@@ -12,6 +12,7 @@ import {LoginServeService} from "./serve/login-serve.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { MainComponent } from './components/main/main.component';
 import { MainsComponent } from './components/mains/mains.component';
+import { CollegeManageComponent } from './components/college-manage/college-manage.component';
 
 
 
@@ -21,7 +22,8 @@ import { MainsComponent } from './components/mains/mains.component';
     LoginComponent,
     ErrorPageComponent,
     MainComponent,
-    MainsComponent
+    MainsComponent,
+    CollegeManageComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,5 @@
+1、创建component
+2、在main组建中使用  [routeLink]="['./college']"
+3、在app-routing文件中配置路由
+	在main路由中配置子路由（path的名字和2步骤的名字一致，component：是需要提供的组件名字）
+4、在新建的component写你需要的内容
