@@ -53,3 +53,9 @@ html, body {
   clear: both;
   overflow: hidden;
 }
+.c_left{
+  float: left;
+}
+.c_right{
+  float: right;
+}

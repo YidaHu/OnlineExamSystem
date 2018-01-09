@@ -21,6 +21,7 @@ import { LeadershipManageComponent } from './components/information-manage/leade
 import { MajorManageComponent } from './components/information-manage/major-manage/major-manage.component';
 import { StudentManageComponent } from './components/information-manage/student-manage/student-manage.component';
 import { TeacherManageComponent } from './components/information-manage/teacher-manage/teacher-manage.component';
+import {TableServiceService} from "./serve/table-service.service";
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { TeacherManageComponent } from './components/information-manage/teacher-
     NgZorroAntdModule.forRoot()
   ],
   providers: [
-    LoginServeService
+    LoginServeService,
+    TableServiceService
   ],
   bootstrap: [AppComponent]
 })
