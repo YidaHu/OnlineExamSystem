@@ -10,6 +10,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class MajorManageComponent implements OnInit {
   validateForm: FormGroup;
 
+  private statusShow = false; /*状态*/
   private id; /*删除的id*/
   private tabTitle = "";  /*弹窗标题*/
   private scholls;
@@ -57,8 +58,10 @@ export class MajorManageComponent implements OnInit {
     this.isVisible = true;
     if(strs == "add"){
       this.tabTitle = "添加专业数据";
+      this.statusShow = false;
     }else{
       this.tabTitle = "修改专业数据";
+      this.statusShow = true;
     }
   }
 

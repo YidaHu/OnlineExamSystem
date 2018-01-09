@@ -108,7 +108,7 @@
             <div nz-form-explain *ngIf="validateForm.controls.name.dirty&&validateForm.controls.name.hasError('required')">请填写专业</div>
           </div>
         </div>
-        <div nz-form-item nz-row>
+        <div nz-form-item nz-row  *ngIf="statusShow">
           <div nz-form-label nz-col [nzSpan]="6">
             <label>状态</label>
           </div>
