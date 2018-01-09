@@ -16,7 +16,7 @@ export class TableServiceService {
       params = params.append('gender', gender);
     });
     return this.http.post(`${this.randomUserUrl}`, {
-      // params: params
+      params: params
     })
   }
 }

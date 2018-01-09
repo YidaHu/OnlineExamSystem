@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TableServiceService} from "../../../serve/table-service.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-major-manage',
@@ -7,10 +8,17 @@ import {TableServiceService} from "../../../serve/table-service.service";
   styleUrls: ['./major-manage.component.css']
 })
 export class MajorManageComponent implements OnInit {
+  validateForm: FormGroup;
+
+  private id; /*删除的id*/
+  private tabTitle = "";  /*弹窗标题*/
   private scholls;
-  private  schollsId;
-  private serachShow = false; //控制是否生成table
-  private isVisible = false; //tab窗口
+  private schollsId;
+  private serachShow = false;
+  /*控制是否生成table*/
+  private isVisible = false;
+  /*tab添加修改窗口*/
+
   _current = 1;
   _pageSize = 10;
   _total = 1;
@@ -18,32 +26,58 @@ export class MajorManageComponent implements OnInit {
   _loading = true;
   _sortValue = null;
   _filterGender = [
-    { name: 'male', value: false },
-    { name: 'female', value: false }
+    {name: 'male', value: false},
+    {name: 'female', value: false}
   ];
 
-  constructor(private _randomUser: TableServiceService) { }
-
-  ngOnInit() {
-    this.scholls = [{ value: 'jack', label: 'Jack' },
-      { value: 'lucy', label: 'Lucy' },
-      { value: 'disabled', label: 'Disabled', disabled: true }];
+  constructor(private _randomUser: TableServiceService, private fb: FormBuilder) {
   }
 
-  //查询数据
+  ngOnInit() {
+    this.scholls = [{value: 'jack', label: 'Jack'},
+      {value: 'lucy', label: 'Lucy'},
+      {value: 'disabled', label: 'Disabled', disabled: true}];
+    this.validateForm = this.fb.group({
+      school_id: ['', [Validators.required]],
+      department_id: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      is_adult: ['', [Validators.required]]
+    });
+  }
+
+  /*查询数据*/
   searchMajor() {
     console.log(this.schollsId);
     this.serachShow = true;
     this.refreshData();
   }
 
-  //添加数据
-  addMajor() {
-    console.log('添加成功')
-    this.isVisible = false;
+  /*弹窗*/
+  operateData(strs) {
+    this.isVisible = true;
+    if(strs == "add"){
+      this.tabTitle = "添加专业数据";
+    }else{
+      this.tabTitle = "修改专业数据";
+    }
   }
 
-  //关闭窗口
+  /*添加数据*/
+  addMajor() {
+    if (this.validateForm.valid){
+      /*此处提交*/
+      console.log(this.validateForm.value);
+      this.validateForm.reset();
+      console.log(this.validateForm.value)
+      this.isVisible = false;
+      this.refreshData(true);
+      /*刷新table*/
+
+    }
+  }
+
+
+  /*关闭窗口*/
   handleCancel() {
     this.isVisible = false;
   }
@@ -61,7 +95,7 @@ export class MajorManageComponent implements OnInit {
   }
 
 
-  //表格数据操作
+  /*表格数据操作*/
   refreshData(reset = false) {
     if (reset) {
       this._current = 1;
@@ -72,7 +106,20 @@ export class MajorManageComponent implements OnInit {
       this._loading = false;
       this._total = data[0].info.total;
       this._dataSet = data[0].results;
-      console.log(this._total)
-    })
+      console.log(this._total);
+    });
   }
+
+
+  /*删除提醒操作*/
+  cancel = function () {
+    this.alertTab = false;
+  };
+
+  confirm = () => {
+    /*删除数据请求*/
+    console.log(this.id);
+    this.refreshData(true);
+  };
+
 }
