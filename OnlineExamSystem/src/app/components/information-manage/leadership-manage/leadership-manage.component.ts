@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 @Component({
   selector: 'app-leadership-manage',
   templateUrl: './leadership-manage.component.html',
+  styleUrls: ['./leadership-manage.component.css']
 })
 
 export class LeadershipManageComponent implements OnInit {

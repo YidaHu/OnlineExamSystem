@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 @Component({
   selector: 'app-school-manage',
   templateUrl: './school-manage.component.html',
+  styleUrls: ['./school-manage.component.css']
 })
 
 export class SchoolManageComponent implements OnInit {

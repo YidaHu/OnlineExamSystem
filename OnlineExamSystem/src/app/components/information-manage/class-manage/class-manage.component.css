@@ -8,11 +8,11 @@ nz-dropdown::after {
   clear: both;
 }
 
-.major{
+.class{
   padding: 20px;
 }
 
-.majorSearch{
+.classSearch{
   padding:30px 100px 30px 0px;
 }
 
@@ -30,6 +30,6 @@ nz-dropdown::after {
   display: inline-block;
   margin: 0px 10px;
 }
-.majorSearch button{
+.classSearch button{
   vertical-align:text-bottom;
 }
