@@ -186,6 +186,72 @@ var departmentData = [
         }
     }
 ];
+//班级数据
+var classData = [
+    {
+        "results": [
+
+            {
+                "id":001,
+                "name":"计算机1411",
+                "school_name":"苏州科技大学",
+                "department_name":"计算机学院",
+                "major_id":"计算机科学与技术"
+            },
+            {
+                "id":002,
+                "name":"生物1411",
+                "school_name":"上海交通大学",
+                "department_name":"生物学院",
+                "major_id":"生物技术"
+            },
+            {
+                "id":003,
+                "name":"临床医学1511",
+                "school_name":"苏州大学",
+                "department_name":"医学院",
+                "major_id":"临床医学"
+            }
+        ],
+        "info": {
+            "seed": "de714be58ddcbe07",
+            "results": 10,
+            "page": 1,
+            "version": "1.1",
+            "total":100
+        }
+    }
+];
+//课程数据
+var courseData = [
+    {
+        "results": [
+
+            {
+                "id":001,
+                "course_name":"Java编程技术",
+                "school_name":"苏州科技大学"
+            },
+            {
+                "id":002,
+                "course_name":"Python基础教程",
+                "school_name":"上海交通大学"
+            },
+            {
+                "id":003,
+                "course_name":"机器学习",
+                "school_name":"苏州大学"
+            }
+        ],
+        "info": {
+            "seed": "de714be58ddcbe07",
+            "results": 10,
+            "page": 1,
+            "version": "1.1",
+            "total":100
+        }
+    }
+];
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
@@ -210,6 +276,12 @@ app.post('/api/school', function(req, res) {
 app.post('/api/department', function(req, res) {
     /*optional stuff to do after success */
     res.json(departmentData);
+});
+app.post('/api/class', function (req, res) {
+   res.json(classData);
+});
+app.post('/api/course', function (req, res) {
+   res.json(courseData);
 });
 
 app.listen(3000);

@@ -13,7 +13,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { MainComponent } from './components/main/main.component';
 import { MainsComponent } from './components/mains/mains.component';
 import { DepartmentManagementComponent } from './components/information-manage/department-manage/department-manage.component';
-import {SchoolManagementComponent} from './components/information-manage/school-manage/school-manage.component';
+import {SchoolManageComponent} from './components/information-manage/school-manage/school-manage.component';
 import { AdminManageComponent } from './components/information-manage/admin-manage/admin-manage.component';
 import { ClassManageComponent } from './components/information-manage/class-manage/class-manage.component';
 import { CourseManageComponent } from './components/information-manage/course-manage/course-manage.component';
@@ -32,7 +32,7 @@ import {TableServiceService} from "./serve/table-service.service";
     MainComponent,
     MainsComponent,
     DepartmentManagementComponent,
-    SchoolManagementComponent,
+    SchoolManageComponent,
     AdminManageComponent,
     ClassManageComponent,
     CourseManageComponent,

@@ -5,7 +5,7 @@ import { ErrorPageComponent } from './components/error-page/error-page.component
 import {MainComponent} from "./components/main/main.component";
 import {MainsComponent} from "./components/mains/mains.component";
 import {DepartmentManagementComponent} from "./components/information-manage/department-manage/department-manage.component";
-import {SchoolManagementComponent} from "./components/information-manage/school-manage/school-manage.component";
+import {SchoolManageComponent} from "./components/information-manage/school-manage/school-manage.component";
 import {AdminManageComponent} from "./components/information-manage/admin-manage/admin-manage.component";
 import {LeadershipManageComponent} from "./components/information-manage/leadership-manage/leadership-manage.component";
 import {StudentManageComponent} from "./components/information-manage/student-manage/student-manage.component";
@@ -21,7 +21,7 @@ const routes: Routes = [
     //信息管理
     {path:'admin-manage',component:AdminManageComponent},
     {path:'leadership-manage',component:LeadershipManageComponent},
-    {path:'school-manage',component:SchoolManagementComponent},
+    {path:'school-manage',component:SchoolManageComponent},
     {path: 'department-manage', component: DepartmentManagementComponent},
     {path:'major-manage',component:MajorManageComponent},
     {path:'class-manage',component:ClassManageComponent},

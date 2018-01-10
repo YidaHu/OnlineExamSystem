@@ -2,11 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {TableServiceService} from "../../../serve/table-service.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 @Component({
-  selector: 'app-school-department-manage',
+  selector: 'app-school-manage',
   templateUrl: './school-manage.component.html',
 })
 
-export class SchoolManagementComponent implements OnInit {
+export class SchoolManageComponent implements OnInit {
   validateForm: FormGroup;
 
   private statusShow = false;
