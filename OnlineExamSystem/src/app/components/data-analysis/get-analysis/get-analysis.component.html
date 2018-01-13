@@ -1,0 +1,79 @@
+<div class="div-get-analysis">
+  <div class="departmentSearch a">
+    <label class="selectLab">学院</label>
+    <div class="selectOptions">
+      <nz-select style="width: 200px;" [(ngModel)]="schollId" [nzPlaceHolder]="'请选择学院'" [nzSize]="size">
+        <nz-option
+          *ngFor="let option of scholls"
+          [nzLabel]="option.label"
+          [nzValue]="option.value"
+          [nzDisabled]="option.disabled">
+        </nz-option>
+      </nz-select>
+    </div>
+
+    <label class="selectLab">班级</label>
+    <div class="selectOptions">
+      <nz-select style="width: 200px;" [(ngModel)]="schollId" [nzPlaceHolder]="'请选择班级'" [nzSize]="size">
+        <nz-option
+          *ngFor="let option of scholls"
+          [nzLabel]="option.label"
+          [nzValue]="option.value"
+          [nzDisabled]="option.disabled">
+        </nz-option>
+      </nz-select>
+    </div>
+
+    <label class="selectLab">学生</label>
+    <div class="selectOptions">
+      <nz-select style="width: 200px;" [(ngModel)]="schollId" [nzPlaceHolder]="'请选择学生'" [nzSize]="size">
+        <nz-option
+          *ngFor="let option of scholls"
+          [nzLabel]="option.label"
+          [nzValue]="option.value"
+          [nzDisabled]="option.disabled">
+        </nz-option>
+      </nz-select>
+    </div>
+    <!--<button nz-button [nzType]="'default'" (click)="searchDepartment()">-->
+    <!--<i class="anticon anticon-search"></i><span>查询</span>-->
+    <!--</button>-->
+  </div>
+  <div class="departmentSearch b">
+    <label class="selectLab">科目</label>
+    <div class="selectOptions">
+      <nz-select style="width: 200px;" [(ngModel)]="schollId" [nzPlaceHolder]="'请选择科目'" [nzSize]="size">
+        <nz-option
+          *ngFor="let option of scholls"
+          [nzLabel]="option.label"
+          [nzValue]="option.value"
+          [nzDisabled]="option.disabled">
+        </nz-option>
+      </nz-select>
+    </div>
+
+    <label class="selectLab">学期</label>
+    <div class="selectOptions">
+      <nz-select style="width: 200px;" [(ngModel)]="schollId" [nzPlaceHolder]="'请选择学期'" [nzSize]="size">
+        <nz-option
+          *ngFor="let option of scholls"
+          [nzLabel]="option.label"
+          [nzValue]="option.value"
+          [nzDisabled]="option.disabled">
+        </nz-option>
+      </nz-select>
+    </div>
+
+    <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="searchDepartment()">
+      <span>&nbsp;查询&nbsp;</span>
+    </button>
+  </div>
+  <!--<div>-->
+  <div class="charts">
+    <div echarts [options]="option1" class="option1" style="height:400px"></div>
+    <div echarts [options]="option2" class="option2" style="height:400px"></div>
+    <br>
+    <div echarts [options]="option3" class="option3" style="height:450px"></div>
+    <div echarts [options]="option4" class="option4" style="height:450px"></div>
+  </div>
+</div>

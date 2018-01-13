@@ -1,5 +1,5 @@
 <div class="header">
-  <div class="header_s">苏州科技大学后台系统</div>
+  <div class="header_s">苏州科技大学在线考试与成绩分析系统</div>
   <div class="header_admin">
     <nz-dropdown>
       <a class="ant-dropdown-link clearfix" nz-dropdown>
@@ -76,7 +76,7 @@
             <span>考试设计</span>
           </span>
           <ul>
-            <li nz-menu-item>在线组卷</li>
+            <li nz-menu-item [routerLink]="['./design-paper']">在线组卷</li>
             <li nz-menu-item>考试安排</li>
             <li nz-menu-item>组卷里是</li>
           </ul>
@@ -98,10 +98,10 @@
             <span>数据分析</span>
           </span>
           <ul>
-            <li nz-menu-item>得分分析</li>
-            <li nz-menu-item>知识点分析</li>
+            <li nz-menu-item [routerLink]="['./get-analysis']">得分分析</li>
+            <li nz-menu-item [routerLink]="['./knowledge-analysis']">知识点分析</li>
             <li nz-menu-item>题目分析</li>
-            <li nz-menu-item>成绩分析</li>
+            <li nz-menu-item [routerLink]="['./score-analysis']">成绩分析</li>
           </ul>
         </li>
         <li nz-submenu>
