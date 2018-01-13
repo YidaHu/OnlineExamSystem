@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 
 @Injectable()
@@ -18,7 +18,7 @@ export class TableServiceService {
     // return this.http.post(`${this.randomUserUrl}`, {
     return this.http.post(`${url}`, {
       params: params
-    })
+    });
   }
 
   //echarts假数据
@@ -39,10 +39,42 @@ export class TableServiceService {
       });
     }
 
-    return {
-      legendData: legendData,
-      seriesData: seriesData
+    let option = {
+      title: {
+        text: '同名数量统计',
+        subtext: '纯属虚构',
+        x: 'center'
+      },
+      tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+      },
+      legend: {
+        type: 'scroll',
+        orient: 'vertical',
+        right: 10,
+        top: 20,
+        bottom: 20,
+        data: legendData
+      },
+      series: [
+        {
+          name: '姓名',
+          type: 'pie',
+          radius: '55%',
+          center: ['40%', '50%'],
+          data:seriesData,
+          itemStyle: {
+            emphasis: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
+        }
+      ]
     };
+   return option;
 
     function makeWord(max, min) {
       let nameLen = Math.ceil(Math.random() * max + min);
@@ -55,5 +87,6 @@ export class TableServiceService {
 
 
   }
+
 
 }

@@ -44,6 +44,7 @@ export class MajorManageComponent implements OnInit {
       name: ['', [Validators.required]],
       is_adult: ['', [Validators.required]]
     });
+
   }
 
   /*查询数据*/
