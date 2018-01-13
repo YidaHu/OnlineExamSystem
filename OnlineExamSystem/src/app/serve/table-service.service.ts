@@ -41,8 +41,8 @@ export class TableServiceService {
 
     let option = {
       title: {
-        text: '同名数量统计',
-        subtext: '纯属虚构',
+        text: '学生成绩',
+        subtext: '科目成绩',
         x: 'center'
       },
       tooltip: {

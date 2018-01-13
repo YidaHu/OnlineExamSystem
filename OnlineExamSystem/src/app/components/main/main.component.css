@@ -64,8 +64,10 @@
   overflow:auto;
   background-color: #393D49;
   float: left;
+  width: 18%;
 }
 .con_right{
-  /*overflow: hidden;*/
+  float: right;
   height:100%;
+  width: 82%;
 }
