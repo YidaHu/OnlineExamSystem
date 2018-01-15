@@ -15,8 +15,11 @@ export class ScoreAnalysisComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.option = this.tableServiceService.genData(50);
 
+  }
+
+  searchScoreAnalysis() {
+    this.option = this.tableServiceService.genData(50);
   }
 
 

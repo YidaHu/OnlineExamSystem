@@ -284,4 +284,14 @@ app.post('/api/course', function (req, res) {
    res.json(courseData);
 });
 
+
+//数据分析
+app.post('/api/getAnalysis', function (req, res) {
+    if(req.body.department == '计算机学院' && req.body.student == '胡义达'){
+        res.json({"success":true});
+    }else{
+        res.json({"success":false});
+    }
+});
+
 app.listen(3000);

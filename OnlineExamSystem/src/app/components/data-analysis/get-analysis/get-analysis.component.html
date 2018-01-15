@@ -1,73 +1,77 @@
 <div class="div-get-analysis">
-  <div class="departmentSearch a">
-    <label class="selectLab">学院</label>
-    <div class="selectOptions">
-      <nz-select style="width: 200px;" [(ngModel)]="schollId" [nzPlaceHolder]="'请选择学院'" [nzSize]="size">
-        <nz-option
-          *ngFor="let option of scholls"
-          [nzLabel]="option.label"
-          [nzValue]="option.value"
-          [nzDisabled]="option.disabled">
-        </nz-option>
-      </nz-select>
-    </div>
+  <form nz-form [formGroup]="searchData" class="get-form" (ngSubmit)="searchGetAnalysis()">
+    <div class="departmentSearch a">
+      <label class="selectLab">学院</label>
+      <div class="selectOptions" nz-form-control>
+        <nz-select style="width: 200px;" formControlName="department" [(ngModel)]="department" [nzPlaceHolder]="'请选择学院'"
+                   [nzSize]="size">
+          <nz-option
+            *ngFor="let option of departments"
+            [nzLabel]="option.label"
+            [nzValue]="option.value"
+            [nzDisabled]="option.disabled">
+          </nz-option>
+        </nz-select>
+      </div>
 
-    <label class="selectLab">班级</label>
-    <div class="selectOptions">
-      <nz-select style="width: 200px;" [(ngModel)]="schollId" [nzPlaceHolder]="'请选择班级'" [nzSize]="size">
-        <nz-option
-          *ngFor="let option of scholls"
-          [nzLabel]="option.label"
-          [nzValue]="option.value"
-          [nzDisabled]="option.disabled">
-        </nz-option>
-      </nz-select>
-    </div>
+      <label class="selectLab">班级</label>
+      <div class="selectOptions" nz-form-control>
+        <nz-select style="width: 200px;" formControlName="class" [(ngModel)]="schollId" [nzPlaceHolder]="'请选择班级'" [nzSize]="size">
+          <nz-option
+            *ngFor="let option of classes"
+            [nzLabel]="option.label"
+            [nzValue]="option.value"
+            [nzDisabled]="option.disabled">
+          </nz-option>
+        </nz-select>
+      </div>
 
-    <label class="selectLab">学生</label>
-    <div class="selectOptions">
-      <nz-select style="width: 200px;" [(ngModel)]="schollId" [nzPlaceHolder]="'请选择学生'" [nzSize]="size">
-        <nz-option
-          *ngFor="let option of scholls"
-          [nzLabel]="option.label"
-          [nzValue]="option.value"
-          [nzDisabled]="option.disabled">
-        </nz-option>
-      </nz-select>
+      <label class="selectLab">学生</label>
+      <div class="selectOptions" nz-form-control>
+        <nz-select style="width: 200px;" formControlName="student" [(ngModel)]="schollId" [nzPlaceHolder]="'请选择学生'" [nzSize]="size">
+          <nz-option
+            *ngFor="let option of students"
+            [nzLabel]="option.label"
+            [nzValue]="option.value"
+            [nzDisabled]="option.disabled">
+          </nz-option>
+        </nz-select>
+      </div>
+      <!--<button nz-button [nzType]="'default'" (click)="searchDepartment()">-->
+      <!--<i class="anticon anticon-search"></i><span>查询</span>-->
+      <!--</button>-->
     </div>
-    <!--<button nz-button [nzType]="'default'" (click)="searchDepartment()">-->
-    <!--<i class="anticon anticon-search"></i><span>查询</span>-->
-    <!--</button>-->
-  </div>
-  <div class="departmentSearch b">
-    <label class="selectLab">科目</label>
-    <div class="selectOptions">
-      <nz-select style="width: 200px;" [(ngModel)]="schollId" [nzPlaceHolder]="'请选择科目'" [nzSize]="size">
-        <nz-option
-          *ngFor="let option of scholls"
-          [nzLabel]="option.label"
-          [nzValue]="option.value"
-          [nzDisabled]="option.disabled">
-        </nz-option>
-      </nz-select>
-    </div>
+    <div class="departmentSearch b">
+      <label class="selectLab">科目</label>
+      <div class="selectOptions" nz-form-control>
+        <nz-select style="width: 200px;" formControlName="course" [(ngModel)]="schollId" [nzPlaceHolder]="'请选择科目'" [nzSize]="size">
+          <nz-option
+            *ngFor="let option of courses"
+            [nzLabel]="option.label"
+            [nzValue]="option.value"
+            [nzDisabled]="option.disabled">
+          </nz-option>
+        </nz-select>
+      </div>
 
-    <label class="selectLab">学期</label>
-    <div class="selectOptions">
-      <nz-select style="width: 200px;" [(ngModel)]="schollId" [nzPlaceHolder]="'请选择学期'" [nzSize]="size">
-        <nz-option
-          *ngFor="let option of scholls"
-          [nzLabel]="option.label"
-          [nzValue]="option.value"
-          [nzDisabled]="option.disabled">
-        </nz-option>
-      </nz-select>
-    </div>
+      <label class="selectLab">学期</label>
+      <div class="selectOptions" nz-form-control>
+        <nz-select style="width: 200px;" formControlName="semester" [(ngModel)]="schollId" [nzPlaceHolder]="'请选择学期'" [nzSize]="size">
+          <nz-option
+            *ngFor="let option of semesters"
+            [nzLabel]="option.label"
+            [nzValue]="option.value"
+            [nzDisabled]="option.disabled">
+          </nz-option>
+        </nz-select>
+      </div>
 
-    <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="searchDepartment()">
-      <span>&nbsp;查询&nbsp;</span>
-    </button>
-  </div>
+      <button nz-button [nzType]="'primary'" [nzSize]="'large'" >
+        <span>&nbsp;查询&nbsp;</span>
+      </button>
+    </div>
+  </form>
+
   <!--<div>-->
   <div class="charts">
     <div echarts [options]="option1" class="option1" style="height:400px"></div>

@@ -25,8 +25,9 @@ import {TableServiceService} from "./serve/table-service.service";
 import {DesignPaperComponent} from './components/exam-design/design-paper/design-paper.component';
 import {GetAnalysisComponent} from './components/data-analysis/get-analysis/get-analysis.component';
 import {NgxEchartsModule} from "ngx-echarts";
-import { KnowledgeAnalysisComponent } from './components/data-analysis/knowledge-analysis/knowledge-analysis.component';
-import { ScoreAnalysisComponent } from './components/data-analysis/score-analysis/score-analysis.component';
+import {KnowledgeAnalysisComponent} from './components/data-analysis/knowledge-analysis/knowledge-analysis.component';
+import {ScoreAnalysisComponent} from './components/data-analysis/score-analysis/score-analysis.component';
+import {DataAnalysisServiceService} from "./serve/data-analysis-service.service";
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { ScoreAnalysisComponent } from './components/data-analysis/score-analysi
   ],
   providers: [
     LoginServeService,
-    TableServiceService
+    TableServiceService,
+    DataAnalysisServiceService
   ],
   bootstrap: [AppComponent]
 })

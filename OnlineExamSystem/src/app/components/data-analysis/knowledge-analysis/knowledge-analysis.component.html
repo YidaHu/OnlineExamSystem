@@ -4,7 +4,7 @@
     <div class="selectOptions">
       <nz-select style="width: 200px;" [(ngModel)]="schollId" [nzPlaceHolder]="'请选择学院'" [nzSize]="size">
         <nz-option
-          *ngFor="let option of scholls"
+          *ngFor="let option of departments"
           [nzLabel]="option.label"
           [nzValue]="option.value"
           [nzDisabled]="option.disabled">
@@ -16,7 +16,7 @@
     <div class="selectOptions">
       <nz-select style="width: 200px;" [(ngModel)]="schollId" [nzPlaceHolder]="'请选择班级'" [nzSize]="size">
         <nz-option
-          *ngFor="let option of scholls"
+          *ngFor="let option of classes"
           [nzLabel]="option.label"
           [nzValue]="option.value"
           [nzDisabled]="option.disabled">
@@ -28,7 +28,7 @@
     <div class="selectOptions">
       <nz-select style="width: 200px;" [(ngModel)]="schollId" [nzPlaceHolder]="'请选择学生'" [nzSize]="size">
         <nz-option
-          *ngFor="let option of scholls"
+          *ngFor="let option of students"
           [nzLabel]="option.label"
           [nzValue]="option.value"
           [nzDisabled]="option.disabled">
@@ -44,7 +44,7 @@
     <div class="selectOptions">
       <nz-select style="width: 200px;" [(ngModel)]="schollId" [nzPlaceHolder]="'请选择科目'" [nzSize]="size">
         <nz-option
-          *ngFor="let option of scholls"
+          *ngFor="let option of courses"
           [nzLabel]="option.label"
           [nzValue]="option.value"
           [nzDisabled]="option.disabled">
@@ -56,7 +56,7 @@
     <div class="selectOptions">
       <nz-select style="width: 200px;" [(ngModel)]="schollId" [nzPlaceHolder]="'请选择学期'" [nzSize]="size">
         <nz-option
-          *ngFor="let option of scholls"
+          *ngFor="let option of semesters"
           [nzLabel]="option.label"
           [nzValue]="option.value"
           [nzDisabled]="option.disabled">

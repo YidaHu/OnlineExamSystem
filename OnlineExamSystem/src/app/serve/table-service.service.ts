@@ -5,8 +5,11 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 export class TableServiceService {
   // randomUserUrl = 'https://api.randomuser.me/';
   randomUserUrl = '/api/table';
-  constructor(private http: HttpClient) { }
-  getUsers(pageIndex = 1, pageSize = 10, sortField, sortOrder, genders,url) {
+
+  constructor(private http: HttpClient) {
+  }
+
+  getUsers(pageIndex = 1, pageSize = 10, sortField, sortOrder, genders, url) {
     let params = new HttpParams()
       .append('page', `${pageIndex}`)
       .append('results', `${pageSize}`)
@@ -35,9 +38,12 @@ export class TableServiceService {
       legendData.push(name);
       seriesData.push({
         name: name,
-        value: Math.round(Math.random() * 100000)
+        // value: Math.round(Math.random() * 100000)
+        value: Math.floor((Math.random() * 61) + 40)
       });
     }
+    console.log(legendData);
+    console.log(seriesData);
 
     let option = {
       title: {
@@ -63,7 +69,7 @@ export class TableServiceService {
           type: 'pie',
           radius: '55%',
           center: ['40%', '50%'],
-          data:seriesData,
+          data: seriesData,
           itemStyle: {
             emphasis: {
               shadowBlur: 10,
@@ -74,7 +80,7 @@ export class TableServiceService {
         }
       ]
     };
-   return option;
+    return option;
 
     function makeWord(max, min) {
       let nameLen = Math.ceil(Math.random() * max + min);

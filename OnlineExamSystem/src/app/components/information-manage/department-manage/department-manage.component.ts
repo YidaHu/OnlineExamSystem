@@ -40,8 +40,8 @@ export class DepartmentManagementComponent implements OnInit {
     // this.scholls = [{value: 'jack', label: '苏州科技大学'},
     //   {value: 'lucy', label: 'Lucy'},
     //   {value: 'disabled', label: 'Disabled', disabled: true}];
-    this.scholls = [{value: 'jack', label: '苏州科技大学'},
-      {value: 'lucy', label: '苏州大学'},
+    this.scholls = [{value: 'usts', label: '苏州科技大学'},
+      {value: 'su', label: '苏州大学'},
       {value: 'disabled', label: 'Disabled', disabled: true}];
     this.validateForm = this.fb.group({
       school_id: ['', [Validators.required]],

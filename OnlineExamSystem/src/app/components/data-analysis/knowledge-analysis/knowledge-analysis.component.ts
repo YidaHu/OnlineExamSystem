@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-knowledge-analysis',
@@ -7,9 +7,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class KnowledgeAnalysisComponent implements OnInit {
 
-  constructor() { }
+  //下拉框数据
+  private departments;
+  private classes;
+  private students;
+  private courses;
+  private semesters;
+
+  constructor() {
+  }
 
   ngOnInit() {
+    this.departments = [{value: 'cs', label: '计算机学院'},
+      {value: 'en', label: '外国语学院'},
+      {value: 'disabled', label: 'Disabled', disabled: true}];
+    this.classes = [{value: 'ct1', label: '计算机1411'},
+      {value: 'ai1', label: '人工智能1511'},
+      {value: 'disabled', label: 'Disabled', disabled: true}];
+    this.students = [{value: 'huyd', label: '胡义达'},
+      {value: 'zhang', label: '张三'},
+      {value: 'disabled', label: 'Disabled', disabled: true}];
+    this.courses = [{value: 'algorithm', label: '算法'},
+      {value: 'python', label: 'Python'},
+      {value: 'disabled', label: 'Disabled', disabled: true}];
+    this.semesters = [{value: '17181', label: '17-18-1'},
+      {value: '17182', label: '17-18-2'},
+      {value: 'disabled', label: 'Disabled', disabled: true}];
   }
 
   option1 = {
