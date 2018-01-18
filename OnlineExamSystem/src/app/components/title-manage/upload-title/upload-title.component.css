@@ -1,0 +1,21 @@
+.label-title {
+  vertical-align: text-bottom;
+  height: 28px;
+  width: 50px;
+  display: inline-block;
+  text-align: center;
+  background: #e5e5e5;
+  line-height: 28px;
+}
+
+.ume-title {
+  width: 70%;
+  height: 30%;
+}
+
+.div-title {
+  width: 70%;
+  height: 30%;
+}
+
+

@@ -38,9 +38,9 @@
             <span>信息查询</span>
           </span>
           <ul>
-            <li nz-menu-item>成绩查询</li>
-            <li nz-menu-item>学生查询</li>
-            <li nz-menu-item>教师查询</li>
+            <li nz-menu-item [routerLink]="['./grade-query']">成绩查询</li>
+            <li nz-menu-item [routerLink]="['./student-query']">学生查询</li>
+            <li nz-menu-item [routerLink]="['./teacher-query']">教师查询</li>
           </ul>
         </li>
         <li nz-submenu>
@@ -78,7 +78,7 @@
           <ul>
             <li nz-menu-item [routerLink]="['./design-paper']">在线组卷</li>
             <li nz-menu-item>考试安排</li>
-            <li nz-menu-item>组卷里是</li>
+            <li nz-menu-item>组卷历史</li>
           </ul>
         </li>
         <li nz-submenu>
@@ -89,7 +89,7 @@
           <ul>
             <li nz-menu-item>错题列表</li>
             <li nz-menu-item>诊断报告</li>
-            <li nz-menu-item>上传题目</li>
+            <li nz-menu-item [routerLink]="['./upload-title']">上传题目</li>
           </ul>
         </li>
         <li nz-submenu>

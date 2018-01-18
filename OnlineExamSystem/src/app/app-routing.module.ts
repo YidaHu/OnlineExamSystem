@@ -17,12 +17,21 @@ import {DesignPaperComponent} from './components/exam-design/design-paper/design
 import {GetAnalysisComponent} from "./components/data-analysis/get-analysis/get-analysis.component";
 import {KnowledgeAnalysisComponent} from "./components/data-analysis/knowledge-analysis/knowledge-analysis.component";
 import {ScoreAnalysisComponent} from "./components/data-analysis/score-analysis/score-analysis.component";
+import {UploadTitleComponent} from "./components/title-manage/upload-title/upload-title.component";
+import {GradeQueryComponent} from "./components/information-query/grade-query/grade-query.component";
+import {StudentQueryComponent} from "./components/information-query/student-query/student-query.component";
+import {TeacherQueryComponent} from "./components/information-query/teacher-query/teacher-query.component";
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {
     path: 'main', component: MainComponent, children: [
     {path: '', component: MainsComponent},
+    //信息查询
+    {path: 'grade-query', component: GradeQueryComponent},
+    {path: 'student-query', component: StudentQueryComponent},
+    {path: 'teacher-query', component: TeacherQueryComponent},
+
     //信息管理
     {path: 'admin-manage', component: AdminManageComponent},
     {path: 'leadership-manage', component: LeadershipManageComponent},
@@ -33,6 +42,9 @@ const routes: Routes = [
     {path: 'course-manage', component: CourseManageComponent},
     {path: 'teacher-manage', component: TeacherManageComponent},
     {path: 'student-manage', component: StudentManageComponent},
+    //题目管理
+    {path: 'upload-title', component: UploadTitleComponent},
+
     //考试设计
     {path: 'design-paper', component: DesignPaperComponent},
     //数据分析

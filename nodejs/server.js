@@ -3,6 +3,47 @@
  */
 var app = require('express')();
 var bodyParser = require('body-parser');
+//成绩数据
+var courseResultData = [
+    {
+        "results": [
+
+            {
+                "id":001,
+                "school_name":"苏州科技大学",
+                "student_name":"胡义达",
+                "class_name":"计算机1411",
+                "course_name":"Python",
+                "results":"100",
+            },
+            {
+                "id":002,
+                "school_name":"苏州科技大学",
+                "student_name":"张三",
+                "class_name":"计算机1411",
+                "course_name":"Python",
+                "results":"99",
+            },
+            {
+                "id":003,
+                "school_name":"苏州科技大学",
+                "student_name":"李四",
+                "class_name":"计算机1411",
+                "course_name":"Python",
+                "results":"98",
+            }
+        ],
+        "info": {
+            "seed": "de714be58ddcbe07",
+            "results": 10,
+            "page": 1,
+            "version": "1.1",
+            "total":100
+        }
+    }
+];
+
+
 //管理员数据
 var adminData = [
     {
@@ -252,6 +293,38 @@ var courseData = [
         }
     }
 ];
+
+//成绩分布数据
+var resultData = [
+    {
+        "results": [
+
+            {
+                "id":001,
+                "course_name":"人工智能",
+                "school_name":"苏州科技大学"
+            },
+            {
+                "id":002,
+                "course_name":"Python基础教程",
+                "school_name":"上海交通大学"
+            },
+            {
+                "id":003,
+                "course_name":"机器学习",
+                "school_name":"苏州大学"
+            }
+        ],
+        "info": {
+            "seed": "de714be58ddcbe07",
+            "results": 10,
+            "page": 1,
+            "version": "1.1",
+            "total":100
+        }
+    }
+];
+
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
@@ -262,6 +335,9 @@ app.post('/api', function (req, res) {
     }else{
         res.json({"success":false});
     }
+});
+app.post('/api/courseResult', function (req, res) {
+   res.json(courseResultData);
 });
 app.post('/api/admin', function (req, res) {
    res.json(adminData);

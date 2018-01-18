@@ -15,13 +15,14 @@ export class GetAnalysisComponent implements OnInit {
   private students;
   private courses;
   private semesters;
+  private department;
 
   private option1;
   private option2;
   private option3;
   private option4;
 
-  department;
+
 
   constructor(private dataAnalysisService: DataAnalysisServiceService,private fb: FormBuilder) {
   }
