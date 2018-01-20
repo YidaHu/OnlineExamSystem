@@ -331,15 +331,15 @@ var school_all = [
         "results": [
 
             {
-                "id":001,
+                "id":1,
                 "school_name":"苏州科技大学"
             },
             {
-                "id":002,
+                "id":2,
                 "school_name":"上海交通大学"
             },
             {
-                "id":003,
+                "id":3,
                 "school_name":"苏州大学"
             }
         ],

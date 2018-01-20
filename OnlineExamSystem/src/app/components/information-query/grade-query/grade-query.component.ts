@@ -14,7 +14,7 @@ export class GradeQueryComponent implements OnInit {
   searchData: FormGroup;
 
   /*下拉框*/
-  private schools;
+  private schools = [];
   private departments;
   private classes;
   private exams;
@@ -57,10 +57,10 @@ export class GradeQueryComponent implements OnInit {
       exam: ['', [Validators.required]]
     });
 
-    this.gradeQueryServerService.getsSchools( data => {
-      this.schools = data.[0].results;
-      // console.log(  data[0].results instanceof Array)
-    })
+    this.gradeQueryServerService.getsSchools(data => {
+      this.schools = data[0].results; 
+      console.log(data[0].results);
+    });
     //
     // this.schools = [{value: 'cs', label: '计算机学院'},
     //   {value: 'en', label: '外国语学院'},
