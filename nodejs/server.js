@@ -398,8 +398,10 @@ app.get('/api/school_all', function (req, res) {
 });
 //根据学校查询学院
 app.post('/api/school2department', function (req, res) {
-   if(req.body.school == '苏州科技大学'){
+    console.log(req.body.school['school_name']);
+   if(req.body.school['school_name'] == '苏州科技大学'){
         res.json(school2department);
+        console.log('yes')
     }else{
         res.json("");
     }
