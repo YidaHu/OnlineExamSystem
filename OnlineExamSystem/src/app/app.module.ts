@@ -28,14 +28,13 @@ import {NgxEchartsModule} from "ngx-echarts";
 import {KnowledgeAnalysisComponent} from './components/data-analysis/knowledge-analysis/knowledge-analysis.component';
 import {ScoreAnalysisComponent} from './components/data-analysis/score-analysis/score-analysis.component';
 import {DataAnalysisServiceService} from "./serve/data-analysis-service.service";
-import {UEditorModule} from "ngx-ueditor";
 import {UploadTitleComponent} from './components/title-manage/upload-title/upload-title.component';
-import {ENgxEditorModule} from "e-ngx-editor";
 import {UMeditorModule} from "ngx-umeditor";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { GradeQueryComponent } from './components/information-query/grade-query/grade-query.component';
 import { StudentQueryComponent } from './components/information-query/student-query/student-query.component';
 import { TeacherQueryComponent } from './components/information-query/teacher-query/teacher-query.component';
+import {GradeQueryServerService} from "./serve/information-query/grade-query-server.service";
 
 @NgModule({
   declarations: [
@@ -71,22 +70,14 @@ import { TeacherQueryComponent } from './components/information-query/teacher-qu
     ReactiveFormsModule,
     NgZorroAntdModule.forRoot(),
     NgxEchartsModule,
-    ENgxEditorModule,
     UMeditorModule,
     NgbModule,
-    UEditorModule.forRoot({
-      // 指定ueditor.js路径目录
-      path: 'assets/ueditor/',
-      // 默认全局配置项
-      options: {
-        themePath: '/assets/ueditor/themes/'
-      }
-    })
   ],
   providers: [
     LoginServeService,
     TableServiceService,
-    DataAnalysisServiceService
+    DataAnalysisServiceService,
+    GradeQueryServerService
   ],
   bootstrap: [AppComponent]
 })

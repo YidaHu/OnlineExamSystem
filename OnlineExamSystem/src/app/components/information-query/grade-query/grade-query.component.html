@@ -7,9 +7,9 @@
                    [nzSize]="size">
           <nz-option
             *ngFor="let option of schools"
-            [nzLabel]="option.label"
-            [nzValue]="option.value"
-            [nzDisabled]="option.disabled">
+            [nzLabel]="option.shcool_name"
+            [nzValue]="option.id"
+            <!--[nzDisabled]="option.disabled">-->
           </nz-option>
         </nz-select>
       </div>

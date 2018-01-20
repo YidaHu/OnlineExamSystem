@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TableServiceService} from "../../../serve/table-service.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {GradeQueryServerService} from "../../../serve/information-query/grade-query-server.service";
 
 @Component({
   selector: 'app-grade-query',
@@ -43,7 +44,7 @@ export class GradeQueryComponent implements OnInit {
     {name: 'female', value: false}
   ];
 
-  constructor(private _randomUser: TableServiceService, private fb: FormBuilder) {
+  constructor(private _randomUser: TableServiceService, private fb: FormBuilder, private gradeQueryServerService:GradeQueryServerService) {
   }
 
   ngOnInit() {
@@ -56,9 +57,14 @@ export class GradeQueryComponent implements OnInit {
       exam: ['', [Validators.required]]
     });
 
-    this.schools = [{value: 'cs', label: '计算机学院'},
-      {value: 'en', label: '外国语学院'},
-      {value: 'disabled', label: 'Disabled', disabled: true}];
+    this.gradeQueryServerService.getsSchools( data => {
+      this.schools = data.[0].results;
+      // console.log(  data[0].results instanceof Array)
+    })
+    //
+    // this.schools = [{value: 'cs', label: '计算机学院'},
+    //   {value: 'en', label: '外国语学院'},
+    //   {value: 'disabled', label: 'Disabled', disabled: true}];
     setTimeout(_=> {
       this.departments = [{value: 'cs', label: '计算机学院'},
         {value: 'en', label: '外国语学院'},

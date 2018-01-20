@@ -325,6 +325,62 @@ var resultData = [
     }
 ];
 
+//学校查询
+var school_all = [
+    {
+        "results": [
+
+            {
+                "id":001,
+                "school_name":"苏州科技大学"
+            },
+            {
+                "id":002,
+                "school_name":"上海交通大学"
+            },
+            {
+                "id":003,
+                "school_name":"苏州大学"
+            }
+        ],
+        "info": {
+            "seed": "de714be58ddcbe07",
+            "results": 10,
+            "page": 1,
+            "version": "1.1",
+            "total":100
+        }
+    }
+];
+
+//根据学校查询学院
+var school2department = [
+    {
+        "results": [
+
+            {
+                "id":001,
+                "department_name":"电子学院"
+            },
+            {
+                "id":002,
+                "department_name":"计算机学院"
+            },
+            {
+                "id":003,
+                "department_name":"医学院"
+            }
+        ],
+        "info": {
+            "seed": "de714be58ddcbe07",
+            "results": 10,
+            "page": 1,
+            "version": "1.1",
+            "total":100
+        }
+    }
+];
+
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
@@ -336,6 +392,20 @@ app.post('/api', function (req, res) {
         res.json({"success":false});
     }
 });
+//查询学校
+app.get('/api/school_all', function (req, res) {
+   res.json(school_all);
+});
+//根据学校查询学院
+app.post('/api/school2department', function (req, res) {
+   if(req.body.school == '苏州科技大学'){
+        res.json(school2department);
+    }else{
+        res.json("");
+    }
+});
+
+
 app.post('/api/courseResult', function (req, res) {
    res.json(courseResultData);
 });
