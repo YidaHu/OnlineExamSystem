@@ -31,10 +31,11 @@ import {DataAnalysisServiceService} from "./serve/data-analysis-service.service"
 import {UploadTitleComponent} from './components/title-manage/upload-title/upload-title.component';
 import {UMeditorModule} from "ngx-umeditor";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { GradeQueryComponent } from './components/information-query/grade-query/grade-query.component';
-import { StudentQueryComponent } from './components/information-query/student-query/student-query.component';
-import { TeacherQueryComponent } from './components/information-query/teacher-query/teacher-query.component';
+import {GradeQueryComponent} from './components/information-query/grade-query/grade-query.component';
+import {StudentQueryComponent} from './components/information-query/student-query/student-query.component';
+import {TeacherQueryComponent} from './components/information-query/teacher-query/teacher-query.component';
 import {GradeQueryServerService} from "./serve/information-query/grade-query-server.service";
+import {AdminManageServerService} from "./serve/imformation-manage/admin-manage-server.service";
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import {GradeQueryServerService} from "./serve/information-query/grade-query-ser
     LoginServeService,
     TableServiceService,
     DataAnalysisServiceService,
-    GradeQueryServerService
+    GradeQueryServerService,
+    AdminManageServerService
   ],
   bootstrap: [AppComponent]
 })

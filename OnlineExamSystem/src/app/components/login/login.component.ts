@@ -14,23 +14,27 @@ export class LoginComponent implements OnInit {
   private userCate = [];
   private errorInfo = false;
 
-  constructor(private fb: FormBuilder, private loginServeService: LoginServeService, private router: Router) {
+  private username;
+  private password;
+  private roleId;
 
+  constructor(private fb: FormBuilder, private loginServeService: LoginServeService, private router: Router) {
   }
 
   ngOnInit() {
     this.validateForm = this.fb.group({
-      userName: [null, [Validators.required]],
+      username: [null, [Validators.required]],
       adminCate: [null, [Validators.required]],
       password: [null, [Validators.required]],
-      remember: [true],
+      // remember: [true],
     });
+
     setTimeout(() => {
       this.userCate = [
-        {value: 'admin', label: '超级管理员'},
-        {value: 'manager', label: '学校管理员'},
-        {value: 'teacher', label: '教师'},
-        {value: 'student', label: '学生'}
+        {value: '1', label: '超级管理员'},
+        {value: '2', label: '学校管理员'},
+        {value: '3', label: '教师'},
+        {value: '4', label: '学生'}
       ];
     })
   }
@@ -42,9 +46,16 @@ export class LoginComponent implements OnInit {
   _submitForm() {
     console.log(this.validateForm.controls)
     if (this.validateForm.valid) {
-      console.log(this.validateForm.value)
-      this.loginServeService.login(this.validateForm.value, data => {
-        if (data.success) {
+      // console.log(this.validateForm.value)
+      let urlSearchParams = new URLSearchParams();
+      urlSearchParams.append('username', this.username);
+      urlSearchParams.append('password', this.password);
+      urlSearchParams.append('roleId', this.roleId.value);
+      let param = urlSearchParams.toString()
+      this.loginServeService.login(param, data => {
+        // if (data.success) {
+        console.log(data);
+        if (data.message == "SUCCESS") {
           this.router.navigate(['main']);
         } else {
           this.errorInfo = true;

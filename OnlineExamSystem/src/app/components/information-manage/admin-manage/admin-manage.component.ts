@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TableServiceService} from "../../../serve/table-service.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AdminManageServerService} from "../../../serve/imformation-manage/admin-manage-server.service";
 @Component({
   selector: 'app-admin-manage',
   templateUrl: './admin-manage.component.html',
@@ -19,6 +20,13 @@ export class AdminManageComponent implements OnInit {
   /*弹窗标题*/
   private scholls;
   private schollsId;
+
+  private loginName;
+  private realName;
+  private password;
+  private genders;
+
+
   private serachShow = false;
   /*控制是否生成table*/
   private isVisible = false;
@@ -34,18 +42,19 @@ export class AdminManageComponent implements OnInit {
     {name: 'female', value: false}
   ];
 
-  constructor(private _randomUser: TableServiceService, private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private adminManageServerService: AdminManageServerService) {
   }
 
   ngOnInit() {
-    this.scholls = [{value: 'jack', label: 'Jack'},
+    this.genders = [{value: 'jack', label: 'Jack'},
       {value: 'lucy', label: 'Lucy'},
       {value: 'disabled', label: 'Disabled', disabled: true}];
     this.validateForm = this.fb.group({
-      admin_id: ['', [Validators.required]],
-      department_id: ['', [Validators.required]],
-      name: ['', [Validators.required]],
-      is_adult: ['', [Validators.required]]
+
+      loginName: ['', [Validators.required]],
+      realName: ['', [Validators.required]],
+      genders: ['', [Validators.required]],
+      password: ['', [Validators.required]]
     });
     this.searchAdmin();
   }
@@ -56,6 +65,7 @@ export class AdminManageComponent implements OnInit {
     this.serachShow = true;
     this.refreshData();
   }
+
 
   /*弹窗*/
   operateData(strs) {
@@ -108,7 +118,7 @@ export class AdminManageComponent implements OnInit {
     }
     this._loading = true;
     const selectedGender = this._filterGender.filter(item => item.value).map(item => item.name);
-    this._randomUser.getUsers(this._current, this._pageSize, 'name', this._sortValue, selectedGender, '/api/admin').subscribe((data: any) => {
+    this.adminManageServerService.getAdmin(this._current, this._pageSize, 'name', this._sortValue, selectedGender, '/examonline/api/root/user/listrooter').subscribe((data: any) => {
       this._loading = false;
       this._total = data[0].info.total;
       this._dataSet = data[0].results;

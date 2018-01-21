@@ -2,7 +2,7 @@
   <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="_submitForm()">
     <div nz-form-item>
       <div nz-form-control>
-        <nz-select style="width: 100%;" formControlName="adminCate" [nzPlaceHolder]="'请选择用户'" nzAllowClear>
+        <nz-select style="width: 100%;" formControlName="adminCate" [(ngModel)]="roleId" [nzPlaceHolder]="'请选择用户'" nzAllowClear>
           <nz-option
             style="padding-left: 10px"
             *ngFor="let option of userCate"
@@ -11,31 +11,37 @@
             [nzDisabled]="option.disabled">
           </nz-option>
         </nz-select>
-        <div nz-form-explain *ngIf="validateForm.controls.adminCate.dirty&&validateForm.controls.adminCate.hasError('required')">请选择用户!</div>
+        <div nz-form-explain
+             *ngIf="validateForm.controls.adminCate.dirty&&validateForm.controls.adminCate.hasError('required')">请选择用户!
+        </div>
       </div>
     </div>
     <div nz-form-item>
       <div nz-form-control>
-        <nz-input formControlName="userName"  (click)="fouces()"  [nzPlaceHolder]="'请输入用户名'" [nzSize]="'large'">
+        <nz-input formControlName="username" (click)="fouces()" [(ngModel)]="username" [nzPlaceHolder]="'请输入用户名'" [nzSize]="'large'">
           <ng-template #prefix>
             <i class="anticon anticon-user"></i>
           </ng-template>
         </nz-input>
-        <div nz-form-explain *ngIf="validateForm.controls.userName.dirty&&validateForm.controls.userName.hasError('required')">请输入用户名!</div>
+        <div nz-form-explain
+             *ngIf="validateForm.controls.username.dirty&&validateForm.controls.username.hasError('required')">请输入用户名!
+        </div>
       </div>
     </div>
     <div nz-form-item>
       <div nz-form-control>
-        <nz-input formControlName="password" (click)="fouces()" [nzType]="'password'" [nzPlaceHolder]="'请输入密码'" [nzSize]="'large'">
+        <nz-input formControlName="password" (click)="fouces()" [(ngModel)]="password" [nzType]="'password'" [nzPlaceHolder]="'请输入密码'"
+                  [nzSize]="'large'">
           <ng-template #prefix>
             <i class="anticon anticon-lock"></i>
           </ng-template>
         </nz-input>
-        <div nz-form-explain *ngIf="validateForm.controls.password.dirty&&validateForm.controls.password.hasError('required')">请输入密码!</div>
+        <div nz-form-explain
+             *ngIf="validateForm.controls.password.dirty&&validateForm.controls.password.hasError('required')">请输入密码!
+        </div>
       </div>
     </div>
-    <div class="errorInfo"  *ngIf="errorInfo">用户名或密码错误!</div>
-
+    <div class="errorInfo" *ngIf="errorInfo">用户名或密码错误!</div>
     <div nz-form-item>
       <div nz-form-control>
         <label nz-checkbox formControlName="remember">
