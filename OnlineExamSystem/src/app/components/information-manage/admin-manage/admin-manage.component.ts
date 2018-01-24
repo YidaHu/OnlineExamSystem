@@ -2,6 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {TableServiceService} from "../../../serve/table-service.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AdminManageServerService} from "../../../serve/imformation-manage/admin-manage-server.service";
+import {HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
+import {HttpParams} from "@angular/common/http";
+import {Observable} from "rxjs";
 @Component({
   selector: 'app-admin-manage',
   templateUrl: './admin-manage.component.html',
@@ -13,6 +17,8 @@ export class AdminManageComponent implements OnInit {
 
   private statusShow = false;
   /*状态*/
+
+  private result: Observable<any>;
 
   private id;
   /*删除的id*/
@@ -42,10 +48,26 @@ export class AdminManageComponent implements OnInit {
     {name: 'female', value: false}
   ];
 
-  constructor(private fb: FormBuilder, private adminManageServerService: AdminManageServerService) {
+  constructor(private fb: FormBuilder, private adminManageServerService: AdminManageServerService, private http: HttpClient) {
   }
 
   ngOnInit() {
+    let urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('loginName', 'test123');
+    urlSearchParams.append('password', 'test123');
+    urlSearchParams.append('realName', 'test');
+    urlSearchParams.append('gender', '男');
+    urlSearchParams.append('roleId', '2');
+    let param = urlSearchParams.toString()
+    // this.http.post("http://localhost:8081/examonline/api/root/user/addrooter",param).subscribe(data => console.log(data));
+
+    this.http.post('http://localhost:8081/examonline/api/root/user/addrooter', param, {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded;charset=utf-8'),
+      withCredentials: true,
+    }).subscribe(data => {
+      console.log(data);
+    })
+
     this.genders = [{value: 'jack', label: 'Jack'},
       {value: 'lucy', label: 'Lucy'},
       {value: 'disabled', label: 'Disabled', disabled: true}];
@@ -118,12 +140,26 @@ export class AdminManageComponent implements OnInit {
     }
     this._loading = true;
     const selectedGender = this._filterGender.filter(item => item.value).map(item => item.name);
-    this.adminManageServerService.getAdmin(this._current, this._pageSize, 'name', this._sortValue, selectedGender, '/examonline/api/root/user/listrooter').subscribe((data: any) => {
+    let urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('page', `${this._current}`);
+    urlSearchParams.append('size', `${this._pageSize}`);
+    let param = urlSearchParams.toString();
+
+    // const params = new HttpParams()
+    //   .set('page', 1)
+    //   .set('size', '10');
+
+    this.adminManageServerService.getAdmin({'page':1,'size':10}, 'name', this._sortValue, selectedGender, 'http://localhost:8081/examonline/api/root/user/listrooter').subscribe((data: any) => {
+
+      console.log(data.data.list)
       this._loading = false;
-      this._total = data[0].info.total;
-      this._dataSet = data[0].results;
-      console.log(data)
-    })
+      this._total = data.data.endRow;
+      this._dataSet = data.data.list;
+
+    });
+
+
+
   }
 
   /*删除提醒操作*/

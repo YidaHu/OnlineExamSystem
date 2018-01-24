@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {TableServiceService} from "../../../serve/table-service.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
+import {AdminManageServerService} from "../../../serve/imformation-manage/admin-manage-server.service";
 
 @Component({
   selector: 'app-class-manage',
@@ -34,7 +37,7 @@ export class ClassManageComponent implements OnInit {
     {name: 'female', value: false}
   ];
 
-  constructor(private _randomUser: TableServiceService, private fb: FormBuilder) {
+  constructor(private _randomUser: TableServiceService, private fb: FormBuilder, private adminManageServerService: AdminManageServerService, private http: HttpClient) {
   }
 
   ngOnInit() {
@@ -47,6 +50,18 @@ export class ClassManageComponent implements OnInit {
       name: ['', [Validators.required]],
       is_adult: ['', [Validators.required]]
     });
+
+
+    let urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('loginName', 'test123');
+    urlSearchParams.append('password', 'test123');
+    urlSearchParams.append('realName', 'test');
+    urlSearchParams.append('gender', '男');
+    urlSearchParams.append('roleId', '2');
+    let param = urlSearchParams.toString()
+    // this.http.post("http://localhost:8081/examonline/api/root/user/addrooter",param).subscribe(data => console.log(data));
+
+
   }
 
   /*查询数据*/

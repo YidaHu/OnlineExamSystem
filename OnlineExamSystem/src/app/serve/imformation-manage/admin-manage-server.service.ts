@@ -25,20 +25,24 @@ export class AdminManageServerService {
   //   }).subscribe(data => callback(data))
   // };
 
-  getAdmin(pageIndex = 1, pageSize = 10, sortField, sortOrder, genders, url) {
-    let params = new HttpParams()
-      .append('page', `${pageIndex}`)
-      .append('results', `${pageSize}`)
-      .append('sortField', sortField)
-      .append('sortOrder', sortOrder);
-    genders.forEach(gender => {
-      params = params.append('gender', gender);
+  getAdmin(param, sortField, sortOrder, genders, url) {
+
+    return this.http.get(url, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json;charset=utf-8'),
+      withCredentials: true,
+      params:param
     });
-    // return this.http.post(`${this.randomUserUrl}`, {
-    return this.http.post(`${url}`, {
-      params: params
-    });
+
+
   }
+
+  // getAdmin(params, callback) {
+  //   this.http.get('http://localhost:8081/examonline/api/root/user/listrooter', params, {
+  //     headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded;charset=utf-8'),
+  //   }).subscribe(data => {
+  //     callback(data);
+  //   })
+  // }
 
 
 }
