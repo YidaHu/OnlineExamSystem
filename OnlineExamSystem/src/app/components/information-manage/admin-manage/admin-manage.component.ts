@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TableServiceService} from "../../../serve/table-service.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AdminManageServerService} from "../../../serve/imformation-manage/admin-manage-server.service";
+import {AdminManageServerService} from "../../../serve/information-manage/admin-manage-server.service";
 import {HttpHeaders} from "@angular/common/http";
 import {HttpClient} from "@angular/common/http";
 import {HttpParams} from "@angular/common/http";
@@ -30,7 +30,7 @@ export class AdminManageComponent implements OnInit {
   private loginName;
   private realName;
   private password;
-  private genders;
+  private gender;
 
 
   private serachShow = false;
@@ -52,30 +52,15 @@ export class AdminManageComponent implements OnInit {
   }
 
   ngOnInit() {
-    let urlSearchParams = new URLSearchParams();
-    urlSearchParams.append('loginName', 'test123');
-    urlSearchParams.append('password', 'test123');
-    urlSearchParams.append('realName', 'test');
-    urlSearchParams.append('gender', '男');
-    urlSearchParams.append('roleId', '2');
-    let param = urlSearchParams.toString()
-    // this.http.post("http://localhost:8081/examonline/api/root/user/addrooter",param).subscribe(data => console.log(data));
 
-    this.http.post('http://localhost:8081/examonline/api/root/user/addrooter', param, {
-      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded;charset=utf-8'),
-      withCredentials: true,
-    }).subscribe(data => {
-      console.log(data);
-    })
-
-    this.genders = [{value: 'jack', label: 'Jack'},
-      {value: 'lucy', label: 'Lucy'},
-      {value: 'disabled', label: 'Disabled', disabled: true}];
+    // this.genders = [{value: 'jack', label: 'Jack'},
+    //   {value: 'lucy', label: 'Lucy'},
+    //   {value: 'disabled', label: 'Disabled', disabled: true}];
     this.validateForm = this.fb.group({
 
       loginName: ['', [Validators.required]],
       realName: ['', [Validators.required]],
-      genders: ['', [Validators.required]],
+      gender: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
     this.searchAdmin();
@@ -98,21 +83,53 @@ export class AdminManageComponent implements OnInit {
     } else {
       this.tabTitle = "修改用户数据";
       this.statusShow = true;
+      this.id = strs.id;
+      this.loginName = strs.loginName;
+      this.realName = strs.realName;
+      this.gender = strs.gender;
     }
+    // console.log(strs);
   }
 
-  //添加数据
-  addAdmin() {
-    if (this.validateForm.valid) {
-      /*此处提交*/
-      console.log(this.validateForm.value);
-      this.validateForm.reset();
-      console.log(this.validateForm.value)
-      this.isVisible = false;
-      this.refreshData(true);
-      /*刷新table*/
+  //添加管理员
+  submit() {
+    // if (this.validateForm.valid) {
+    /*此处提交*/
 
+
+    // const body = this.validateForm;
+    if (this.statusShow == true) {
+      const body = {
+        id: this.id,
+        loginName: this.loginName,
+        password: this.password,
+        realName: this.realName,
+        gender: this.gender
+      };
+      this.adminManageServerService.updateAdmin(body).subscribe((data: any) => {
+        console.log("更新");
+        console.log(body);
+      });
+      this.refreshData(true);
+    } else {
+      const body = {loginName: this.loginName, password: this.password, realName: this.realName, gender: this.gender};
+      this.adminManageServerService.addAdmin(body).subscribe((data: any) => {
+        console.log("添加");
+        console.log(body);
+      });
+      this.refreshData(true);
     }
+
+
+    // console.log(this.validateForm.value);
+    this.validateForm.reset();
+    // console.log(this.validateForm.value)
+    this.isVisible = false;
+    // this.refreshData(true);
+    this.searchAdmin();
+    /*刷新table*/
+
+    // }
   }
 
   //关闭窗口
@@ -134,7 +151,7 @@ export class AdminManageComponent implements OnInit {
 
 
   //表格数据操作
-  refreshData(reset = false) {
+  refreshData(reset) {
     if (reset) {
       this._current = 1;
     }
@@ -145,19 +162,17 @@ export class AdminManageComponent implements OnInit {
     urlSearchParams.append('size', `${this._pageSize}`);
     let param = urlSearchParams.toString();
 
-    // const params = new HttpParams()
-    //   .set('page', 1)
-    //   .set('size', '10');
+    this.adminManageServerService.getAdmin({
+      'page': 1,
+      'size': 10
+    }, 'name', this._sortValue, selectedGender, 'http://localhost:8081/examonline/api/root/user/listrooter').subscribe((data: any) => {
 
-    this.adminManageServerService.getAdmin({'page':1,'size':10}, 'name', this._sortValue, selectedGender, 'http://localhost:8081/examonline/api/root/user/listrooter').subscribe((data: any) => {
-
-      console.log(data.data.list)
+      // console.log(data.data.list)
       this._loading = false;
       this._total = data.data.endRow;
       this._dataSet = data.data.list;
 
     });
-
 
 
   }
@@ -167,9 +182,12 @@ export class AdminManageComponent implements OnInit {
     this.alertTab = false;
   };
 
-  confirm = () => {
+  confirm = function (id) {
     /*删除数据请求*/
-    console.log(this.id);
+    // console.log(id);
+    this.adminManageServerService.deleteAdmin({id: id}, "http://localhost:8081/examonline/api/root/user/deleteroot").subscribe((data: any) => {
+      // console.log(data)
+    });
     this.refreshData(true);
   };
 

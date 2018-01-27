@@ -35,7 +35,8 @@ import {GradeQueryComponent} from './components/information-query/grade-query/gr
 import {StudentQueryComponent} from './components/information-query/student-query/student-query.component';
 import {TeacherQueryComponent} from './components/information-query/teacher-query/teacher-query.component';
 import {GradeQueryServerService} from "./serve/information-query/grade-query-server.service";
-import {AdminManageServerService} from "./serve/imformation-manage/admin-manage-server.service";
+import {AdminManageServerService} from "./serve/information-manage/admin-manage-server.service";
+import {LeadershipManageServerService} from "./serve/information-manage/leadership-manage-server.service";
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import {AdminManageServerService} from "./serve/imformation-manage/admin-manage-
     TableServiceService,
     DataAnalysisServiceService,
     GradeQueryServerService,
-    AdminManageServerService
+    AdminManageServerService,
+    LeadershipManageServerService,
   ],
   bootstrap: [AppComponent]
 })

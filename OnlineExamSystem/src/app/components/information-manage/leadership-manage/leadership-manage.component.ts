@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {TableServiceService} from "../../../serve/table-service.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {LeadershipManageServerService} from "../../../serve/information-manage/leadership-manage-server.service";
+import {HttpClient} from "@angular/common/http";
 @Component({
   selector: 'app-leadership-manage',
   templateUrl: './leadership-manage.component.html',
@@ -34,7 +36,7 @@ export class LeadershipManageComponent implements OnInit {
     {name: 'female', value: false}
   ];
 
-  constructor(private _randomUser: TableServiceService, private fb: FormBuilder) {
+  constructor(private _randomUser: TableServiceService, private fb: FormBuilder, private leadershipManageServerService: LeadershipManageServerService, private http: HttpClient) {
   }
 
   ngOnInit() {
@@ -107,13 +109,24 @@ export class LeadershipManageComponent implements OnInit {
       this._current = 1;
     }
     this._loading = true;
-    const selectedGender = this._filterGender.filter(item => item.value).map(item => item.name);
-    this._randomUser.getUsers(this._current, this._pageSize, 'name', this._sortValue, selectedGender, '/api/admin').subscribe((data: any) => {
+    // const selectedGender = this._filterGender.filter(item => item.value).map(item => item.name);
+    // this._randomUser.getUsers(this._current, this._pageSize, 'name', this._sortValue, selectedGender, '/api/admin').subscribe((data: any) => {
+    //   this._loading = false;
+    //   this._total = data[0].info.total;
+    //   this._dataSet = data[0].results;
+    //   console.log(data)
+    // })
+    this.leadershipManageServerService.getLeadership({
+      'page': 1,
+      'size': 10
+    }, 'http://localhost:8081/examonline/api/root/user/listadmin').subscribe((data: any) => {
+
+      console.log(data.data.list)
       this._loading = false;
-      this._total = data[0].info.total;
-      this._dataSet = data[0].results;
-      console.log(data)
-    })
+      this._total = data.data.endRow;
+      this._dataSet = data.data.list;
+
+    });
   }
 
   /*删除提醒操作*/

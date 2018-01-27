@@ -3,7 +3,7 @@ import {TableServiceService} from "../../../serve/table-service.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {HttpHeaders} from "@angular/common/http";
 import {HttpClient} from "@angular/common/http";
-import {AdminManageServerService} from "../../../serve/imformation-manage/admin-manage-server.service";
+import {AdminManageServerService} from "../../../serve/information-manage/admin-manage-server.service";
 
 @Component({
   selector: 'app-class-manage',

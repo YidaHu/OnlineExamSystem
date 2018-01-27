@@ -28,8 +28,7 @@
         <th nz-th><span>姓名</span></th>
         <th nz-th><span>角色</span></th>
         <th nz-th><span>学校</span></th>
-        <th nz-th><span>学院</span></th>
-        <th nz-th><span>班级</span></th>
+        <th nz-th><span>性别</span></th>
         <th nz-th><span>创建时间</span></th>
         <th nz-th><span>更新时间</span></th>
         <th nz-th><span>操作</span></th>
@@ -38,14 +37,13 @@
       <tbody nz-tbody>
       <tr nz-tbody-tr *ngFor="let data of nzTable.data">
         <td nz-td>{{data.id}}</td>
-        <td nz-td>{{data.login_name}}</td>
-        <td nz-td>{{data.real_name}}</td>
-        <td nz-td>{{data.role_id}}</td>
-        <td nz-td>{{data.school_name}}</td>
-        <td nz-td>{{data.department_id}}</td>
+        <td nz-td>{{data.loginName}}</td>
+        <td nz-td>{{data.realName}}</td>
+        <td nz-td>{{data.roleId}}</td>
+        <td nz-td>{{data.schoolId}}</td>
         <td nz-td>{{data.class_name}}</td>
-        <td nz-td>{{data.created_time}}</td>
-        <td nz-td>{{data.update_time}}</td>
+        <td nz-td>{{data.createdTime}}</td>
+        <td nz-td>{{data.updateTime}}</td>
         <td nz-td>
           <!--<span>shanchu</span>-->
           <!--<span>xiugai</span>-->
