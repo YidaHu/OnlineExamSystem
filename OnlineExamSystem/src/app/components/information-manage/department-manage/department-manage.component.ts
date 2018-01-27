@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TableServiceService} from "../../../serve/table-service.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {SchoolManageServerService} from "../../../serve/information-manage/school-manage-server.service";
 
 @Component({
   selector: 'app-department-manage',
@@ -10,7 +11,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class DepartmentManagementComponent implements OnInit {
   validateForm: FormGroup;
 
-  private statusShow = false; /*状态*/
+  private statusShow = false;
+  /*状态*/
 
   private id;
   /*删除的id*/
@@ -33,21 +35,37 @@ export class DepartmentManagementComponent implements OnInit {
     {name: 'female', value: false}
   ];
 
-  constructor(private _randomUser: TableServiceService, private fb: FormBuilder) {
+  constructor(private _randomUser: TableServiceService, private fb: FormBuilder, private schoolManageServerService: SchoolManageServerService) {
   }
 
   ngOnInit() {
     // this.scholls = [{value: 'jack', label: '苏州科技大学'},
     //   {value: 'lucy', label: 'Lucy'},
     //   {value: 'disabled', label: 'Disabled', disabled: true}];
-    this.scholls = [{value: 'usts', label: '苏州科技大学'},
-      {value: 'su', label: '苏州大学'},
-      {value: 'disabled', label: 'Disabled', disabled: true}];
+    // this.scholls = [{value: 'usts', label: '苏州科技大学'},
+    //   {value: 'su', label: '苏州大学'},
+    //   {value: 'disabled', label: 'Disabled', disabled: true}];
     this.validateForm = this.fb.group({
       school_id: ['', [Validators.required]],
       department_id: ['', [Validators.required]],
       name: ['', [Validators.required]],
       is_adult: ['', [Validators.required]]
+    });
+  }
+
+  //获取学校
+  querySchool() {
+    this.schoolManageServerService.getSchool({
+      'page': 1,
+      'size': 10
+    }).subscribe((data: any) => {
+
+      console.log(data.data.list)
+      this.scholls = data.data.list;
+      this._loading = false;
+      this._total = data.data.endRow;
+      this._dataSet = data.data.list;
+
     });
   }
 

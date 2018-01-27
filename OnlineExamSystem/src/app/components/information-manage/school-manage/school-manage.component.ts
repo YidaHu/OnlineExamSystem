@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {TableServiceService} from "../../../serve/table-service.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {SchoolManageServerService} from "../../../serve/information-manage/school-manage-server.service";
+import {HttpClient} from "@angular/common/http";
 @Component({
   selector: 'app-school-manage',
   templateUrl: './school-manage.component.html',
@@ -9,6 +11,9 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 export class SchoolManageComponent implements OnInit {
   validateForm: FormGroup;
+
+  private name;
+  private teacherNum;
 
   private statusShow = false;
   /*状态*/
@@ -34,18 +39,13 @@ export class SchoolManageComponent implements OnInit {
     {name: 'female', value: false}
   ];
 
-  constructor(private _randomUser: TableServiceService, private fb: FormBuilder) {
+  constructor(private _randomUser: TableServiceService, private fb: FormBuilder, private schoolManageServerService: SchoolManageServerService, private http: HttpClient) {
   }
 
   ngOnInit() {
-    this.scholls = [{value: 'jack', label: 'Jack'},
-      {value: 'lucy', label: 'Lucy'},
-      {value: 'disabled', label: 'Disabled', disabled: true}];
     this.validateForm = this.fb.group({
-      school_id: ['', [Validators.required]],
-      department_id: ['', [Validators.required]],
       name: ['', [Validators.required]],
-      is_adult: ['', [Validators.required]]
+      teacherNum: ['', [Validators.required]],
     });
     this.searchSchool();
   }
@@ -54,34 +54,65 @@ export class SchoolManageComponent implements OnInit {
   searchSchool() {
     // console.log(this.schollsId);
     this.serachShow = true;
-    this.refreshData();
+    this.refreshData(true);
   }
 
   /*弹窗*/
   operateData(strs) {
     this.isVisible = true;
     if (strs == "add") {
-      this.tabTitle = "添加专业数据";
+      this.tabTitle = "添加学校数据";
       this.statusShow = false;
     } else {
-      this.tabTitle = "修改专业数据";
+      this.tabTitle = "修改学校数据";
       this.statusShow = true;
+      this.id = strs.id;
+      this.name = strs.name;
+      this.teacherNum = strs.teacherNum;
     }
+    // console.log(strs);
+  }
+
+  submit() {
+    if (this.statusShow == true) {
+      const body = {
+        id: this.id,
+        name: this.name,
+        teacherNum: this.teacherNum,
+      };
+      this.schoolManageServerService.updateSchool(body).subscribe((data: any) => {
+        console.log("更新");
+        console.log(body);
+      });
+    } else {
+      const body = {name: this.name, teacherNum: this.teacherNum};
+      this.schoolManageServerService.addSchool(body).subscribe((data: any) => {
+        console.log("添加");
+        console.log(body);
+      });
+    }
+    // console.log(this.validateForm.value);
+    this.validateForm.reset();
+    // console.log(this.validateForm.value)
+    this.isVisible = false;
+    // this.refreshData(true);
+    this.searchSchool();
+    /*刷新table*/
   }
 
   //添加数据
-  addSchool() {
-    if (this.validateForm.valid) {
-      /*此处提交*/
-      console.log(this.validateForm.value);
-      this.validateForm.reset();
-      console.log(this.validateForm.value)
-      this.isVisible = false;
-      this.refreshData(true);
-      /*刷新table*/
-
-    }
-  }
+  // addSchool() {
+  //   if (this.validateForm.valid) {
+  //     /*此处提交*/
+  //     console.log(this.validateForm.value);
+  //     this.validateForm.reset();
+  //     console.log(this.validateForm.value)
+  //     this.isVisible = false;
+  //     this.refreshData(true);
+  //     /*刷新table*/
+  //
+  //   }
+  // }
 
   //关闭窗口
   handleCancel() {
@@ -90,7 +121,7 @@ export class SchoolManageComponent implements OnInit {
 
   sort(value) {
     this._sortValue = value;
-    this.refreshData();
+    this.refreshData(true);
   }
 
   reset() {
@@ -102,18 +133,34 @@ export class SchoolManageComponent implements OnInit {
 
 
   //表格数据操作
-  refreshData(reset = false) {
+  refreshData(reset) {
+    // if (reset) {
+    //   this._current = 1;
+    // }
+    // this._loading = true;
+    // const selectedGender = this._filterGender.filter(item => item.value).map(item => item.name);
+    // this._randomUser.getUsers(this._current, this._pageSize, 'name', this._sortValue, selectedGender, '/api/school').subscribe((data: any) => {
+    //   this._loading = false;
+    //   this._total = data[0].info.total;
+    //   this._dataSet = data[0].results;
+    //   console.log(data)
+    // })
+
     if (reset) {
       this._current = 1;
     }
     this._loading = true;
-    const selectedGender = this._filterGender.filter(item => item.value).map(item => item.name);
-    this._randomUser.getUsers(this._current, this._pageSize, 'name', this._sortValue, selectedGender, '/api/school').subscribe((data: any) => {
+    this.schoolManageServerService.getSchool({
+      'page': 1,
+      'size': 10
+    }).subscribe((data: any) => {
+
+      console.log(data.data.list)
       this._loading = false;
-      this._total = data[0].info.total;
-      this._dataSet = data[0].results;
-      console.log(data)
-    })
+      this._total = data.data.endRow;
+      this._dataSet = data.data.list;
+
+    });
   }
 
   /*删除提醒操作*/
@@ -121,10 +168,12 @@ export class SchoolManageComponent implements OnInit {
     this.alertTab = false;
   };
 
-  confirm = () => {
+  confirm = function (id) {
     /*删除数据请求*/
-    console.log(this.id);
-    this.refreshData(true);
+    this.schoolManageServerService.deleteSchool({id: id}).subscribe((data: any) => {
+      // console.log(data)
+    });
+    this.searchSchool();
   };
 
 }

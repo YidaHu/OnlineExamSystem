@@ -70,7 +70,7 @@ export class AdminManageComponent implements OnInit {
   searchAdmin() {
     // console.log(this.schollsId);
     this.serachShow = true;
-    this.refreshData();
+    this.refreshData(true);
   }
 
 
@@ -110,17 +110,13 @@ export class AdminManageComponent implements OnInit {
         console.log("更新");
         console.log(body);
       });
-      this.refreshData(true);
     } else {
       const body = {loginName: this.loginName, password: this.password, realName: this.realName, gender: this.gender};
       this.adminManageServerService.addAdmin(body).subscribe((data: any) => {
         console.log("添加");
         console.log(body);
       });
-      this.refreshData(true);
     }
-
-
     // console.log(this.validateForm.value);
     this.validateForm.reset();
     // console.log(this.validateForm.value)
@@ -139,7 +135,7 @@ export class AdminManageComponent implements OnInit {
 
   sort(value) {
     this._sortValue = value;
-    this.refreshData();
+    this.refreshData(true);
   }
 
   reset() {
@@ -188,7 +184,7 @@ export class AdminManageComponent implements OnInit {
     this.adminManageServerService.deleteAdmin({id: id}, "http://localhost:8081/examonline/api/root/user/deleteroot").subscribe((data: any) => {
       // console.log(data)
     });
-    this.refreshData(true);
+    this.searchAdmin();
   };
 
 }

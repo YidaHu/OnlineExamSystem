@@ -1,13 +1,14 @@
 <div class="department">
   <div class="departmentSearch">
-    <label for="*" class="selectLab">学校</label>
+    <label  class="selectLab">学校</label>
     <div class="selectOptions">
-      <nz-select style="width: 200px;" [(ngModel)]="schollId" [nzPlaceHolder]="'请选择学校'" [nzSize]="size">
+      <nz-select style="width: 200px;" [(ngModel)]="schollId" [nzPlaceHolder]="'请选择学校'" [nzSize]="size"
+                 (ngModelChange)="querySchool()">
         <nz-option
           *ngFor="let option of scholls"
-          [nzLabel]="option.label"
-          [nzValue]="option.value"
-          [nzDisabled]="option.disabled">
+          [nzLabel]="option.id"
+          [nzValue]="option.teacherNum"
+          [nzDisabled]="option.teacherNum">
         </nz-option>
       </nz-select>
     </div>

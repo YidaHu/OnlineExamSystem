@@ -109,13 +109,6 @@ export class LeadershipManageComponent implements OnInit {
       this._current = 1;
     }
     this._loading = true;
-    // const selectedGender = this._filterGender.filter(item => item.value).map(item => item.name);
-    // this._randomUser.getUsers(this._current, this._pageSize, 'name', this._sortValue, selectedGender, '/api/admin').subscribe((data: any) => {
-    //   this._loading = false;
-    //   this._total = data[0].info.total;
-    //   this._dataSet = data[0].results;
-    //   console.log(data)
-    // })
     this.leadershipManageServerService.getLeadership({
       'page': 1,
       'size': 10

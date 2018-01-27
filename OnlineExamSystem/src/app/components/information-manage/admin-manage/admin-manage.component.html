@@ -87,7 +87,7 @@
           <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
             <nz-input [nzSize]="'large'" formControlName="realName" [(ngModel)]="realName" [nzType]="'text'" [nzId]="'text'"></nz-input>
             <div nz-form-explain
-                 *ngIf="validateForm.controls.realName.dirty&&validateForm.controls.realName.hasError('required')">请填写专业
+                 *ngIf="validateForm.controls.realName.dirty&&validateForm.controls.realName.hasError('required')">请填写姓名
             </div>
           </div>
         </div>
@@ -98,7 +98,7 @@
           <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
             <nz-input [nzSize]="'large'" formControlName="password" [(ngModel)]="password" [nzType]="'text'" [nzId]="'text'"></nz-input>
             <div nz-form-explain
-                 *ngIf="validateForm.controls.password.dirty&&validateForm.controls.password.hasError('required')">请填写专业
+                 *ngIf="validateForm.controls.password.dirty&&validateForm.controls.password.hasError('required')">请填写密码
             </div>
           </div>
         </div>
