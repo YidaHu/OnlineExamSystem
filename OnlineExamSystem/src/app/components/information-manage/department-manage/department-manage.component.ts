@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TableServiceService} from "../../../serve/table-service.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SchoolManageServerService} from "../../../serve/information-manage/school-manage-server.service";
+import {DepartmentManageServerService} from "../../../serve/information-manage/department-manage-server.service";
 
 @Component({
   selector: 'app-department-manage',
@@ -11,8 +12,13 @@ import {SchoolManageServerService} from "../../../serve/information-manage/schoo
 export class DepartmentManagementComponent implements OnInit {
   validateForm: FormGroup;
 
+  private schoolId;//主界面学校ID
+  private school_id;//添加学院界面学校ID
+  private name;
+
   private statusShow = false;
   /*状态*/
+  private flag = false;
 
   private id;
   /*删除的id*/
@@ -35,7 +41,7 @@ export class DepartmentManagementComponent implements OnInit {
     {name: 'female', value: false}
   ];
 
-  constructor(private _randomUser: TableServiceService, private fb: FormBuilder, private schoolManageServerService: SchoolManageServerService) {
+  constructor(private _randomUser: TableServiceService, private fb: FormBuilder, private schoolManageServerService: SchoolManageServerService, private departmentManageServerService: DepartmentManageServerService) {
   }
 
   ngOnInit() {
@@ -51,58 +57,94 @@ export class DepartmentManagementComponent implements OnInit {
       name: ['', [Validators.required]],
       is_adult: ['', [Validators.required]]
     });
-  }
 
-  //获取学校
-  querySchool() {
+    //获取学校
     this.schoolManageServerService.getSchool({
       'page': 1,
-      'size': 10
+      'size': 10,
     }).subscribe((data: any) => {
 
       console.log(data.data.list)
       this.scholls = data.data.list;
-      this._loading = false;
-      this._total = data.data.endRow;
-      this._dataSet = data.data.list;
+      // this._loading = false;
+      // this._total = data.data.endRow;
+      // this._dataSet = data.data.list;
 
     });
+
+  }
+
+  //获取学校
+  querySchool(value) {
+    console.log(value)
+    this.schoolId = value;
+
   }
 
   //查询数据
   searchDepartment() {
     console.log(this.schollsId);
+    this.departmentManageServerService.getDepartment({
+      'page': 1,
+      'size': 10,
+      'schoolId': this.schoolId
+    }).subscribe((data: any) => {
+
+      console.log(data.data.list)
+      // this.scholls = data.data.list;
+      this._loading = false;
+      this._total = data.data.endRow;
+      this._dataSet = data.data.list;
+
+    });
     this.serachShow = true;
-    this.refreshData();
+    // this.refreshData(true);
   }
 
   /*弹窗*/
   operateData(strs) {
     this.isVisible = true;
     if (strs == "add") {
-      this.tabTitle = "添加专业数据";
+      this.tabTitle = "添加学院数据";
       this.statusShow = false;
     } else {
-      this.tabTitle = "修改专业数据";
+      this.tabTitle = "修改学院数据";
+      this.id = strs.id;
+      this.name = strs.name;
+      // this.schoolId = this.scholls[0];
       this.statusShow = true;
     }
   }
 
-  //添加数据
-  addDepartment() {
-    // console.log('添加成功')
-    // this.isVisible = false;
-    if (this.validateForm.valid) {
-      /*此处提交*/
-      console.log(this.validateForm.value);
-      this.validateForm.reset();
-      console.log(this.validateForm.value)
-      this.isVisible = false;
-      this.refreshData(true);
-      /*刷新table*/
-
+  submit() {
+    if (this.statusShow == true) {
+      const body = {
+        id: this.id,
+        name: this.name,
+        schoolId: this.school_id,
+      };
+      this.departmentManageServerService.updateDepartment(body).subscribe((data: any) => {
+        console.log("更新");
+        console.log(body);
+      });
+    } else {
+      console.log(this.school_id + "->>")
+      const body = {name: this.name, schoolId: this.school_id};
+      this.departmentManageServerService.addDepartment(body).subscribe((data: any) => {
+        console.log("添加");
+        console.log(body);
+      });
     }
+    // console.log(this.validateForm.value);
+    this.validateForm.reset();
+    // console.log(this.validateForm.value)
+    this.isVisible = false;
+    this.searchDepartment();
+    // this.refreshData(true);
+    // this.searchSchool();
+    /*刷新table*/
   }
+
 
   //关闭窗口
   handleCancel() {
@@ -111,41 +153,30 @@ export class DepartmentManagementComponent implements OnInit {
 
   sort(value) {
     this._sortValue = value;
-    this.refreshData();
+    this.searchDepartment();
   }
 
   reset() {
     this._filterGender.forEach(item => {
       item.value = false;
     });
-    this.refreshData(true);
+    // this.refreshData(true);
   }
 
-
-  //表格数据操作
-  refreshData(reset = false) {
-    if (reset) {
-      this._current = 1;
-    }
-    this._loading = true;
-    const selectedGender = this._filterGender.filter(item => item.value).map(item => item.name);
-    this._randomUser.getUsers(this._current, this._pageSize, 'name', this._sortValue, selectedGender, '/api/department').subscribe((data: any) => {
-      this._loading = false;
-      this._total = data[0].info.total;
-      this._dataSet = data[0].results;
-      console.log(this._total)
-    })
-  }
 
   /*删除提醒操作*/
   cancel = function () {
     this.alertTab = false;
   };
 
-  confirm = () => {
+  confirm = function (id) {
     /*删除数据请求*/
-    console.log(this.id);
-    this.refreshData(true);
+    console.log(id);
+    this.departmentManageServerService.deleteDepartment(id).subscribe((data: any) => {
+      // console.log(data)
+    });
+    this.searchDepartment();
+    // this.refreshData(true);
   };
 
 }
