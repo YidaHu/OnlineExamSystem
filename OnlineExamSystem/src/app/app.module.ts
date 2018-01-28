@@ -39,6 +39,7 @@ import {AdminManageServerService} from "./serve/information-manage/admin-manage-
 import {LeadershipManageServerService} from "./serve/information-manage/leadership-manage-server.service";
 import {SchoolManageServerService} from "./serve/information-manage/school-manage-server.service";
 import {DepartmentManageServerService} from "./serve/information-manage/department-manage-server.service";
+import {MajorManageServerService} from "./serve/information-manage/major-manage-server.service";
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import {DepartmentManageServerService} from "./serve/information-manage/departme
     LeadershipManageServerService,
     SchoolManageServerService,
     DepartmentManageServerService,
+    MajorManageServerService,
   ],
   bootstrap: [AppComponent]
 })

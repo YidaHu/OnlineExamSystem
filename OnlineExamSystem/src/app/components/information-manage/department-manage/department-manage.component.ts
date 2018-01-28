@@ -66,9 +66,6 @@ export class DepartmentManagementComponent implements OnInit {
 
       console.log(data.data.list)
       this.scholls = data.data.list;
-      // this._loading = false;
-      // this._total = data.data.endRow;
-      // this._dataSet = data.data.list;
 
     });
 
@@ -175,7 +172,7 @@ export class DepartmentManagementComponent implements OnInit {
     this.departmentManageServerService.deleteDepartment(id).subscribe((data: any) => {
       // console.log(data)
     });
-    this.searchDepartment();
+    this.refreshData(true);
     // this.refreshData(true);
   };
 

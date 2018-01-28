@@ -38,4 +38,13 @@ export class DepartmentManageServerService {
     });
   }
 
+  //校管根据学校查询所有部门
+  getDepartmentFromAdmin(param) {
+    return this.http.get('http://localhost:8081/examonline/api/admin/department', {
+      headers: new HttpHeaders().set('Content-Type', 'application/json;charset=utf-8'),
+      withCredentials: true,
+      params: param
+    });
+  }
+
 }

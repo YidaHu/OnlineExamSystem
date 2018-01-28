@@ -3,6 +3,7 @@ import {TableServiceService} from "../../../serve/table-service.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LeadershipManageServerService} from "../../../serve/information-manage/leadership-manage-server.service";
 import {HttpClient} from "@angular/common/http";
+import {SchoolManageServerService} from "../../../serve/information-manage/school-manage-server.service";
 @Component({
   selector: 'app-leadership-manage',
   templateUrl: './leadership-manage.component.html',
@@ -11,6 +12,13 @@ import {HttpClient} from "@angular/common/http";
 
 export class LeadershipManageComponent implements OnInit {
   validateForm: FormGroup;
+
+  private id_modal;
+  private loginName_modal;
+  private realName_modal;
+  private password_modal;
+  private school_modal;
+  private gender_modal;
 
   private statusShow = false;
   /*状态*/
@@ -36,7 +44,11 @@ export class LeadershipManageComponent implements OnInit {
     {name: 'female', value: false}
   ];
 
-  constructor(private _randomUser: TableServiceService, private fb: FormBuilder, private leadershipManageServerService: LeadershipManageServerService, private http: HttpClient) {
+  constructor(private _randomUser: TableServiceService,
+              private schoolManageServerService: SchoolManageServerService,
+              private fb: FormBuilder,
+              private leadershipManageServerService: LeadershipManageServerService,
+              private http: HttpClient) {
   }
 
   ngOnInit() {
@@ -49,6 +61,16 @@ export class LeadershipManageComponent implements OnInit {
       name: ['', [Validators.required]],
       is_adult: ['', [Validators.required]]
     });
+    //获取学校
+    this.schoolManageServerService.getSchool({
+      'page': 1,
+      'size': 10,
+    }).subscribe((data: any) => {
+
+      console.log(data.data.list)
+      this.scholls = data.data.list;
+
+    });
     this.searchLeadership();
   }
 
@@ -56,33 +78,55 @@ export class LeadershipManageComponent implements OnInit {
   searchLeadership() {
     // console.log(this.schollsId);
     this.serachShow = true;
-    this.refreshData();
+    this.refreshData(true);
   }
 
   /*弹窗*/
   operateData(strs) {
     this.isVisible = true;
     if (strs == "add") {
-      this.tabTitle = "添加用户数据";
+      this.tabTitle = "添加学院数据";
       this.statusShow = false;
     } else {
-      this.tabTitle = "修改用户数据";
+      this.tabTitle = "修改学院数据";
+      this.id_modal = strs.id;
+      this.loginName_modal = strs.loginName;
+      this.realName_modal = strs.realName;
+      this.school_modal = strs.schoolId;
+      this.gender_modal = strs.gender;
+      // this.schoolId = this.scholls[0];
       this.statusShow = true;
     }
   }
 
-  //添加数据
-  addLeadership() {
-    if (this.validateForm.valid) {
-      /*此处提交*/
-      console.log(this.validateForm.value);
-      this.validateForm.reset();
-      console.log(this.validateForm.value)
-      this.isVisible = false;
-      this.refreshData(true);
-      /*刷新table*/
-
+  submit() {
+    if (this.statusShow == true) {
+      const body = {
+        id: this.id_modal,
+        loginName: this.loginName_modal, realName: this.realName_modal,
+        password: this.password_modal, schoolId: this.school_modal, gender: this.gender_modal
+      };
+      this.leadershipManageServerService.updateLeadership(body).subscribe((data: any) => {
+        console.log("更新");
+        console.log(body);
+      });
+    } else {
+      const body = {
+        loginName: this.loginName_modal, realName: this.realName_modal,
+        password: this.password_modal, schoolId: this.school_modal, gender: this.gender_modal
+      };
+      this.leadershipManageServerService.addLeadership(body).subscribe((data: any) => {
+        console.log("添加");
+        console.log(body);
+      });
     }
+    // console.log(this.validateForm.value);
+    this.validateForm.reset();
+    // console.log(this.validateForm.value)
+    this.isVisible = false;
+    this.searchLeadership();
+    // this.searchSchool();
+    /*刷新table*/
   }
 
   //关闭窗口
@@ -92,7 +136,7 @@ export class LeadershipManageComponent implements OnInit {
 
   sort(value) {
     this._sortValue = value;
-    this.refreshData();
+    this.refreshData(true);
   }
 
   reset() {
@@ -104,7 +148,7 @@ export class LeadershipManageComponent implements OnInit {
 
 
   //表格数据操作
-  refreshData(reset = false) {
+  refreshData(reset) {
     if (reset) {
       this._current = 1;
     }
@@ -112,7 +156,7 @@ export class LeadershipManageComponent implements OnInit {
     this.leadershipManageServerService.getLeadership({
       'page': 1,
       'size': 10
-    }, 'http://localhost:8081/examonline/api/root/user/listadmin').subscribe((data: any) => {
+    }).subscribe((data: any) => {
 
       console.log(data.data.list)
       this._loading = false;
@@ -127,10 +171,14 @@ export class LeadershipManageComponent implements OnInit {
     this.alertTab = false;
   };
 
-  confirm = () => {
+  confirm = function (id) {
     /*删除数据请求*/
-    console.log(this.id);
-    this.refreshData(true);
+    console.log(id);
+    this.leadershipManageServerService.deleteLeadership({id: id}).subscribe((data: any) => {
+      // console.log(data)
+    });
+    this.searchLeadership();
+    // this.refreshData(true);
   };
 
 }

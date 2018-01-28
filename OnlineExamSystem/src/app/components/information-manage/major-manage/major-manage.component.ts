@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {TableServiceService} from "../../../serve/table-service.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {SchoolManageServerService} from "../../../serve/information-manage/school-manage-server.service";
+import {MajorManageServerService} from "../../../serve/information-manage/major-manage-server.service";
+import {DepartmentManageServerService} from "../../../serve/information-manage/department-manage-server.service";
 
 @Component({
   selector: 'app-major-manage',
@@ -10,10 +13,22 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class MajorManageComponent implements OnInit {
   validateForm: FormGroup;
 
-  private statusShow = false; /*状态*/
-  private id; /*删除的id*/
-  private tabTitle = "";  /*弹窗标题*/
+  private schoolId;
+  private flag = false;
+
+  private id_modal;
+  private school_modal;
+  private department_modal;
+  private major_modal;
+
+  private statusShow = false;
+  /*状态*/
+  private id;
+  /*删除的id*/
+  private tabTitle = "";
+  /*弹窗标题*/
   private scholls;
+  private departments;
   private schollsId;
   private serachShow = false;
   /*控制是否生成table*/
@@ -31,13 +46,13 @@ export class MajorManageComponent implements OnInit {
     {name: 'female', value: false}
   ];
 
-  constructor(private _randomUser: TableServiceService, private fb: FormBuilder) {
+  constructor(private _randomUser: TableServiceService, private fb: FormBuilder,
+              private schoolManageServerService: SchoolManageServerService,
+              private majorManageServerService: MajorManageServerService,
+              private departmentManageServerService: DepartmentManageServerService) {
   }
 
   ngOnInit() {
-    this.scholls = [{value: 'jack', label: 'Jack'},
-      {value: 'lucy', label: 'Lucy'},
-      {value: 'disabled', label: 'Disabled', disabled: true}];
     this.validateForm = this.fb.group({
       school_id: ['', [Validators.required]],
       department_id: ['', [Validators.required]],
@@ -45,39 +60,100 @@ export class MajorManageComponent implements OnInit {
       is_adult: ['', [Validators.required]]
     });
 
+    //获取学校
+    this.schoolManageServerService.getSchool({
+      'page': 1,
+      'size': 10,
+    }).subscribe((data: any) => {
+
+      console.log(data.data.list)
+      this.scholls = data.data.list;
+
+    });
+
+  }
+
+  queryMajor(value) {
+
   }
 
   /*查询数据*/
   searchMajor() {
     console.log(this.schollsId);
+    this.majorManageServerService.getMajor({
+      'page': 1,
+      'size': 10,
+      'schoolId': this.schoolId
+    }).subscribe((data: any) => {
+
+      console.log(data.data.list)
+      // this.scholls = data.data.list;
+      this._loading = false;
+      this._total = data.data.endRow;
+      this._dataSet = data.data.list;
+
+    });
     this.serachShow = true;
-    this.refreshData();
   }
 
   /*弹窗*/
   operateData(strs) {
     this.isVisible = true;
-    if(strs == "add"){
-      this.tabTitle = "添加专业数据";
+    if (strs == "add") {
+      this.tabTitle = "添加学院数据";
       this.statusShow = false;
-    }else{
-      this.tabTitle = "修改专业数据";
+    } else {
+      this.tabTitle = "修改学院数据";
+      this.id_modal = strs.id;
+      this.major_modal = strs.name;
       this.statusShow = true;
     }
   }
 
-  /*添加数据*/
-  addMajor() {
-    if (this.validateForm.valid){
-      /*此处提交*/
-      console.log(this.validateForm.value);
-      this.validateForm.reset();
-      console.log(this.validateForm.value)
-      this.isVisible = false;
-      this.refreshData(true);
-      /*刷新table*/
-
+  submit() {
+    if (this.statusShow == true) {
+      const body = {
+        id: this.id_modal,
+        name: this.major_modal,
+        departmentId: this.department_modal,
+        schoolId: this.school_modal,
+      };
+      this.majorManageServerService.updateMajor(body).subscribe((data: any) => {
+        console.log("更新");
+        console.log(body);
+      });
+    } else {
+      const body = {name: this.major_modal, departmentId: this.department_modal, schoolId: this.school_modal};
+      this.majorManageServerService.addMajor(body).subscribe((data: any) => {
+        console.log("添加");
+        console.log(body);
+      });
     }
+    // console.log(this.validateForm.value);
+    this.validateForm.reset();
+    // console.log(this.validateForm.value)
+    this.isVisible = false;
+    this.searchMajor();
+    // this.refreshData(true);
+    // this.searchSchool();
+    /*刷新table*/
+  }
+
+  queryDepartment(value) {
+    console.log(value)
+    this.departmentManageServerService.getDepartment({
+      'page': 1,
+      'size': 10,
+      'schoolId': value
+    }).subscribe((data: any) => {
+
+      console.log(data.data.list)
+      this.departments = data.data.list;
+      // this._loading = false;
+      // this._total = data.data.endRow;
+      // this._dataSet = data.data.list;
+
+    });
   }
 
 
@@ -88,31 +164,14 @@ export class MajorManageComponent implements OnInit {
 
   sort(value) {
     this._sortValue = value;
-    this.refreshData();
+    this.searchMajor();
   }
 
   reset() {
     this._filterGender.forEach(item => {
       item.value = false;
     });
-    this.refreshData(true);
-  }
-
-
-  /*表格数据操作*/
-  refreshData(reset = false) {
-    if (reset) {
-      this._current = 1;
-    }
-
-    this._loading = true;
-    const selectedGender = this._filterGender.filter(item => item.value).map(item => item.name);
-    this._randomUser.getUsers(this._current, this._pageSize, 'name', this._sortValue, selectedGender,'/api/major').subscribe((data: any) => {
-      this._loading = false;
-      this._total = data[0].info.total;
-      this._dataSet = data[0].results;
-      console.log(this._total);
-    });
+    this.searchMajor();
   }
 
 
@@ -121,10 +180,14 @@ export class MajorManageComponent implements OnInit {
     this.alertTab = false;
   };
 
-  confirm = () => {
+  confirm = function (id) {
     /*删除数据请求*/
-    console.log(this.id);
-    this.refreshData(true);
+    console.log(id);
+    this.majorManageServerService.deleteMajor(id).subscribe((data: any) => {
+      // console.log(data)
+    });
+    this.searchMajor();
+    // this.refreshData(true);
   };
 
 }
