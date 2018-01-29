@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TableServiceService} from "../../../serve/table-service.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {DepartmentManageServerService} from "../../../serve/information-manage/department-manage-server.service";
 @Component({
   selector: 'app-course-department-manage',
   templateUrl: './course-manage.component.html',
@@ -9,6 +10,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 export class CourseManageComponent implements OnInit {
   validateForm: FormGroup;
+
+  private departments;
 
   private statusShow = false;
   /*状态*/
@@ -34,7 +37,9 @@ export class CourseManageComponent implements OnInit {
     {name: 'female', value: false}
   ];
 
-  constructor(private _randomUser: TableServiceService, private fb: FormBuilder) {
+  constructor(private _randomUser: TableServiceService,
+              private departmentManageServerService: DepartmentManageServerService,
+              private fb: FormBuilder) {
   }
 
   ngOnInit() {
@@ -47,6 +52,17 @@ export class CourseManageComponent implements OnInit {
       name: ['', [Validators.required]],
       is_adult: ['', [Validators.required]]
     });
+    //校管获取所属学校的所有学院
+    this.departmentManageServerService.getDepartmentFromAdmin({
+      'page': 1,
+      'size': 10,
+    }).subscribe((data: any) => {
+
+      console.log(data.data.list)
+      this.departments = data.data.list;
+
+    });
+
     this.searchCourse();
   }
 

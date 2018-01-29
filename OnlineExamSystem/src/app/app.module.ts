@@ -40,6 +40,8 @@ import {LeadershipManageServerService} from "./serve/information-manage/leadersh
 import {SchoolManageServerService} from "./serve/information-manage/school-manage-server.service";
 import {DepartmentManageServerService} from "./serve/information-manage/department-manage-server.service";
 import {MajorManageServerService} from "./serve/information-manage/major-manage-server.service";
+import {CourseManageServerService} from "./serve/information-manage/course-manage-server.service";
+import {ClassManageServerService} from "./serve/information-manage/class-manage-server.service";
 
 @NgModule({
   declarations: [
@@ -88,6 +90,8 @@ import {MajorManageServerService} from "./serve/information-manage/major-manage-
     SchoolManageServerService,
     DepartmentManageServerService,
     MajorManageServerService,
+    CourseManageServerService,
+    ClassManageServerService,
   ],
   bootstrap: [AppComponent]
 })
