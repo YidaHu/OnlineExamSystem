@@ -15,6 +15,7 @@ export class MajorManageComponent implements OnInit {
 
   private root = false;
   private admin = false;
+  private status = "";
 
   private schoolId;
   private flag = false;
@@ -23,6 +24,7 @@ export class MajorManageComponent implements OnInit {
   private school_modal;
   private department_modal;
   private major_modal;
+  private is_adult;
 
   private department;
 
@@ -58,8 +60,8 @@ export class MajorManageComponent implements OnInit {
   }
 
   ngOnInit() {
-    var status = sessionStorage.getItem("roleValue");
-    if (status == "1") {
+    this.status = sessionStorage.getItem("roleValue");
+    if (this.status == "1") {
       this.root = true;
       this.admin = false;
 
@@ -113,7 +115,8 @@ export class MajorManageComponent implements OnInit {
     this.majorManageServerService.getMajor({
       'page': 1,
       'size': 10,
-      'schoolId': this.schoolId
+      'schoolId': this.schoolId,
+      'departmentId': this.department,
     }).subscribe((data: any) => {
 
       console.log(data.data.list)
@@ -158,32 +161,63 @@ export class MajorManageComponent implements OnInit {
   }
 
   submit() {
-    if (this.statusShow == true) {
-      const body = {
-        id: this.id_modal,
-        name: this.major_modal,
-        departmentId: this.department_modal,
-        schoolId: this.school_modal,
-      };
-      this.majorManageServerService.updateMajor(body).subscribe((data: any) => {
-        console.log("更新");
-        console.log(body);
-      });
+
+    if (this.status == "1") {
+      if (this.statusShow == true) {
+        const body = {
+          id: this.id_modal,
+          name: this.major_modal,
+          departmentId: this.department_modal,
+          schoolId: this.school_modal,
+          isAdult: this.is_adult,
+        };
+        this.majorManageServerService.updateMajor(body).subscribe((data: any) => {
+          console.log("更新");
+          console.log(body);
+        });
+      } else {
+        const body = {
+          name: this.major_modal,
+          departmentId: this.department_modal,
+          schoolId: this.school_modal
+        };
+        this.majorManageServerService.addMajor(body).subscribe((data: any) => {
+          console.log("添加");
+          console.log(body);
+        });
+      }
+      // console.log(this.validateForm.value);
+      this.validateForm.reset();
+      // console.log(this.validateForm.value)
+      this.isVisible = false;
+      this.searchMajor();
+      // this.refreshData(true);
+      // this.searchSchool();
+      /*刷新table*/
     } else {
-      const body = {name: this.major_modal, departmentId: this.department_modal, schoolId: this.school_modal};
-      this.majorManageServerService.addMajor(body).subscribe((data: any) => {
-        console.log("添加");
-        console.log(body);
-      });
+      if (this.statusShow == true) {
+      } else {
+        const body = {
+          name: this.major_modal,
+          departmentId: this.department_modal,
+          schoolId: "3"
+        };
+        this.majorManageServerService.addMajorFromAdmin(body).subscribe((data: any) => {
+          console.log("添加");
+          console.log(body);
+        });
+      }
+      // console.log(this.validateForm.value);
+      this.validateForm.reset();
+      // console.log(this.validateForm.value)
+      this.isVisible = false;
+      this.searchMajor();
+      // this.refreshData(true);
+      // this.searchSchool();
+      /*刷新table*/
     }
-    // console.log(this.validateForm.value);
-    this.validateForm.reset();
-    // console.log(this.validateForm.value)
-    this.isVisible = false;
-    this.searchMajor();
-    // this.refreshData(true);
-    // this.searchSchool();
-    /*刷新table*/
+
+
   }
 
   queryDepartment(value) {

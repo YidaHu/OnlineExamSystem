@@ -30,7 +30,7 @@
       <i class="anticon anticon-search"></i><span>查询专业</span>
     </button>
 
-    <button nz-button *ngIf="isAdmin()" [nzType]="'default'" class="c_right" (click)="applyData('apply')">
+    <button nz-button *ngIf="isAdmin()" [nzType]="'default'" class="c_right" (click)="operateData('add')">
       <span>申请专业</span>
     </button>
     <button nz-button *ngIf="isRoot()" [nzType]="'default'" class="c_right" (click)="operateData('add')">
@@ -59,16 +59,20 @@
         </th>
         <th nz-th><span>学院</span></th>
         <th nz-th><span>学校</span></th>
-        <th nz-th><span>操作</span></th>
+        <th nz-th><span>状态</span></th>
+        <th nz-th *ngIf="isRoot()"><span>操作</span></th>
       </tr>
       </thead>
       <tbody nz-tbody>
       <tr nz-tbody-tr *ngFor="let data of nzTable.data">
         <td nz-td>{{data.id}}</td>
         <td nz-td>{{data.name}}</td>
-        <td nz-td>{{data.departmentId}}</td>
-        <td nz-td>{{data.schoolId}}</td>
-        <td nz-td>
+        <td nz-td>{{data.departmentName}}</td>
+        <td nz-td>{{data.schoolName}}</td>
+        <td nz-td *ngIf="data.isAdult ==1 ">已审核</td>
+        <td nz-td *ngIf="data.isAdult ==0">未审核</td>
+        <td nz-td *ngIf="data.isAdult ==2">审核失败</td>
+        <td nz-td *ngIf="isRoot()">
           <nz-popconfirm [nzTitle]="'确定要删除这个任务吗？'" (nzOnConfirm)="confirm(data.id)" (nzOnCancel)="cancel()">
             <a nz-popconfirm>删除</a>
           </nz-popconfirm>
@@ -134,7 +138,8 @@
             <nz-input [nzSize]="'large'" formControlName="major_modal" [(ngModel)]="major_modal" [nzType]="'text'"
                       [nzId]="'text'"></nz-input>
             <div nz-form-explain
-                 *ngIf="validateForm.controls.major_modal.dirty&&validateForm.controls.major_modal.hasError('required')">请填写专业
+                 *ngIf="validateForm.controls.major_modal.dirty&&validateForm.controls.major_modal.hasError('required')">
+              请填写专业
             </div>
           </div>
         </div>
@@ -143,11 +148,11 @@
             <label>状态</label>
           </div>
           <div nz-form-control nz-col [nzSpan]="14">
-            <nz-radio-group formControlName="is_adult">
+            <nz-radio-group formControlName="is_adult" [(ngModel)]="is_adult">
               <label nz-radio [nzValue]="1">
                 <span>已审核</span>
               </label>
-              <label nz-radio [nzValue]="2">
+              <label nz-radio [nzValue]="0">
                 <span>未审核</span>
               </label>
             </nz-radio-group>
