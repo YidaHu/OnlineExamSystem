@@ -15,8 +15,9 @@ import {Observable} from "rxjs";
 export class AdminManageComponent implements OnInit {
   validateForm: FormGroup;
 
-  private statusShow = false;
-  /*状态*/
+  private statusShow = false;//状态
+  private statusRole = false;//角色权限状态
+
 
   private result: Observable<any>;
 
@@ -52,6 +53,17 @@ export class AdminManageComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    var status = sessionStorage.getItem("roleValue");
+    if (status == "1"){
+      this.statusRole = true;
+    }else if (status == "2"){
+      this.statusRole = true;
+    }else if (status == "2"){
+      this.statusRole = false;
+    }else {
+      this.statusRole = false;
+    }
 
     // this.genders = [{value: 'jack', label: 'Jack'},
     //   {value: 'lucy', label: 'Lucy'},

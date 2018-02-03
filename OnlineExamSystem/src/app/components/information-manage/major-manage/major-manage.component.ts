@@ -13,6 +13,9 @@ import {DepartmentManageServerService} from "../../../serve/information-manage/d
 export class MajorManageComponent implements OnInit {
   validateForm: FormGroup;
 
+  private root = false;
+  private admin = false;
+
   private schoolId;
   private flag = false;
 
@@ -20,6 +23,8 @@ export class MajorManageComponent implements OnInit {
   private school_modal;
   private department_modal;
   private major_modal;
+
+  private department;
 
   private statusShow = false;
   /*状态*/
@@ -53,10 +58,19 @@ export class MajorManageComponent implements OnInit {
   }
 
   ngOnInit() {
+    var status = sessionStorage.getItem("roleValue");
+    if (status == "1") {
+      this.root = true;
+      this.admin = false;
+
+    } else {
+      this.root = false;
+      this.admin = true;
+    }
     this.validateForm = this.fb.group({
-      school_id: ['', [Validators.required]],
-      department_id: ['', [Validators.required]],
-      name: ['', [Validators.required]],
+      school_modal: ['', [Validators.required]],
+      department_modal: ['', [Validators.required]],
+      major_modal: ['', [Validators.required]],
       is_adult: ['', [Validators.required]]
     });
 
@@ -71,10 +85,26 @@ export class MajorManageComponent implements OnInit {
 
     });
 
+    //校管获取所属学校的所有学院
+    this.departmentManageServerService.getDepartmentFromAdmin({
+      'page': 1,
+      'size': 10,
+    }).subscribe((data: any) => {
+
+      console.log(data.data.list)
+      this.departments = data.data.list;
+      // this.departments_modal = data.data.list;
+
+    });
+
   }
 
-  queryMajor(value) {
+  isRoot() {
+    return this.root;
+  }
 
+  isAdmin() {
+    return this.admin;
   }
 
   /*查询数据*/
@@ -84,6 +114,23 @@ export class MajorManageComponent implements OnInit {
       'page': 1,
       'size': 10,
       'schoolId': this.schoolId
+    }).subscribe((data: any) => {
+
+      console.log(data.data.list)
+      // this.scholls = data.data.list;
+      this._loading = false;
+      this._total = data.data.endRow;
+      this._dataSet = data.data.list;
+
+    });
+    this.serachShow = true;
+  }
+
+  searchMajorFromAdmin() {
+    this.majorManageServerService.getMajorFromAdmin({
+      'page': 1,
+      'size': 10,
+      'departmentId': this.department
     }).subscribe((data: any) => {
 
       console.log(data.data.list)

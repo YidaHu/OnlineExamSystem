@@ -1,7 +1,7 @@
 <div class="department">
   <div class="departmentSearch">
-    <label class="selectLab">学校</label>
-    <div class="selectOptions">
+    <label class="selectLab" *ngIf="isRoot()">学校</label>
+    <div class="selectOptions" *ngIf="isRoot()">
       <nz-select style="width: 200px;" [(ngModel)]="schoolId" [nzPlaceHolder]="'请选择学校'" [nzSize]="size"
                  (ngModelChange)="querySchool(schoolId)">
         <nz-option
@@ -15,7 +15,11 @@
       <i class="anticon anticon-search"></i><span>查询</span>
     </button>
 
-    <button nz-button [nzType]="'default'" class="c_right" (click)="operateData('add')">
+    <button nz-button *ngIf="isAdmin()" [nzType]="'default'" (click)="searchDepartmentFromAdmin()">
+      <i class="anticon anticon-search"></i><span>查询学院</span>
+    </button>
+
+    <button nz-button *ngIf="isRoot()" [nzType]="'default'" class="c_right" (click)="operateData('add')">
       <span>添加学院</span>
     </button>
   </div>
@@ -44,7 +48,7 @@
       <tbody nz-tbody>
       <tr nz-tbody-tr *ngFor="let data of nzTable.data">
         <td nz-td>{{data.id}}</td>
-        <td nz-td>{{data.schoolId}}</td>
+        <td nz-td>{{data.schoolName}}</td>
         <td nz-td>{{data.name}}</td>
         <td nz-td>
           <!--<span>shanchu</span>-->
@@ -84,7 +88,10 @@
                 [nzValue]="option.id">
               </nz-option>
             </nz-select>
-            <div nz-form-explain *ngIf="validateForm.controls.school_id.dirty&&validateForm.controls.school_id.hasError('required')">请选择学校</div>
+            <div nz-form-explain
+                 *ngIf="validateForm.controls.school_id.dirty&&validateForm.controls.school_id.hasError('required')">
+              请选择学校
+            </div>
           </div>
         </div>
         <div nz-form-item nz-row>
@@ -92,7 +99,8 @@
             <label nz-form-item-required>学院</label>
           </div>
           <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
-            <nz-input [nzSize]="'large'" formControlName="name" [(ngModel)]="name" [nzType]="'text'" [nzId]="'text'"></nz-input>
+            <nz-input [nzSize]="'large'" formControlName="name" [(ngModel)]="name" [nzType]="'text'"
+                      [nzId]="'text'"></nz-input>
             <div nz-form-explain
                  *ngIf="validateForm.controls.name.dirty&&validateForm.controls.name.hasError('required')">请填写专业
             </div>

@@ -42,6 +42,11 @@ import {DepartmentManageServerService} from "./serve/information-manage/departme
 import {MajorManageServerService} from "./serve/information-manage/major-manage-server.service";
 import {CourseManageServerService} from "./serve/information-manage/course-manage-server.service";
 import {ClassManageServerService} from "./serve/information-manage/class-manage-server.service";
+import {TeacherManageServerService} from "./serve/information-manage/teacher-manage-server.service";
+import {StudentManageServerService} from "./serve/information-manage/student-manage-server.service";
+import {KnowledageManageServiceService} from "./serve/title-manage/knowledage-manage-service.service";
+import { KnowledageManageComponent } from './components/title-manage/knowledage-manage/knowledage-manage.component';
+import {Ng2Webstorage} from "ngx-webstorage";
 
 @NgModule({
   declarations: [
@@ -67,6 +72,7 @@ import {ClassManageServerService} from "./serve/information-manage/class-manage-
     GradeQueryComponent,
     StudentQueryComponent,
     TeacherQueryComponent,
+    KnowledageManageComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,6 +85,8 @@ import {ClassManageServerService} from "./serve/information-manage/class-manage-
     NgxEchartsModule,
     UMeditorModule,
     NgbModule,
+    Ng2Webstorage,
+
   ],
   providers: [
     LoginServeService,
@@ -92,6 +100,9 @@ import {ClassManageServerService} from "./serve/information-manage/class-manage-
     MajorManageServerService,
     CourseManageServerService,
     ClassManageServerService,
+    TeacherManageServerService,
+    StudentManageServerService,
+    KnowledageManageServiceService,
   ],
   bootstrap: [AppComponent]
 })

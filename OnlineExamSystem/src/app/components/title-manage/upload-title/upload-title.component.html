@@ -6,16 +6,57 @@
 
 
 <!--<umeditor [(ngModel)]="full_source"</umeditor>-->
-<div class="div-title">
-  <label class="label-title">上传题目</label>
-  <umeditor class="ume-title" [(ngModel)]="model_text" #full></umeditor>
+<div class="classSearch">
+  <label class="selectLab">知识点</label>
+  <div class="selectOptions">
+    <nz-select style="width: 200px;" [(ngModel)]="eoKnowleagePoint" [nzPlaceHolder]="'请选择知识点'" [nzSize]="size">
+      <nz-option
+        *ngFor="let option of eoKnowleagePoints"
+        [nzLabel]="option.name"
+        [nzValue]="option.id"
+        [nzDisabled]="option.disabled">
+      </nz-option>
+    </nz-select>
+  </div>
 
-  <label class="label-title">答案</label>
-  <umeditor class="ume-title" [(ngModel)]="model_text" #full></umeditor>
+  <label class="selectLab">题目类型</label>
+
+  <div class="selectOptions" nz-form-control>
+    <nz-select style="width: 200px;" [(ngModel)]="title_type" [nzPlaceHolder]="'请选择题型'"
+               [nzSize]="size">
+      <nz-option
+        *ngFor="let option of title_types"
+        [nzLabel]="option.label"
+        [nzValue]="option.value"
+        [nzDisabled]="option.disabled">
+      </nz-option>
+    </nz-select>
+  </div>
+
+  <label class="selectLab">题目难度</label>
+
+  <div class="selectOptions">
+    <nz-rate [(ngModel)]="degree" (ngModelChange)="get_degree_value(degree)" nzAllowHalf></nz-rate>
+    <span *ngIf="degree_value" class="ant-rate-text">{{degree_value}} 难度</span>
+  </div>
+
+
+</div>
+
+<div class="div-title">
+  <!--<label class="label-title">上传题目</label>-->
+
+
+  <p style="font-size: large">题目</p>
+  <umeditor class="ume-title" [(ngModel)]="title_text" #full></umeditor>
+
+  <!--<label class="label-title">答案</label>-->
+  <p style="font-size: large">答案</p>
+  <umeditor class="ume-title" [(ngModel)]="answer_text" #full></umeditor>
+
   <button class="" nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="getAllHtml()">
     <span>&nbsp;提交&nbsp;</span>
   </button>
-  <h1>{{title}}</h1>
 </div>
 
 

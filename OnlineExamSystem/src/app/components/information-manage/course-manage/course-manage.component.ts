@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TableServiceService} from "../../../serve/table-service.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DepartmentManageServerService} from "../../../serve/information-manage/department-manage-server.service";
+import {CourseManageServerService} from "../../../serve/information-manage/course-manage-server.service";
 @Component({
   selector: 'app-course-department-manage',
   templateUrl: './course-manage.component.html',
@@ -11,7 +12,12 @@ import {DepartmentManageServerService} from "../../../serve/information-manage/d
 export class CourseManageComponent implements OnInit {
   validateForm: FormGroup;
 
+  private department;
   private departments;
+
+  private course_modal;
+  private department_modal;
+  private departments_modal;
 
   private statusShow = false;
   /*状态*/
@@ -39,17 +45,14 @@ export class CourseManageComponent implements OnInit {
 
   constructor(private _randomUser: TableServiceService,
               private departmentManageServerService: DepartmentManageServerService,
+              private courseManageServerService: CourseManageServerService,
               private fb: FormBuilder) {
   }
 
   ngOnInit() {
-    this.scholls = [{value: 'jack', label: 'Jack'},
-      {value: 'lucy', label: 'Lucy'},
-      {value: 'disabled', label: 'Disabled', disabled: true}];
     this.validateForm = this.fb.group({
-      course_id: ['', [Validators.required]],
-      department_id: ['', [Validators.required]],
-      name: ['', [Validators.required]],
+      course_modal: ['', [Validators.required]],
+      department_modal: ['', [Validators.required]],
       is_adult: ['', [Validators.required]]
     });
     //校管获取所属学校的所有学院
@@ -60,15 +63,28 @@ export class CourseManageComponent implements OnInit {
 
       console.log(data.data.list)
       this.departments = data.data.list;
+      this.departments_modal = data.data.list;
 
     });
 
-    this.searchCourse();
   }
 
   //查询数据
   searchCourse() {
     // console.log(this.schollsId);
+    this.courseManageServerService.getCourse({
+      'page': 1,
+      'size': 10,
+      'departmentId': this.department,
+    }).subscribe((data: any) => {
+
+      console.log(data.data.list)
+      // this.scholls = data.data.list;
+      this._loading = false;
+      this._total = data.data.endRow;
+      this._dataSet = data.data.list;
+
+    });
     this.serachShow = true;
     this.refreshData();
   }
@@ -77,26 +93,43 @@ export class CourseManageComponent implements OnInit {
   operateData(strs) {
     this.isVisible = true;
     if (strs == "add") {
-      this.tabTitle = "添加专业数据";
+      this.tabTitle = "添加学院数据";
       this.statusShow = false;
     } else {
-      this.tabTitle = "修改专业数据";
+      this.tabTitle = "修改学院数据";
+      this.id = strs.id;
+      this.course_modal = strs.name;
+      this.department_modal = strs.department_name;
       this.statusShow = true;
     }
   }
 
-  //添加数据
-  addCourse() {
-    if (this.validateForm.valid) {
-      /*此处提交*/
-      console.log(this.validateForm.value);
-      this.validateForm.reset();
-      console.log(this.validateForm.value)
-      this.isVisible = false;
-      this.refreshData(true);
-      /*刷新table*/
-
+  submit() {
+    if (this.statusShow == true) {
+      const body = {
+        id: this.id,
+        name: this.course_modal,
+        departmentId: this.department_modal,
+      };
+      this.courseManageServerService.updateCourse(body).subscribe((data: any) => {
+        console.log("更新");
+        console.log(body);
+      });
+    } else {
+      const body = {
+        name: this.course_modal,
+        departmentId: this.department_modal,
+      };
+      this.courseManageServerService.addCourse(body).subscribe((data: any) => {
+        console.log("添加");
+        console.log(body);
+      });
     }
+    this.validateForm.reset();
+    this.searchCourse();
+    this.isVisible = false;
+    /*刷新table*/
+
   }
 
   //关闭窗口
@@ -137,10 +170,14 @@ export class CourseManageComponent implements OnInit {
     this.alertTab = false;
   };
 
-  confirm = () => {
+  confirm = function (id) {
     /*删除数据请求*/
-    console.log(this.id);
-    this.refreshData(true);
+    console.log(id);
+    this.courseManageServerService.deleteCourse(id).subscribe((data: any) => {
+      // console.log(data)
+    });
+    this.searchCourse();
+    // this.refreshData(true);
   };
 
 }

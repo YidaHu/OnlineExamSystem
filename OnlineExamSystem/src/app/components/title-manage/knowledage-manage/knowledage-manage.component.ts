@@ -1,16 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 import {TableServiceService} from "../../../serve/table-service.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {LeadershipManageServerService} from "../../../serve/information-manage/leadership-manage-server.service";
 import {HttpClient} from "@angular/common/http";
 import {SchoolManageServerService} from "../../../serve/information-manage/school-manage-server.service";
-@Component({
-  selector: 'app-leadership-manage',
-  templateUrl: './leadership-manage.component.html',
-  styleUrls: ['./leadership-manage.component.css']
-})
+import {KnowledageManageServiceService} from "../../../serve/title-manage/knowledage-manage-service.service";
+import {CourseManageServerService} from "../../../serve/information-manage/course-manage-server.service";
 
-export class LeadershipManageComponent implements OnInit {
+@Component({
+  selector: 'app-knowledage-manage',
+  templateUrl: './knowledage-manage.component.html',
+  styleUrls: ['./knowledage-manage.component.css']
+})
+export class KnowledageManageComponent implements OnInit {
+
   validateForm: FormGroup;
 
   private id_modal;
@@ -27,8 +29,7 @@ export class LeadershipManageComponent implements OnInit {
   /*删除的id*/
   private tabTitle = "";
   /*弹窗标题*/
-  private scholls;
-  private schollsId;
+  private subjects;
   private serachShow = false;
   /*控制是否生成table*/
   private isVisible = false;
@@ -45,39 +46,37 @@ export class LeadershipManageComponent implements OnInit {
   ];
 
   constructor(private _randomUser: TableServiceService,
-              private schoolManageServerService: SchoolManageServerService,
               private fb: FormBuilder,
-              private leadershipManageServerService: LeadershipManageServerService,
+              private knowledageManageServerService: KnowledageManageServiceService,
+              private courseManageServerService: CourseManageServerService,
               private http: HttpClient) {
   }
 
   ngOnInit() {
-    this.scholls = [{value: 'jack', label: 'Jack'},
+    this.subjects = [{value: 'jack', label: 'Jack'},
       {value: 'lucy', label: 'Lucy'},
       {value: 'disabled', label: 'Disabled', disabled: true}];
     this.validateForm = this.fb.group({
-      leadership_id: ['', [Validators.required]],
-      department_id: ['', [Validators.required]],
-      name: ['', [Validators.required]],
+      knowledge_modal: ['', [Validators.required]],
+      subject_modal: ['', [Validators.required]],
       is_adult: ['', [Validators.required]]
     });
-    //获取学校
-    this.schoolManageServerService.getSchool({
+    //教师获取科目
+    this.courseManageServerService.getCourseFromTeacher({
       'page': 1,
       'size': 10,
     }).subscribe((data: any) => {
 
       console.log(data.data.list)
-      this.scholls = data.data.list;
+      this.subjects = data.data.list;
 
     });
-    this.searchLeadership();
-    console.log(sessionStorage.getItem('roleValue'));
+    this.searchKnowledage();
   }
 
   //查询数据
-  searchLeadership() {
-    // console.log(this.schollsId);
+  searchKnowledage() {
+    // console.log(this.subjectsId);
     this.serachShow = true;
     this.refreshData(true);
   }
@@ -95,7 +94,7 @@ export class LeadershipManageComponent implements OnInit {
       this.realName_modal = strs.realName;
       this.school_modal = strs.schoolId;
       this.gender_modal = strs.gender;
-      // this.schoolId = this.scholls[0];
+      // this.schoolId = this.subjects[0];
       this.statusShow = true;
     }
   }
@@ -107,7 +106,7 @@ export class LeadershipManageComponent implements OnInit {
         loginName: this.loginName_modal, realName: this.realName_modal,
         password: this.password_modal, schoolId: this.school_modal, gender: this.gender_modal
       };
-      this.leadershipManageServerService.updateLeadership(body).subscribe((data: any) => {
+      this.knowledageManageServerService.updateKnowledage(body).subscribe((data: any) => {
         console.log("更新");
         console.log(body);
       });
@@ -116,7 +115,7 @@ export class LeadershipManageComponent implements OnInit {
         loginName: this.loginName_modal, realName: this.realName_modal,
         password: this.password_modal, schoolId: this.school_modal, gender: this.gender_modal
       };
-      this.leadershipManageServerService.addLeadership(body).subscribe((data: any) => {
+      this.knowledageManageServerService.addKnowledage(body).subscribe((data: any) => {
         console.log("添加");
         console.log(body);
       });
@@ -125,7 +124,7 @@ export class LeadershipManageComponent implements OnInit {
     this.validateForm.reset();
     // console.log(this.validateForm.value)
     this.isVisible = false;
-    this.searchLeadership();
+    this.searchKnowledage();
     // this.searchSchool();
     /*刷新table*/
   }
@@ -154,7 +153,7 @@ export class LeadershipManageComponent implements OnInit {
       this._current = 1;
     }
     this._loading = true;
-    this.leadershipManageServerService.getLeadership({
+    this.knowledageManageServerService.getKnowledage({
       'page': 1,
       'size': 10
     }).subscribe((data: any) => {
@@ -175,10 +174,10 @@ export class LeadershipManageComponent implements OnInit {
   confirm = function (id) {
     /*删除数据请求*/
     console.log(id);
-    this.leadershipManageServerService.deleteLeadership({id: id}).subscribe((data: any) => {
+    this.knowledageManageServerService.deleteKnowledage({id: id}).subscribe((data: any) => {
       // console.log(data)
     });
-    this.searchLeadership();
+    this.searchKnowledage();
     // this.refreshData(true);
   };
 

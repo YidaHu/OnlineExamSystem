@@ -21,6 +21,7 @@ import {UploadTitleComponent} from "./components/title-manage/upload-title/uploa
 import {GradeQueryComponent} from "./components/information-query/grade-query/grade-query.component";
 import {StudentQueryComponent} from "./components/information-query/student-query/student-query.component";
 import {TeacherQueryComponent} from "./components/information-query/teacher-query/teacher-query.component";
+import {KnowledageManageComponent} from "./components/title-manage/knowledage-manage/knowledage-manage.component";
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -44,6 +45,7 @@ const routes: Routes = [
     {path: 'student-manage', component: StudentManageComponent},
     //题目管理
     {path: 'upload-title', component: UploadTitleComponent},
+    {path: 'knowledage-manage', component: KnowledageManageComponent},
 
     //考试设计
     {path: 'design-paper', component: DesignPaperComponent},

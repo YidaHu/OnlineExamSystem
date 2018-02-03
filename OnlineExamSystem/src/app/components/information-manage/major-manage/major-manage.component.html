@@ -1,9 +1,9 @@
 <div class="major">
   <div class="majorSearch">
-    <label class="selectLab">学校</label>
+    <label class="selectLab" *ngIf="isRoot()">学校</label>
     <div class="selectOptions">
-      <nz-select style="width: 200px;" [(ngModel)]="schoolId" [nzPlaceHolder]="'请选择学校'" [nzSize]="size"
-                 (ngModelChange)="queryMajor(schoolId)">
+      <nz-select style="width: 200px;" *ngIf="isRoot()" [(ngModel)]="schoolId" [nzPlaceHolder]="'请选择学校'" [nzSize]="size"
+                 (ngModelChange)="queryDepartment(schoolId)">
         <nz-option
           *ngFor="let option of scholls"
           [nzLabel]="option.name"
@@ -11,11 +11,29 @@
         </nz-option>
       </nz-select>
     </div>
-    <button nz-button [nzType]="'default'" (click)="searchMajor()">
+    <label class="selectLab">学院</label>
+    <div class="selectOptions">
+      <nz-select style="width: 200px;" [(ngModel)]="department" [nzPlaceHolder]="'请选择学院'" [nzSize]="size">
+        <nz-option
+          *ngFor="let option of departments"
+          [nzLabel]="option.name"
+          [nzValue]="option.id"
+          [nzDisabled]="option.disabled">
+        </nz-option>
+      </nz-select>
+    </div>
+    <button nz-button *ngIf="isRoot()" [nzType]="'default'" (click)="searchMajor()">
       <i class="anticon anticon-search"></i><span>查询</span>
     </button>
 
-    <button nz-button [nzType]="'default'" class="c_right" (click)="operateData('add')">
+    <button nz-button *ngIf="isAdmin()" [nzType]="'default'" (click)="searchMajorFromAdmin()">
+      <i class="anticon anticon-search"></i><span>查询专业</span>
+    </button>
+
+    <button nz-button *ngIf="isAdmin()" [nzType]="'default'" class="c_right" (click)="applyData('apply')">
+      <span>申请专业</span>
+    </button>
+    <button nz-button *ngIf="isRoot()" [nzType]="'default'" class="c_right" (click)="operateData('add')">
       <span>添加专业</span>
     </button>
   </div>
@@ -76,7 +94,7 @@
             <label nz-form-item-required>学校</label>
           </div>
           <div nz-form-control nz-col [nzSpan]="14">
-            <nz-select formControlName="school_id" [(ngModel)]="school_modal" [nzSize]="'large'"
+            <nz-select formControlName="school_modal" [(ngModel)]="school_modal" [nzSize]="'large'"
                        (ngModelChange)="queryDepartment(school_modal)">
               <nz-option
                 *ngFor="let option of scholls"
@@ -85,7 +103,7 @@
               </nz-option>
             </nz-select>
             <div nz-form-explain
-                 *ngIf="validateForm.controls.school_id.dirty&&validateForm.controls.school_id.hasError('required')">
+                 *ngIf="validateForm.controls.school_modal.dirty&&validateForm.controls.school_modal.hasError('required')">
               请选择学校
             </div>
           </div>
@@ -95,7 +113,7 @@
             <label nz-form-item-required>学院</label>
           </div>
           <div nz-form-control nz-col [nzSpan]="14">
-            <nz-select formControlName="department_id" [(ngModel)]="department_modal" [nzSize]="'large'">
+            <nz-select formControlName="department_modal" [(ngModel)]="department_modal" [nzSize]="'large'">
               <nz-option
                 *ngFor="let option of departments"
                 [nzLabel]="option.name"
@@ -103,7 +121,7 @@
               </nz-option>
             </nz-select>
             <div nz-form-explain
-                 *ngIf="validateForm.controls.department_id.dirty&&validateForm.controls.department_id.hasError('required')">
+                 *ngIf="validateForm.controls.department_modal.dirty&&validateForm.controls.department_modal.hasError('required')">
               请选择学院
             </div>
           </div>
@@ -113,10 +131,10 @@
             <label nz-form-item-required>专业</label>
           </div>
           <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
-            <nz-input [nzSize]="'large'" formControlName="name" [(ngModel)]="major_modal" [nzType]="'text'"
+            <nz-input [nzSize]="'large'" formControlName="major_modal" [(ngModel)]="major_modal" [nzType]="'text'"
                       [nzId]="'text'"></nz-input>
             <div nz-form-explain
-                 *ngIf="validateForm.controls.name.dirty&&validateForm.controls.name.hasError('required')">请填写专业
+                 *ngIf="validateForm.controls.major_modal.dirty&&validateForm.controls.major_modal.hasError('required')">请填写专业
             </div>
           </div>
         </div>

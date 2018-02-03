@@ -43,21 +43,21 @@
             <li nz-menu-item [routerLink]="['./teacher-query']">教师查询</li>
           </ul>
         </li>
-        <li nz-submenu>
+        <li nz-submenu *ngIf="isRootAdmin()">
           <span title>
             <i class="anticon anticon-appstore"></i>
             <span>信息管理</span>
           </span>
           <ul>
-            <li nz-menu-item [routerLink]="['./admin-manage']">管理员管理</li>
-            <li nz-menu-item [routerLink]="['./leadership-manage']">学校管理员管理</li>
-            <li nz-menu-item [routerLink]="['./teacher-manage']">教师管理</li>
-            <li nz-menu-item [routerLink]="['./student-manage']">学生管理</li>
-            <li nz-menu-item [routerLink]="['./school-manage']">学校管理</li>
-            <li nz-menu-item [routerLink]="['./department-manage']">学院管理</li>
-            <li nz-menu-item [routerLink]="['./major-manage']">专业管理</li>
-            <li nz-menu-item [routerLink]="['./class-manage']">班级管理</li>
-            <li nz-menu-item [routerLink]="['./course-manage']">课程管理</li>
+            <li nz-menu-item *ngIf="isRoot()" [routerLink]="['./admin-manage']">管理员管理</li>
+            <li nz-menu-item *ngIf="isRoot()" [routerLink]="['./leadership-manage']">学校管理员管理</li>
+            <li nz-menu-item *ngIf="isAdmin()" [routerLink]="['./teacher-manage']">教师管理</li>
+            <li nz-menu-item *ngIf="isAdmin()" [routerLink]="['./student-manage']">学生管理</li>
+            <li nz-menu-item *ngIf="isRoot()" [routerLink]="['./school-manage']">学校管理</li>
+            <li nz-menu-item *ngIf="isRootAdmin()" [routerLink]="['./department-manage']">学院管理</li>
+            <li nz-menu-item *ngIf="isRootAdmin()" [routerLink]="['./major-manage']">专业管理</li>
+            <li nz-menu-item *ngIf="isAdmin()" [routerLink]="['./class-manage']">班级管理</li>
+            <li nz-menu-item *ngIf="isAdmin()" [routerLink]="['./course-manage']">科目管理</li>
           </ul>
         </li>
         <li nz-submenu>
@@ -90,6 +90,7 @@
             <li nz-menu-item>错题列表</li>
             <li nz-menu-item>诊断报告</li>
             <li nz-menu-item [routerLink]="['./upload-title']">上传题目</li>
+            <li nz-menu-item [routerLink]="['./knowledage-manage']">知识点管理</li>
           </ul>
         </li>
         <li nz-submenu>

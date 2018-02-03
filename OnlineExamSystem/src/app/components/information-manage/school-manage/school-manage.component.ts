@@ -3,6 +3,7 @@ import {TableServiceService} from "../../../serve/table-service.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SchoolManageServerService} from "../../../serve/information-manage/school-manage-server.service";
 import {HttpClient} from "@angular/common/http";
+import {SessionStorageService} from "ngx-webstorage";
 @Component({
   selector: 'app-school-manage',
   templateUrl: './school-manage.component.html',
@@ -39,7 +40,11 @@ export class SchoolManageComponent implements OnInit {
     {name: 'female', value: false}
   ];
 
-  constructor(private _randomUser: TableServiceService, private fb: FormBuilder, private schoolManageServerService: SchoolManageServerService, private http: HttpClient) {
+  constructor(private _randomUser: TableServiceService,
+              private fb: FormBuilder,
+              private sessionSt: SessionStorageService,
+              private schoolManageServerService: SchoolManageServerService,
+              private http: HttpClient) {
   }
 
   ngOnInit() {

@@ -12,6 +12,9 @@ import {DepartmentManageServerService} from "../../../serve/information-manage/d
 export class DepartmentManagementComponent implements OnInit {
   validateForm: FormGroup;
 
+  private root = false;
+  private admin = false;
+
   private schoolId;//主界面学校ID
   private school_id;//添加学院界面学校ID
   private name;
@@ -45,12 +48,16 @@ export class DepartmentManagementComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.scholls = [{value: 'jack', label: '苏州科技大学'},
-    //   {value: 'lucy', label: 'Lucy'},
-    //   {value: 'disabled', label: 'Disabled', disabled: true}];
-    // this.scholls = [{value: 'usts', label: '苏州科技大学'},
-    //   {value: 'su', label: '苏州大学'},
-    //   {value: 'disabled', label: 'Disabled', disabled: true}];
+    var status = sessionStorage.getItem("roleValue");
+    if (status == "1") {
+      this.root = true;
+      this.admin = false;
+
+    } else {
+      this.root = false;
+      this.admin = true;
+    }
+
     this.validateForm = this.fb.group({
       school_id: ['', [Validators.required]],
       department_id: ['', [Validators.required]],
@@ -69,6 +76,14 @@ export class DepartmentManagementComponent implements OnInit {
 
     });
 
+  }
+
+  isRoot() {
+    return this.root;
+  }
+
+  isAdmin() {
+    return this.admin;
   }
 
   //获取学校
@@ -96,6 +111,22 @@ export class DepartmentManagementComponent implements OnInit {
     });
     this.serachShow = true;
     // this.refreshData(true);
+  }
+
+  searchDepartmentFromAdmin() {
+    this.departmentManageServerService.getDepartmentFromAdmin({
+      'page': 1,
+      'size': 10,
+    }).subscribe((data: any) => {
+
+      console.log(data.data.list)
+      // this.scholls = data.data.list;
+      this._loading = false;
+      this._total = data.data.endRow;
+      this._dataSet = data.data.list;
+
+    });
+    this.serachShow = true;
   }
 
   /*弹窗*/

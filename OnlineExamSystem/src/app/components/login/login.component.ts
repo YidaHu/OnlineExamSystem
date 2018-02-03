@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LoginServeService} from "../../serve/login-serve.service";
 import {passwordValid, usernameValid} from "../../validator/validators";
 import {Router} from "@angular/router";
+import {SessionStorageService, SessionStorage} from "ngx-webstorage";
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,13 @@ export class LoginComponent implements OnInit {
   private password;
   private roleId;
 
-  constructor(private fb: FormBuilder, private loginServeService: LoginServeService, private router: Router) {
+  @SessionStorage()
+  public boundValue;
+
+  constructor(private fb: FormBuilder,
+              private loginServeService: LoginServeService,
+              private sessionSt: SessionStorageService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -56,6 +63,10 @@ export class LoginComponent implements OnInit {
         // if (data.success) {
         console.log(data);
         if (data.message == "SUCCESS") {
+          // this.sessionSt.store('roleValue', data.data.sysUser.roleId);
+          sessionStorage.setItem('roleValue', data.data.sysUser.roleId);
+          // console.log(this.sessionSt.retrieve('roleValue'));
+          console.log(sessionStorage.getItem('roleValue'));
           this.router.navigate(['main']);
         } else {
           this.errorInfo = true;

@@ -12,12 +12,12 @@
         </nz-option>
       </nz-select>
     </div>
-    <button nz-button [nzType]="'default'" (click)="searchClass()">
+    <button nz-button [nzType]="'default'" (click)="searchCourse()">
       <i class="anticon anticon-search"></i><span>查询</span>
     </button>
 
-    <button nz-button [nzType]="'default'" (click)="operateData('add')">
-      <span>添加课程</span>
+    <button nz-button [nzType]="'default'" class="c_right" (click)="operateData('add')">
+      <span>添加科目</span>
     </button>
   </div>
   <div class="courseTable" *ngIf="serachShow">
@@ -34,21 +34,21 @@
       <thead nz-thead>
       <tr>
         <th nz-th>
-          <span>课程编号</span>
+          <span>科目编号</span>
           <nz-table-sort (nzValueChange)="sort($event)"></nz-table-sort>
         </th>
         <th nz-th>
-          <span>课程名称</span>
+          <span>科目名称</span>
         </th>
-        <th nz-th><span>学校</span></th>
+        <th nz-th><span>学院</span></th>
         <th nz-th><span>操作</span></th>
       </tr>
       </thead>
       <tbody nz-tbody>
       <tr nz-tbody-tr *ngFor="let data of nzTable.data">
         <td nz-td>{{data.id}}</td>
-        <td nz-td>{{data.course_name}}</td>
-        <td nz-td>{{data.school_name}}</td>
+        <td nz-td>{{data.name}}</td>
+        <td nz-td>{{data.department_name }}</td>
         <td nz-td>
           <!--<span>shanchu</span>-->
           <!--<span>xiugai</span>-->
@@ -56,7 +56,7 @@
             <a nz-popconfirm>删除</a>
           </nz-popconfirm>
 
-          <span style="color: dodgerblue;cursor: pointer" (click)="operateData('edit')">修改</span>
+          <span style="color: dodgerblue;cursor: pointer" (click)="operateData(data)">修改</span>
         </td>
       </tr>
       </tbody>
@@ -76,42 +76,34 @@
       <form nz-form [nzType]="'horizontal'" [formGroup]="validateForm">
         <div nz-form-item nz-row>
           <div nz-form-label nz-col [nzSpan]="6">
-            <label nz-form-item-required>学校</label>
-          </div>
-          <div nz-form-control nz-col [nzSpan]="14">
-            <nz-select formControlName="course_id" [nzSize]="'large'">
-              <nz-option [nzLabel]="'China'" [nzValue]="'China'"></nz-option>
-              <nz-option [nzLabel]="'U.S.A'" [nzValue]="'U.S.A'"></nz-option>
-            </nz-select>
-            <div nz-form-explain
-                 *ngIf="validateForm.controls.course_id.dirty&&validateForm.controls.course_id.hasError('required')">
-              请选择学校
-            </div>
-          </div>
-        </div>
-        <div nz-form-item nz-row>
-          <div nz-form-label nz-col [nzSpan]="6">
             <label nz-form-item-required>学院</label>
           </div>
           <div nz-form-control nz-col [nzSpan]="14">
-            <nz-select formControlName="department_id" [nzSize]="'large'">
-              <nz-option [nzLabel]="'China'" [nzValue]="'China'"></nz-option>
-              <nz-option [nzLabel]="'U.S.A'" [nzValue]="'U.S.A'"></nz-option>
+            <nz-select style="width: 200px;" formControlName="department_modal" [(ngModel)]="department_modal"
+                       [nzPlaceHolder]="'请选择学院'" [nzSize]="size">
+              <nz-option
+                *ngFor="let option of departments_modal"
+                [nzLabel]="option.name"
+                [nzValue]="option.id"
+                [nzDisabled]="option.disabled">
+              </nz-option>
             </nz-select>
             <div nz-form-explain
-                 *ngIf="validateForm.controls.department_id.dirty&&validateForm.controls.department_id.hasError('required')">
+                 *ngIf="validateForm.controls.department_modal.dirty&&validateForm.controls.department_modal.hasError('required')">
               请选择学校
             </div>
           </div>
         </div>
         <div nz-form-item nz-row>
           <div nz-form-label nz-col [nzSpan]="6">
-            <label nz-form-item-required>专业</label>
+            <label nz-form-item-required>科目</label>
           </div>
           <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
-            <nz-input [nzSize]="'large'" formControlName="name" [nzType]="'text'" [nzId]="'text'"></nz-input>
+            <nz-input [nzSize]="'large'" formControlName="course_modal" [(ngModel)]="course_modal" [nzType]="'text'"
+                      [nzId]="'text'"></nz-input>
             <div nz-form-explain
-                 *ngIf="validateForm.controls.name.dirty&&validateForm.controls.name.hasError('required')">请填写专业
+                 *ngIf="validateForm.controls.course_modal.dirty&&validateForm.controls.course_modal.hasError('required')">
+              请填写专业
             </div>
           </div>
         </div>
@@ -132,8 +124,8 @@
         </div>
         <div nz-form-item nz-row style="margin-bottom:8px;">
           <div nz-form-control nz-col [nzSpan]="14" [nzOffset]="6">
-            <button nz-button [nzType]="'primary'" [nzSize]="'large'" [disabled]="!validateForm.valid"
-                    (click)="addMajor($event)">提交
+            <button nz-button [nzType]="'primary'" [nzSize]="'large'"
+                    (click)="submit($event)">提交
             </button>
             <button nz-button [nzSize]="'large'" style="margin-left: 20px" (click)="handleCancel($event)">取消</button>
           </div>
