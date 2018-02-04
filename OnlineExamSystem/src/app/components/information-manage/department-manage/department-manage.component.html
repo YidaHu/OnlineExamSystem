@@ -11,7 +11,7 @@
         </nz-option>
       </nz-select>
     </div>
-    <button nz-button [nzType]="'default'" (click)="searchDepartment()">
+    <button nz-button *ngIf="isRoot()" [nzType]="'default'" (click)="searchDepartment()">
       <i class="anticon anticon-search"></i><span>查询</span>
     </button>
 

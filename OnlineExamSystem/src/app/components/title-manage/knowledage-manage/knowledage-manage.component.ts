@@ -62,14 +62,15 @@ export class KnowledageManageComponent implements OnInit {
       is_adult: ['', [Validators.required]]
     });
     //教师获取科目
-    this.courseManageServerService.getCourseFromTeacher({
+    this.courseManageServerService.getCourseFomTeacher({
       'page': 1,
       'size': 10,
     }).subscribe((data: any) => {
 
-      console.log(data.data.list)
-      this.subjects = data.data.list;
-
+      console.log(data)
+      if (data.data) {
+        this.subjects = data.data.list;
+      }
     });
     this.searchKnowledage();
   }
