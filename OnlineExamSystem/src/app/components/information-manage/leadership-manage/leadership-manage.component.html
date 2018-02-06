@@ -42,8 +42,8 @@
         <td nz-td>校管</td>
         <td nz-td>{{data.schoolName}}</td>
         <td nz-td>{{data.gender}}</td>
-        <td nz-td>{{data.createdTime}}</td>
-        <td nz-td>{{data.updateTime}}</td>
+        <td nz-td>{{data.createdTime|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+        <td nz-td>{{data.updateTime|date:'yyyy-MM-dd HH:mm:ss'}}</td>
         <td nz-td>
           <!--<span>shanchu</span>-->
           <!--<span>xiugai</span>-->
@@ -74,7 +74,8 @@
             <label nz-form-item-required>登录名</label>
           </div>
           <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
-            <nz-input [nzSize]="'large'" formControlName="name" [(ngModel)]="loginName_modal" [nzType]="'text'" [nzId]="'text'"></nz-input>
+            <nz-input [nzSize]="'large'" formControlName="name" [(ngModel)]="loginName_modal" [nzType]="'text'"
+                      [nzId]="'text'"></nz-input>
             <div nz-form-explain
                  *ngIf="validateForm.controls.name.dirty&&validateForm.controls.name.hasError('required')">请填写姓名
             </div>
@@ -85,7 +86,8 @@
             <label nz-form-item-required>姓名</label>
           </div>
           <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
-            <nz-input [nzSize]="'large'" formControlName="name" [(ngModel)]="realName_modal" [nzType]="'text'" [nzId]="'text'"></nz-input>
+            <nz-input [nzSize]="'large'" formControlName="name" [(ngModel)]="realName_modal" [nzType]="'text'"
+                      [nzId]="'text'"></nz-input>
             <div nz-form-explain
                  *ngIf="validateForm.controls.name.dirty&&validateForm.controls.name.hasError('required')">请填写姓名
             </div>
@@ -96,7 +98,8 @@
             <label nz-form-item-required>密码</label>
           </div>
           <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
-            <nz-input [nzSize]="'large'" formControlName="name" [(ngModel)]="password_modal" [nzType]="'text'" [nzId]="'text'"></nz-input>
+            <nz-input [nzSize]="'large'" formControlName="name" [(ngModel)]="password_modal" [nzType]="'text'"
+                      [nzId]="'text'"></nz-input>
             <div nz-form-explain
                  *ngIf="validateForm.controls.name.dirty&&validateForm.controls.name.hasError('required')">请填写密码
             </div>

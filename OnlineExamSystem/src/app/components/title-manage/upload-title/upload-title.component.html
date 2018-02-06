@@ -39,23 +39,35 @@
     <nz-rate [(ngModel)]="degree" (ngModelChange)="get_degree_value(degree)" nzAllowHalf></nz-rate>
     <span *ngIf="degree_value" class="ant-rate-text">{{degree_value}} 难度</span>
   </div>
+</div>
 
-
+<div class="classSearch">
+  <label class="selectLab">题目简称</label>
+  <div class="selectOptions">
+    <nz-input [(ngModel)]="title_nickname" [nzPlaceHolder]="'请输入题目称号'"></nz-input>
+  </div>
 </div>
 
 <div class="div-title">
   <!--<label class="label-title">上传题目</label>-->
 
 
-  <p style="font-size: large">题目</p>
+  <p style="font-size: large">题干</p>
   <umeditor class="ume-title" [(ngModel)]="title_text" #full></umeditor>
+
+  <p style="font-size: large">选项</p>
+  <umeditor class="ume-title" [(ngModel)]="title_option" #full></umeditor>
 
   <!--<label class="label-title">答案</label>-->
   <p style="font-size: large">答案</p>
   <umeditor class="ume-title" [(ngModel)]="answer_text" #full></umeditor>
 
-  <button class="" nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="getAllHtml()">
-    <span>&nbsp;提交&nbsp;</span>
+
+</div>
+
+<div class="classSearch">
+  <button class="btn" nz-button [nzType]="'danger'" [nzSize]="'large'" (click)="submit()">
+    <span>&nbsp;添加题目&nbsp;</span>
   </button>
 </div>
 

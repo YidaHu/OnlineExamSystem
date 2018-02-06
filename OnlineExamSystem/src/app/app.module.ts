@@ -47,6 +47,8 @@ import {StudentManageServerService} from "./serve/information-manage/student-man
 import {KnowledageManageServiceService} from "./serve/title-manage/knowledage-manage-service.service";
 import { KnowledageManageComponent } from './components/title-manage/knowledage-manage/knowledage-manage.component';
 import {Ng2Webstorage} from "ngx-webstorage";
+import {UtilsServiceService} from "./serve/utils-service.service";
+import {TitleManageServerService} from "./serve/title-manage/title-manage-server.service";
 
 @NgModule({
   declarations: [
@@ -103,6 +105,8 @@ import {Ng2Webstorage} from "ngx-webstorage";
     TeacherManageServerService,
     StudentManageServerService,
     KnowledageManageServiceService,
+    UtilsServiceService,
+    TitleManageServerService,
   ],
   bootstrap: [AppComponent]
 })

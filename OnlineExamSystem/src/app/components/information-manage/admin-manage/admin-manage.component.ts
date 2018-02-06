@@ -6,6 +6,7 @@ import {HttpHeaders} from "@angular/common/http";
 import {HttpClient} from "@angular/common/http";
 import {HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {UtilsServiceService} from "../../../serve/utils-service.service";
 @Component({
   selector: 'app-admin-manage',
   templateUrl: './admin-manage.component.html',
@@ -49,19 +50,21 @@ export class AdminManageComponent implements OnInit {
     {name: 'female', value: false}
   ];
 
-  constructor(private fb: FormBuilder, private adminManageServerService: AdminManageServerService, private http: HttpClient) {
+  constructor(private fb: FormBuilder,
+              private adminManageServerService: AdminManageServerService,
+              private http: HttpClient) {
   }
 
   ngOnInit() {
 
     var status = sessionStorage.getItem("roleValue");
-    if (status == "1"){
+    if (status == "1") {
       this.statusRole = true;
-    }else if (status == "2"){
+    } else if (status == "2") {
       this.statusRole = true;
-    }else if (status == "2"){
+    } else if (status == "2") {
       this.statusRole = false;
-    }else {
+    } else {
       this.statusRole = false;
     }
 

@@ -42,8 +42,9 @@
         <td nz-td *ngIf="data.roleId ==1 ">超级</td>
         <td nz-td *ngIf="data.roleId != 1">普通</td>
         <td nz-td>{{data.gender}}</td>
-        <td nz-td>{{data.createdTime}}</td>
-        <td nz-td>{{data.updateTime}}</td>
+        <!--<td nz-td>{{data.createdTime}}</td>-->
+        <td nz-td>{{data.createdTime|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+        <td nz-td>{{data.updateTime|date:'yyyy-MM-dd HH:mm:ss'}}</td>
         <td nz-td>
           <!--<span>shanchu</span>-->
           <!--<span>xiugai</span>-->

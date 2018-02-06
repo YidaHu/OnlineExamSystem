@@ -12,6 +12,10 @@
   width: 100px;
   height: 200px;
   autoHeight: false;
+  padding: 30px 100px 30px 10px;
+}
+
+.btn {
 }
 
 .div-title {

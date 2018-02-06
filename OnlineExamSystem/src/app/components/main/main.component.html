@@ -93,7 +93,7 @@
             <li nz-menu-item>组卷历史</li>
           </ul>
         </li>
-        <li nz-submenu>
+        <li nz-submenu *ngIf="isTeacher()">
           <span title>
             <i class="anticon anticon-setting"></i>
             <span>题目管理</span>
