@@ -22,6 +22,7 @@ import {GradeQueryComponent} from "./components/information-query/grade-query/gr
 import {StudentQueryComponent} from "./components/information-query/student-query/student-query.component";
 import {TeacherQueryComponent} from "./components/information-query/teacher-query/teacher-query.component";
 import {KnowledageManageComponent} from "./components/title-manage/knowledage-manage/knowledage-manage.component";
+import {TitleListComponent} from "./components/title-manage/title-list/title-list.component";
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -45,6 +46,7 @@ const routes: Routes = [
     {path: 'student-manage', component: StudentManageComponent},
     //题目管理
     {path: 'upload-title', component: UploadTitleComponent},
+    {path: 'title-list', component: TitleListComponent},
     {path: 'knowledage-manage', component: KnowledageManageComponent},
 
     //考试设计

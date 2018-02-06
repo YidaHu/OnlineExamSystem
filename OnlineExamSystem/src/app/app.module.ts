@@ -45,10 +45,11 @@ import {ClassManageServerService} from "./serve/information-manage/class-manage-
 import {TeacherManageServerService} from "./serve/information-manage/teacher-manage-server.service";
 import {StudentManageServerService} from "./serve/information-manage/student-manage-server.service";
 import {KnowledageManageServiceService} from "./serve/title-manage/knowledage-manage-service.service";
-import { KnowledageManageComponent } from './components/title-manage/knowledage-manage/knowledage-manage.component';
+import {KnowledageManageComponent} from './components/title-manage/knowledage-manage/knowledage-manage.component';
 import {Ng2Webstorage} from "ngx-webstorage";
 import {UtilsServiceService} from "./serve/utils-service.service";
 import {TitleManageServerService} from "./serve/title-manage/title-manage-server.service";
+import { TitleListComponent } from './components/title-manage/title-list/title-list.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import {TitleManageServerService} from "./serve/title-manage/title-manage-server
     StudentQueryComponent,
     TeacherQueryComponent,
     KnowledageManageComponent,
+    TitleListComponent,
   ],
   imports: [
     BrowserModule,
