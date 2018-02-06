@@ -1,5 +1,17 @@
 <div class="header">
   <div class="header_s">苏州科技大学在线考试与成绩分析系统</div>
+  <div class="header_s">
+    <nz-select style="width: 120px;" [(ngModel)]="selectedSubject" [nzPlaceHolder]="'请选择科目'" *ngIf="isTeacher()"
+               (ngModelChange)="selectSubject(selectedSubject)" nzAllowClear>
+      <nz-option
+        *ngFor="let option of subjects"
+        [nzLabel]="option.name"
+        [nzValue]="option.id"
+        [nzDisabled]="option.disabled">
+      </nz-option>
+    </nz-select>
+  </div>
+
   <div class="header_admin">
     <nz-dropdown>
       <a class="ant-dropdown-link clearfix" nz-dropdown>

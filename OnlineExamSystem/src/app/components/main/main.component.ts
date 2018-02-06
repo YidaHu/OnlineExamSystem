@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {CourseManageServerService} from "../../serve/information-manage/course-manage-server.service";
 
 @Component({
   selector: 'app-main',
@@ -13,9 +14,11 @@ export class MainComponent implements OnInit {
   private teacher = false;
   private student = false;
 
+  private subjects;
+
   isCollapsed = false;
 
-  constructor() {
+  constructor(private courseManageServerService: CourseManageServerService) {
   }
 
   ngOnInit() {
@@ -36,6 +39,18 @@ export class MainComponent implements OnInit {
       this.admin = false;
       this.teacher = true;
       this.student = false;
+      //教师获取科目
+      this.courseManageServerService.getCourseFomTeacher({
+        'page': 1,
+        'size': 10,
+      }).subscribe((data: any) => {
+
+        console.log(data)
+        if (data.data) {
+          sessionStorage.setItem('teacherSubjects', data.data.list);
+          this.subjects = data.data.list;
+        }
+      });
     } else {
       this.root = false;
       this.admin = false;
@@ -44,17 +59,28 @@ export class MainComponent implements OnInit {
     }
   }
 
-  isRoot(){
+  isRoot() {
     return this.root;
   }
-  isAdmin(){
+
+  isAdmin() {
     return this.admin;
   }
+
+  isTeacher() {
+    return this.teacher;
+  }
+
   isRootAdmin() {
     return this.root || this.admin;
   }
 
   toggleCollapsed() {
     this.isCollapsed = !this.isCollapsed;
+  }
+
+  selectSubject(selectedSubject) {
+    console.log(selectedSubject);
+    sessionStorage.setItem('selectedSubject', selectedSubject);//把选择的科目保存到sessionStorage中
   }
 }

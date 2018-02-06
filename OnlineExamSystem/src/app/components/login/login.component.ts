@@ -67,6 +67,7 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('roleValue', data.data.sysUser.roleId);
           // console.log(this.sessionSt.retrieve('roleValue'));
           console.log(sessionStorage.getItem('roleValue'));
+          
           this.router.navigate(['main']);
         } else {
           this.errorInfo = true;

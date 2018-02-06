@@ -22,6 +22,9 @@ export class KnowledageManageComponent implements OnInit {
   private school_modal;
   private gender_modal;
 
+  private knowledge_modal;
+  private subject_modal;
+
   private statusShow = false;
   /*状态*/
 
@@ -58,7 +61,7 @@ export class KnowledageManageComponent implements OnInit {
       {value: 'disabled', label: 'Disabled', disabled: true}];
     this.validateForm = this.fb.group({
       knowledge_modal: ['', [Validators.required]],
-      subject_modal: ['', [Validators.required]],
+      // subject_modal: ['', [Validators.required]],
       is_adult: ['', [Validators.required]]
     });
     //教师获取科目
@@ -86,10 +89,10 @@ export class KnowledageManageComponent implements OnInit {
   operateData(strs) {
     this.isVisible = true;
     if (strs == "add") {
-      this.tabTitle = "添加学院数据";
+      this.tabTitle = "添加知识点";
       this.statusShow = false;
     } else {
-      this.tabTitle = "修改学院数据";
+      this.tabTitle = "修改知识点";
       this.id_modal = strs.id;
       this.loginName_modal = strs.loginName;
       this.realName_modal = strs.realName;
@@ -104,8 +107,8 @@ export class KnowledageManageComponent implements OnInit {
     if (this.statusShow == true) {
       const body = {
         id: this.id_modal,
-        loginName: this.loginName_modal, realName: this.realName_modal,
-        password: this.password_modal, schoolId: this.school_modal, gender: this.gender_modal
+        name: this.knowledge_modal,
+        subjectId: sessionStorage.getItem("selectedSubject")
       };
       this.knowledageManageServerService.updateKnowledage(body).subscribe((data: any) => {
         console.log("更新");
@@ -113,8 +116,8 @@ export class KnowledageManageComponent implements OnInit {
       });
     } else {
       const body = {
-        loginName: this.loginName_modal, realName: this.realName_modal,
-        password: this.password_modal, schoolId: this.school_modal, gender: this.gender_modal
+        name: this.knowledge_modal,
+        subjectId: sessionStorage.getItem("selectedSubject")
       };
       this.knowledageManageServerService.addKnowledage(body).subscribe((data: any) => {
         console.log("添加");
@@ -156,14 +159,16 @@ export class KnowledageManageComponent implements OnInit {
     this._loading = true;
     this.knowledageManageServerService.getKnowledage({
       'page': 1,
-      'size': 10
+      'size': 10,
+      'subjectId': sessionStorage.getItem("selectedSubject")
     }).subscribe((data: any) => {
-
-      console.log(data.data.list)
-      this._loading = false;
-      this._total = data.data.endRow;
-      this._dataSet = data.data.list;
-
+      console.log(data)
+      if (data.data) {
+        console.log(data.data.list)
+        this._loading = false;
+        this._total = data.data.endRow;
+        this._dataSet = data.data.list;
+      }
     });
   }
 
