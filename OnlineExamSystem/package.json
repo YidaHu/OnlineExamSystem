@@ -25,6 +25,7 @@
     "@types/mathjax": "0.0.32",
     "core-js": "^2.4.1",
     "echarts": "^3.8.5",
+    "ng-katex": "^1.0.2",
     "ng-zorro-antd": "^0.6.9",
     "ngx-echarts": "^2.0.1",
     "ngx-umeditor": "^1.0.5",

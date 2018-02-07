@@ -49,7 +49,9 @@ import {KnowledageManageComponent} from './components/title-manage/knowledage-ma
 import {Ng2Webstorage} from "ngx-webstorage";
 import {UtilsServiceService} from "./serve/utils-service.service";
 import {TitleManageServerService} from "./serve/title-manage/title-manage-server.service";
-import { TitleListComponent } from './components/title-manage/title-list/title-list.component';
+import {TitleListComponent} from './components/title-manage/title-list/title-list.component';
+import {MathjaxDirective} from './mathjax.directive';
+import {KatexModule} from "ng-katex/src/ng-katex.module";
 
 @NgModule({
   declarations: [
@@ -77,6 +79,7 @@ import { TitleListComponent } from './components/title-manage/title-list/title-l
     TeacherQueryComponent,
     KnowledageManageComponent,
     TitleListComponent,
+    MathjaxDirective,
   ],
   imports: [
     BrowserModule,
@@ -90,6 +93,7 @@ import { TitleListComponent } from './components/title-manage/title-list/title-l
     UMeditorModule,
     NgbModule,
     Ng2Webstorage,
+    KatexModule,
 
   ],
   providers: [
