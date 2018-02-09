@@ -35,8 +35,6 @@
         <td nz-td>{{data.name}}</td>
         <td nz-td>{{data.subjectId}}</td>
         <td nz-td>
-          <!--<span>shanchu</span>-->
-          <!--<span>xiugai</span>-->
           <nz-popconfirm [nzTitle]="'确定要删除这个任务吗？'" (nzOnConfirm)="confirm(data.id)" (nzOnCancel)="cancel()">
             <a nz-popconfirm>删除</a>
           </nz-popconfirm>

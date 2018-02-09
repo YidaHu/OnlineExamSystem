@@ -1,8 +1,27 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<h1>
+  Welcome to <a target="_blank" [href]="url">{{title}}</a> demo app!
+</h1>
 
-<p>
-  <ng-katex [equation]="equation"></ng-katex>
-</p>
+<div class="container">
+  <h2>Equation: </h2>
+  <p>Type here your equation:</p>
+  <p><input type="text" [(ngModel)]="equation"></p>
+  <p>
+    <ng-katex [equation]="equation" [options]="options"></ng-katex>
+  </p>
 
-<p>
-  <ng-katex [equation]="equation1"></ng-katex>
-</p>
+
+  <div id="test">
+    <span class="blue">
+        Other node blah $$ \int_2^3 $$
+      </span>
+  </div>
+</div>
+
+
+<div *ngFor="let option of options">
+  <p *ngIf="!isMath(option)">{{option}}</p>
+  <ng-katex *ngIf="isMath(option)" [equation]="equation" [options]="options"></ng-katex>
+</div>
+

@@ -50,8 +50,8 @@ import {Ng2Webstorage} from "ngx-webstorage";
 import {UtilsServiceService} from "./serve/utils-service.service";
 import {TitleManageServerService} from "./serve/title-manage/title-manage-server.service";
 import {TitleListComponent} from './components/title-manage/title-list/title-list.component';
-import {MathjaxDirective} from './mathjax.directive';
 import {KatexModule} from "ng-katex/src/ng-katex.module";
+import {DesignPaperService} from "./serve/exam-design/design-paper.service";
 
 @NgModule({
   declarations: [
@@ -79,7 +79,6 @@ import {KatexModule} from "ng-katex/src/ng-katex.module";
     TeacherQueryComponent,
     KnowledageManageComponent,
     TitleListComponent,
-    MathjaxDirective,
   ],
   imports: [
     BrowserModule,
@@ -113,6 +112,7 @@ import {KatexModule} from "ng-katex/src/ng-katex.module";
     KnowledageManageServiceService,
     UtilsServiceService,
     TitleManageServerService,
+    DesignPaperService,
   ],
   bootstrap: [AppComponent]
 })

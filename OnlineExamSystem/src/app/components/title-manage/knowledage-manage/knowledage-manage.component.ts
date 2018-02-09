@@ -158,8 +158,8 @@ export class KnowledageManageComponent implements OnInit {
     }
     this._loading = true;
     this.knowledageManageServerService.getKnowledage({
-      'page': 1,
-      'size': 10,
+      'page': this._current,
+      'size': this._pageSize,
       'subjectId': sessionStorage.getItem("selectedSubject")
     }).subscribe((data: any) => {
       console.log(data)
