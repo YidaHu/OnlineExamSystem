@@ -23,6 +23,7 @@ import {StudentQueryComponent} from "./components/information-query/student-quer
 import {TeacherQueryComponent} from "./components/information-query/teacher-query/teacher-query.component";
 import {KnowledageManageComponent} from "./components/title-manage/knowledage-manage/knowledage-manage.component";
 import {TitleListComponent} from "./components/title-manage/title-list/title-list.component";
+import {PaperHistoryComponent} from "./components/exam-design/paper-history/paper-history.component";
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -51,6 +52,7 @@ const routes: Routes = [
 
     //考试设计
     {path: 'design-paper', component: DesignPaperComponent},
+    {path: 'paper-history', component: PaperHistoryComponent},
     //数据分析
     {path: 'get-analysis', component: GetAnalysisComponent},
     {path: 'knowledge-analysis', component: KnowledgeAnalysisComponent},

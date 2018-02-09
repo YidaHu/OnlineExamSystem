@@ -1,0 +1,11 @@
+<nz-card *ngIf="paper">
+  <ng-template #title>
+    {{paper.name}}
+  </ng-template>
+  <ng-template #extra>
+    <a>More</a>
+  </ng-template>
+  <ng-template #body>
+    <p>{{paper.content}}</p>
+  </ng-template>
+</nz-card>

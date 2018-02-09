@@ -52,6 +52,9 @@ import {TitleManageServerService} from "./serve/title-manage/title-manage-server
 import {TitleListComponent} from './components/title-manage/title-list/title-list.component';
 import {KatexModule} from "ng-katex/src/ng-katex.module";
 import {DesignPaperService} from "./serve/exam-design/design-paper.service";
+import { ExamHistoryComponent } from './components/exam-design/exam-history/exam-history.component';
+import { PaperHistoryComponent } from './components/exam-design/paper-history/paper-history.component';
+import { PaperDetailComponent } from './components/exam-design/paper-detail/paper-detail.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +82,9 @@ import {DesignPaperService} from "./serve/exam-design/design-paper.service";
     TeacherQueryComponent,
     KnowledageManageComponent,
     TitleListComponent,
+    ExamHistoryComponent,
+    PaperHistoryComponent,
+    PaperDetailComponent,
   ],
   imports: [
     BrowserModule,

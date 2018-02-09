@@ -90,7 +90,7 @@
           <ul>
             <li nz-menu-item [routerLink]="['./design-paper']">在线组卷</li>
             <li nz-menu-item>考试安排</li>
-            <li nz-menu-item>组卷历史</li>
+            <li nz-menu-item [routerLink]="['./paper-history']">组卷历史</li>
           </ul>
         </li>
         <li nz-submenu *ngIf="isTeacher()">
