@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生管理</title>
+    <link rel="stylesheet" href="../../../node_modules/layui-src/dist/css/layui.css">
+    <style rel="stylesheet">
+        div.clearBoth{
+            clear: none;
+        }
+        .search{
+            padding: 0px 40px;
+        }
+    </style>
+</head>
+<body>
+<form class="layui-form">
+    <div class="layui-row">
+        <div class="layui-form-item clearBoth layui-col-xs4 layui-col-sm4 layui-col-md3">
+            <label class="layui-form-label">学院</label>
+            <div class="layui-input-block">
+                <select name="city" lay-verify="required">
+                    <option value=""></option>
+                    <option value="0">化工学院</option>
+                    <option value="1">电子学院</option>
+                    <option value="2">建筑学院</option>
+                    <option value="3">机械学院</option>
+                    <option value="4">商学院</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item clearBoth layui-col-xs4 layui-col-sm4 layui-col-md3">
+            <label class="layui-form-label">专业</label>
+            <div class="layui-input-block">
+                <select name="city" lay-verify="required">
+                    <option value=""></option>
+                    <option value="0">计算机科学与技术</option>
+                    <option value="1">嵌入式开发</option>
+                    <option value="2">机械设计</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item clearBoth layui-col-xs4 layui-col-sm4 layui-col-md3">
+            <label class="layui-form-label">班级</label>
+            <div class="layui-input-block">
+                <select name="city" lay-verify="required">
+                    <option value=""></option>
+                    <option value="0">1411</option>
+                    <option value="1">1412</option>
+                    <option value="2">1413</option>
+                    <option value="3">1414</option>
+                    <option value="4">1415</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item clearBoth layui-col-xs4 layui-col-sm4 layui-col-md3">
+            <label class="layui-form-label">姓名</label>
+            <div class="layui-input-inline">
+                <input type="text"   placeholder="可选输入姓名" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item" style="text-align: center">
+        <!--<div class="layui-input-block">-->
+            <button class="layui-btn search" lay-submit lay-filter="formDemo">搜索</button>
+        <!--</div>-->
+    </div>
+
+</form>
+</body>
+<script type="text/javascript" src="../../../node_modules/layui-src/dist/layui.js"></script>
+<script>
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data));
+            return false;
+        });
+    });
+</script>
+</html>

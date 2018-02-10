@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>考试测试系统</title>
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/test.css" />
+		<!--<link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">-->
+		<link rel="stylesheet" href="../../css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="../../../node_modules/layui-src/src/css/layui.css"/>
+	</head>
+	<body>
+		<div class="header">
+			<a href="#">苏州科技大学在线考试系统</a>
+			<a href="#">苏州科技大学在线考试系统</a>
+			<a href="../../../index.html">返回控制台</a>
+		</div>
+		<div class="container clearfix">
+			<div class="con_left">
+				<h2 class="con_h">【单项选择题】</h3>
+				<div id="con_select" class="con_select">
+					
+				</div>
+				<h2 class="con_h">【多项选择题】</h3>
+				<div class="con_selects" id="con_selects">
+					
+				</div>
+			</div>
+			<div class="con_right">
+				<div class="schedule">
+					<p>考试进度</p>
+					<div class="clearfix schedule_father">
+						<span id="scheduleLength"></span><span id="scheduNum">1/40</span>
+						<span class="scheduleLength"></span>
+					</div>
+					
+				</div>
+				<div class="put">
+					 <a href="javascript:void(0)" id="submitTile">
+							<i class="fa fa-file-text-o fa-3x icon_color"></i>
+							<span class="icon_color">交卷</span>
+					</a>
+				</div>
+				<div class="scantron">
+					<h3>答题卡</h3>
+					<hr />
+					<div  class="scantron_mark">
+						<span class="y"></span><span>已做</span>
+						<span></span><span>未做</span>
+						<span class="marks"></span><span>标记</span>
+					</div>
+					<h3>【单项选择题】</h3>
+					<div class="select" id="select">
+						
+					</div>
+					<h3>【多项选择题】</h3>
+					<div class="selects" id="selects">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<div class="hrs"></div>
+			<p>Copyright@2017 苏州科技大学胡义达版权所有</p>
+			<div>
+				<span>京ICP备888888号 -1</span>
+				<span>京ICP备888888号 -2</span>
+				<span>京ICP备888888号 -3</span>
+				<span>京ICP备888888号 -4</span>
+			</div>
+			<div>
+				<a href="#">网信认证1</a>
+				<a href="#">网信认证2</a>
+				<a href="#">网信认证3</a>
+				<a href="#">网信认证4</a>
+				<a href="#">网信认证5</a>
+				<a href="#">网信认证6</a>
+				<a href="#">网信认证7</a>
+				<a href="#">网信认证8</a>
+			</div>
+		</div>
+		<!--纠错-->
+		<!--<div id="sure">
+			<div class="sure_con">
+				<div class="sure_top">
+					<span>纠错题目</span>
+					<a href="javascript:share()">
+						<i class="fa fa-close fa-2x icon_color"></i>
+					</a>
+				</div>
+				<div class="mistake">
+					<div class="form_group clearfix">
+						<label for="titleId">题号</label>
+						<input type="text" id="titleId" disabled="" style="border: 0px;" value="第三题"/>
+					</div>
+					<div class="form_group clearfix">
+						<label for="titleEror">错误</label>
+						<textarea name="" rows="6" cols="50" id="titleError" placeholder="请写出该题的错误处"></textarea>
+					</div>
+				</div>
+				<div class="subInput clearfix">
+					<input type="button" value="提交" id="submit"/>
+				</div>
+			</div>
+		</div>-->
+	</body>
+	<div class="mistake">
+		<div class="form_group clearfix">
+			<label for="titleId">题号</label>
+			<input type="text" id="titleId" disabled="" style="border: 0px;" value="第三题"/>
+		</div>
+		<div class="form_group clearfix">
+			<label for="titleEror">错误</label>
+			<textarea name="" rows="6" cols="50" id="titleError" placeholder="请写出该题的错误处"></textarea>
+		</div>
+		<div class="subInput clearfix">
+			<input type="button" value="提交" id="submit"/>
+		</div>
+	</div>
+	<!--单选模版-->
+	<script id="selectHtml" type="text/html">
+		{{each selectList as value i}}
+			<div id="s{{value.id}}" >
+				<div class="tilte_icon clearfix">
+					<span class="orderNum">{{value.id}}</span>
+					<div class="font_icon" name="{{value.id}}">
+						<a href="javascript:void(0)"  class="click_error">
+						<i class="fa fa-edit fa-2x icon_color"></i><span class="icon_color" style="vertical-align: super;">纠错</span>
+						</a>
+						&nbsp;
+						&nbsp;
+						<a href="javascript:void(0)" class="click_mark">
+							<i class="fa fa-flag-o fa-2x icon_color"></i><span class="icon_color" style="vertical-align: super;">标记</span>
+						</a>
+					</div>
+				</div>
+				<p class="con_title">({{value.titleType}}){{value.title}}</p>
+				<div name="{{value.id}}">
+				{{each value['options'] as values j }}
+					<div class="con_key" ><span class="con_key_select" >{{values.order}}</span><span>{{values.option}}</span></div>
+				{{/each}}
+				</div>
+			</div>
+		{{/each}}
+	</script>
+	<!--多选模版-->
+	<script id="selectsHtml" type="text/html">
+		{{each selectsList as value i}}
+			<div id="s{{value.id}}">
+				<div class="tilte_icon clearfix">
+					<span class="orderNum">{{value.id}}</span>
+					<div class="font_icon" name="{{value.id}}">
+						<a href="javascript:void(0)" class="click_error">
+						<i class="fa fa-edit fa-2x icon_color"></i><span class="icon_color" style="vertical-align: super;">纠错</span>
+						</a>
+						&nbsp;
+						&nbsp;
+						<a href="javascript:void(0)" class="click_mark">
+							<i class="fa fa-flag-o fa-2x icon_color"></i><span class="icon_color" style="vertical-align: super;">标记</span>
+						</a>
+					</div>
+				</div>
+				<p class="con_title">({{value.titleType}}){{value.title}}</p>
+				<div name="{{value.id}}">
+				{{each value['options'] as values j }}
+					<div class="con_key" ><span class="con_key_select">{{values.order}}</span><span>{{values.option}}</span></div>
+				{{/each}}
+				</div>
+			</div>
+		{{/each}}
+	</script>
+	<!--右侧单选提示-->
+	<script  id="orderHtml" type="text/html">
+		{{each selectList as value i}}
+			<a href="#s{{value.id}}">{{value.id}}</a>
+		{{/each}}
+	</script>
+	<!--右侧多选提示-->
+	<script  id="ordersHtml" type="text/html">
+		{{each selectsList as value i}}
+			<a href="#s{{value.id}}">{{value.id}}</a>
+		{{/each}}
+	</script>
+	<script type="text/javascript" src="../../../node_modules/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../node_modules/art-template/lib/template-web.js"></script>
+	<script type="text/javascript" src="../../../node_modules/layui-src/src/layui.js"></script>
+	<script>
+		layui.use(['layer', 'form'], function(){
+		  var layer = layui.layer
+		  ,form = layui.form;
+		});
+	</script>
+	<script type="text/javascript" src="../../js/test.js"></script>
+</html>

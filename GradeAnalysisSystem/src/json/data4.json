@@ -1,0 +1,22 @@
+[
+  {
+    "name":"张三",
+    "score":90,
+    "pingji":"A"
+  },
+  {
+    "name":"李四",
+    "score":80,
+    "pingji":"B"
+  },
+  {
+    "name":"王五",
+    "score":65,
+    "pingji":"C"
+  },
+  {
+    "name":"赵六",
+    "score":9,
+    "pingji":"D"
+  }
+]

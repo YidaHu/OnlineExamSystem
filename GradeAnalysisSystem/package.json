@@ -1,0 +1,21 @@
+{
+  "name": "yida",
+  "version": "1.0.0",
+  "description": "苏州科技大学",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "art-template": "^4.12.2",
+    "bootstrap": "^3.3.7",
+    "bootstrap-table": "^1.11.2",
+    "echarts": "^3.8.5",
+    "jquery": "^3.2.1",
+    "layui-src": "^2.2.3"
+  },
+  "dependencies": {}
+}

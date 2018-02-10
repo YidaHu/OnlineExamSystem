@@ -1,0 +1,22 @@
+[
+  {
+    "banji":"1302计算机科学与技术",
+    "kemu":"Java",
+    "max":100,
+    "min":50,
+    "pingjun":80,
+    "jidian":70,
+    "guake":10,
+    "nianji":80
+  },
+  {
+    "banji":"1302计算机科学与技术",
+    "kemu":"Andord",
+    "max":80,
+    "min":59,
+    "pingjun":89,
+    "jidian":30,
+    "guake":1,
+    "nianji":77
+  }
+]

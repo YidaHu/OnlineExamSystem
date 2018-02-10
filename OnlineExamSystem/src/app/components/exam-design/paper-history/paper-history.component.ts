@@ -34,13 +34,6 @@ export class PaperHistoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.goods = [{departmentId: 1, department_name: "", id: 2, name: "数据结构", schoolId: 3}, {
-    //   departmentId: 1,
-    //   department_name: "",
-    //   id: 1,
-    //   name: "软件工程",
-    //   schoolId: 3
-    // }];
   }
 
 }

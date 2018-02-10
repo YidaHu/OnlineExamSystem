@@ -1,0 +1,28 @@
+[
+  {
+    "stuId": 1,
+    "zhuanye":"计算机科学与技术",
+    "banji":"计算机101",
+    "xingming":"张三",
+    "java":90,
+    "Android":100,
+    "Python":10,
+    "suanfa":99,
+    "banjiSort":2,
+    "xueyuanSort":1,
+    "jidian":50
+  },
+  {
+    "stuId": 2,
+    "zhuanye":"计算机科学与技术",
+    "banji":"计算机101",
+    "xingming":"李四",
+    "java":50,
+    "Android":40,
+    "Python":50,
+    "suanfa":95,
+    "banjiSort":7,
+    "xueyuanSort":5,
+    "jidian":56
+  }
+]

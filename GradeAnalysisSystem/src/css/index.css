@@ -1,0 +1,28 @@
+.ifheight{
+    height: 100%;
+    padding: 15px;
+    overflow: auto;
+}
+div.clearBoth{
+    clear: none;
+}
+.search{
+    padding: 0px 40px;
+}
+.searchForm{
+    margin-bottom: 60px;
+}
+.searchTable{
+    display: none;
+}
+canvas {
+//opacity: 0.5;
+}
+#ss{
+    padding: 10px 15px;
+    display:none;
+
+}
+
+
+
