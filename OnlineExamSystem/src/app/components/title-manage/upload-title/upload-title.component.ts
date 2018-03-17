@@ -95,10 +95,11 @@ export class UploadTitleComponent implements OnInit {
           this.answer_text = "";
           this.title_type = "";
           this._message.create("success", "添加成功");
-          this.router.navigate(['./upload-title']);
+          this.router.navigate(['./main/upload-title']);
         } else {
           this._message.create("error", "添加失败");
         }
+        console.log(data);
         console.log("添加");
         console.log(body);
       });

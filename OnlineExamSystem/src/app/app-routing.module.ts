@@ -24,7 +24,7 @@ import {TeacherQueryComponent} from "./components/information-query/teacher-quer
 import {KnowledageManageComponent} from "./components/title-manage/knowledage-manage/knowledage-manage.component";
 import {TitleListComponent} from "./components/title-manage/title-list/title-list.component";
 import {PaperHistoryComponent} from "./components/exam-design/paper-history/paper-history.component";
-import { TestComponent } from './components/test/test.component';
+import {ExamPageComponent} from "./components/exam-page/exam-page.component";
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -58,11 +58,10 @@ const routes: Routes = [
     {path: 'get-analysis', component: GetAnalysisComponent},
     {path: 'knowledge-analysis', component: KnowledgeAnalysisComponent},
     {path: 'score-analysis', component: ScoreAnalysisComponent},
-    // 考试
-    {path:  'test', component: TestComponent}
   ]
   },
-
+  // 考试
+  {path:  'exam', component: ExamPageComponent},
   {path: '**', component: ErrorPageComponent}
 ];
 

@@ -3,11 +3,11 @@ import {TestService} from '../../serve/test/test.service';
 import * as $ from 'jquery'
 
 @Component({
-  selector: 'app-test',
-  templateUrl: './test.component.html',
-  styleUrls: ['./test.component.css']
+  selector: 'app-exam-page',
+  templateUrl: './exam-page.component.html',
+  styleUrls: ['./exam-page.component.css']
 })
-export class TestComponent implements OnInit {
+export class ExamPageComponent implements OnInit {
   eoQuestionList:any=[];
   select:any = [];
   selects:any = [];
