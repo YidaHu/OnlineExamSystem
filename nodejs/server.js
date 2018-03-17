@@ -406,6 +406,143 @@ app.post('/api/school2department', function (req, res) {
         res.json("");
     }
 });
+var testdata  = [
+    {
+        "title":"考试提",
+        "selectList":[
+            {
+                "id":1,
+                "titleType":"单选",
+                "title":"胡义达是世界的？",
+                "options":[
+                    {
+                        "option":"是",
+                        "type":"text",
+                        "index":1,
+                        "order":"A"
+                    },
+                    {
+                        "option":"不是",
+                        "type":"text",
+                        "index":2,
+                        "order":"B"
+                    }
+                ]
+            },
+            {
+                "id":2,
+                "titleType":"单选",
+                "title":"世界是否热爱和平？",
+                "options":[
+                    {
+                        "option":"是",
+                        "type":"text",
+                        "index":1,
+                        "order":"A"
+                    },
+                    {
+                        "option":"不是",
+                        "type":"text",
+                        "index":2,
+                        "order":"B"
+                    }
+                ]
+            },
+            {
+                "id":3,
+                "titleType":"单选",
+                "title":"胡义达是世界的？",
+                "options":[
+                    {
+                        "option":"是",
+                        "type":"text",
+                        "index":1,
+                        "order":"A"
+                    },
+                    {
+                        "option":"不是",
+                        "type":"text",
+                        "index":2,
+                        "order":"B"
+                    }
+                ]
+            },
+            {
+                "id":4,
+                "titleType":"单选",
+                "title":"胡义达是世界的？",
+                "options":[
+                    {
+                        "option":"是",
+                        "type":"text",
+                        "index":1,
+                        "order":"A"
+                    },
+                    {
+                        "option":"不是",
+                        "type":"text",
+                        "index":2,
+                        "order":"B"
+                    }
+                ]
+            }
+        ],
+        "selectsList":[
+            {
+                "id":5,
+                "titleType":"多选",
+                "title":"胡义达是世界的？",
+                "options":[
+                    {
+                        "option":"是",
+                        "type":"text",
+                        "index":1,
+                        "order":"A"
+                    },
+                    {
+                        "option":"不是",
+                        "type":"text",
+                        "index":2,
+                        "order":"B"
+                    }
+                ]
+            },
+            {
+                "id":6,
+                "titleType":"多选",
+                "title":"胡义达是世界的？",
+                "options":[
+                    {
+                        "option":"是",
+                        "type":"text",
+                        "index":1,
+                        "order":"A"
+                    },
+                    {
+                        "option":"不是",
+                        "type":"text",
+                        "index":2,
+                        "order":"B"
+                    },
+                    {
+                        "option":"以上选项都错",
+                        "type":"text",
+                        "index":3,
+                        "order":"C"
+                    },
+                    {
+                        "option":"以上选项都对",
+                        "type":"text",
+                        "index":4,
+                        "order":"D"
+                    }
+                ]
+            }
+        ]
+
+    }
+
+]
 
 
 app.post('/api/courseResult', function (req, res) {
@@ -432,6 +569,9 @@ app.post('/api/course', function (req, res) {
    res.json(courseData);
 });
 
+app.post('/api/test',function(res,req){
+    res.json(testdata)
+})
 
 //数据分析
 app.post('/api/getAnalysis', function (req, res) {

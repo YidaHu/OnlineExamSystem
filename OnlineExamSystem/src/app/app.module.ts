@@ -55,6 +55,8 @@ import {DesignPaperService} from "./serve/exam-design/design-paper.service";
 import { ExamHistoryComponent } from './components/exam-design/exam-history/exam-history.component';
 import { PaperHistoryComponent } from './components/exam-design/paper-history/paper-history.component';
 import { PaperDetailComponent } from './components/exam-design/paper-detail/paper-detail.component';
+import { TestComponent } from './components/test/test.component';
+import { TestService } from './serve/test/test.service';
 
 @NgModule({
   declarations: [
@@ -85,6 +87,7 @@ import { PaperDetailComponent } from './components/exam-design/paper-detail/pape
     ExamHistoryComponent,
     PaperHistoryComponent,
     PaperDetailComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
@@ -119,6 +122,7 @@ import { PaperDetailComponent } from './components/exam-design/paper-detail/pape
     UtilsServiceService,
     TitleManageServerService,
     DesignPaperService,
+    TestService
   ],
   bootstrap: [AppComponent]
 })
