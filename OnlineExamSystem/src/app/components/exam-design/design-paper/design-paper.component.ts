@@ -112,6 +112,7 @@ export class DesignPaperComponent implements OnInit {
       this.designPaperService.addExampaper(body).subscribe((data: any) => {
         console.log("添加");
         console.log(body);
+        console.log(data);
       });
     } else {
       this._message.create("error", "科目不能为空!!!");

@@ -62,7 +62,7 @@ export class AdminManageComponent implements OnInit {
       this.statusRole = true;
     } else if (status == "2") {
       this.statusRole = true;
-    } else if (status == "2") {
+    } else if (status == "3") {
       this.statusRole = false;
     } else {
       this.statusRole = false;

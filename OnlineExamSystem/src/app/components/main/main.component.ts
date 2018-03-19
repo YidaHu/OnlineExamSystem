@@ -71,6 +71,10 @@ export class MainComponent implements OnInit {
     return this.teacher;
   }
 
+  isStudent() {
+    return this.student;
+  }
+
   isRootAdmin() {
     return this.root || this.admin;
   }

@@ -25,6 +25,7 @@ import {KnowledageManageComponent} from "./components/title-manage/knowledage-ma
 import {TitleListComponent} from "./components/title-manage/title-list/title-list.component";
 import {PaperHistoryComponent} from "./components/exam-design/paper-history/paper-history.component";
 import {ExamPageComponent} from "./components/exam-page/exam-page.component";
+import {InsertExamComponent} from "./components/exam-design/insert-exam/insert-exam.component";
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -53,6 +54,7 @@ const routes: Routes = [
 
     //考试设计
     {path: 'design-paper', component: DesignPaperComponent},
+    {path: 'insert-exam', component: InsertExamComponent},
     {path: 'paper-history', component: PaperHistoryComponent},
     //数据分析
     {path: 'get-analysis', component: GetAnalysisComponent},
@@ -61,7 +63,7 @@ const routes: Routes = [
   ]
   },
   // 考试
-  {path:  'exam', component: ExamPageComponent},
+  {path: 'exam', component: ExamPageComponent},
   {path: '**', component: ErrorPageComponent}
 ];
 
