@@ -25,4 +25,22 @@ export class InsertExamService {
     });
   }
 
+  //学生进入考试
+  getExamFromStudent(id, param) {
+    return this.http.get('http://localhost:8081/examonline/api/student/exam/' + id, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json;charset=utf-8'),
+      withCredentials: true,
+      params: param
+    });
+  }
+
+  //学生获得多个考试
+  getExamListFromStudent(param) {
+    return this.http.get('http://localhost:8081/examonline/api/student/examlist', {
+      headers: new HttpHeaders().set('Content-Type', 'application/json;charset=utf-8'),
+      withCredentials: true,
+      params: param
+    });
+  }
+
 }

@@ -47,6 +47,14 @@ export class MajorManageServerService {
     });
   }
 
+  //科目绑定专业
+  bindMajor2Subject(body) {
+    return this.http.post('http://localhost:8081/examonline/api/admin/major/bindsubject', body, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json;charset=UTF-8'),
+      withCredentials: true,
+    });
+  }
+
   addMajorFromAdmin(body) {
     return this.http.post('http://localhost:8081/examonline/api/admin/major', body, {
       headers: new HttpHeaders().set('Content-Type', 'application/json;charset=UTF-8'),

@@ -26,6 +26,7 @@ import {TitleListComponent} from "./components/title-manage/title-list/title-lis
 import {PaperHistoryComponent} from "./components/exam-design/paper-history/paper-history.component";
 import {ExamPageComponent} from "./components/exam-page/exam-page.component";
 import {InsertExamComponent} from "./components/exam-design/insert-exam/insert-exam.component";
+import {SubjectBindComponent} from "./components/information-manage/subject-bind/subject-bind.component";
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -47,6 +48,7 @@ const routes: Routes = [
     {path: 'course-manage', component: CourseManageComponent},
     {path: 'teacher-manage', component: TeacherManageComponent},
     {path: 'student-manage', component: StudentManageComponent},
+    {path: 'subject-bind', component: SubjectBindComponent},
     //题目管理
     {path: 'upload-title', component: UploadTitleComponent},
     {path: 'title-list', component: TitleListComponent},

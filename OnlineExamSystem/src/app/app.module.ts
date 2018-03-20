@@ -59,6 +59,7 @@ import {TestService} from './serve/test/test.service';
 import {ExamPageComponent} from "./components/exam-page/exam-page.component";
 import {InsertExamComponent} from './components/exam-design/insert-exam/insert-exam.component';
 import {InsertExamService} from "./serve/exam-design/insert-exam.service";
+import { SubjectBindComponent } from './components/information-manage/subject-bind/subject-bind.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +91,8 @@ import {InsertExamService} from "./serve/exam-design/insert-exam.service";
     PaperHistoryComponent,
     PaperDetailComponent,
     ExamPageComponent,
-    InsertExamComponent
+    InsertExamComponent,
+    SubjectBindComponent
   ],
   imports: [
     BrowserModule,

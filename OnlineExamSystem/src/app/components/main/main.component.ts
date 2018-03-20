@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CourseManageServerService} from "../../serve/information-manage/course-manage-server.service";
+import {InsertExamService} from "../../serve/exam-design/insert-exam.service";
 
 @Component({
   selector: 'app-main',
@@ -14,11 +15,17 @@ export class MainComponent implements OnInit {
   private teacher = false;
   private student = false;
 
+  private _subject;
+  private _exam;
+  private exams;
+  private subjectsStu;
   private subjects;
 
   isCollapsed = false;
+  isVisibleMiddle = false;
 
-  constructor(private courseManageServerService: CourseManageServerService) {
+  constructor(private courseManageServerService: CourseManageServerService
+    , private insertExamService: InsertExamService) {
   }
 
   ngOnInit() {
@@ -56,7 +63,19 @@ export class MainComponent implements OnInit {
       this.admin = false;
       this.teacher = false;
       this.student = true;
+      //学生获取科目
+      this.courseManageServerService.getSubjectFromStudent({
+        'page': 1,
+        'size': 10,
+      }).subscribe((data: any) => {
+        console.log(data)
+        if (data.data) {
+          console.log(data.data.list)
+          this.subjectsStu = data.data.list;
+        }
+      });
     }
+
   }
 
   isRoot() {
@@ -87,4 +106,35 @@ export class MainComponent implements OnInit {
     console.log(selectedSubject);
     sessionStorage.setItem('selectedSubject', selectedSubject);//把选择的科目保存到sessionStorage中
   }
+
+  queryExam(subject) {
+    this.insertExamService.getExamListFromStudent({
+      'subjectId': subject,
+    }).subscribe((data: any) => {
+
+      console.log(data)
+      if (data.data) {
+        this.exams = data.data;
+      }
+    });
+  }
+
+  showModalMiddle = () => {
+    this.isVisibleMiddle = true;
+  };
+  handleOkMiddle = (e) => {
+    console.log('点击了确定');
+    this.isVisibleMiddle = false;
+    this.insertExamService.getExamFromStudent(this._exam, {
+      'subjectId': this._subject,
+    }).subscribe((data: any) => {
+
+      console.log(data)
+    });
+  };
+
+  handleCancelMiddle = (e) => {
+    console.log(e);
+    this.isVisibleMiddle = false;
+  };
 }

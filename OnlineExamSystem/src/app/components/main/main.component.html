@@ -70,6 +70,7 @@
             <li nz-menu-item *ngIf="isRootAdmin()" [routerLink]="['./major-manage']">专业管理</li>
             <li nz-menu-item *ngIf="isAdmin()" [routerLink]="['./class-manage']">班级管理</li>
             <li nz-menu-item *ngIf="isAdmin()" [routerLink]="['./course-manage']">科目管理</li>
+            <li nz-menu-item *ngIf="isAdmin()" [routerLink]="['./subject-bind']">科目绑定</li>
           </ul>
         </li>
         <li nz-submenu>
@@ -140,7 +141,8 @@
         <li nz-menu-item *ngIf="isStudent()">
           <span title>
             <i class="anticon anticon-setting"></i>
-            <span [routerLink]="['../exam']">进入考试</span>
+            <!--<span [routerLink]="['../exam']">进入考试</span>-->
+            <span (click)="showModalMiddle()">进入考试</span>
           </span>
         </li>
       </ul>
@@ -150,3 +152,34 @@
     <router-outlet></router-outlet>
   </div>
 </div>
+
+<nz-modal [nzWrapClassName]="'vertical-center-modal'" [nzContent]="modalContent2" [nzVisible]="isVisibleMiddle"
+          [nzTitle]="'选择考试'" (nzOnCancel)="handleCancelMiddle($event)" (nzOnOk)="handleOkMiddle($event)">
+  <ng-template #modalContent2>
+    <label class="selectLab">考试科目</label>
+    <div class="selectOptions">
+      <nz-select style="width: 200px;" [(ngModel)]="_subject" [nzPlaceHolder]="'请选择考试科目'"
+                 [nzSize]="size" (ngModelChange)="queryExam(_subject)">
+        <nz-option
+          *ngFor="let option of subjectsStu"
+          [nzLabel]="option.name"
+          [nzValue]="option.id"
+          [nzDisabled]="option.disabled">
+        </nz-option>
+      </nz-select>
+    </div>
+    <label class="selectLab">考试</label>
+    <div class="selectOptions">
+      <nz-select style="width: 200px;" [(ngModel)]="_exam" [nzPlaceHolder]="'请选择考试'"
+                 [nzSize]="size">
+        <nz-option
+          *ngFor="let option of exams"
+          [nzLabel]="option.name"
+          [nzValue]="option.id"
+          [nzDisabled]="option.disabled">
+        </nz-option>
+      </nz-select>
+    </div>
+
+  </ng-template>
+</nz-modal>
