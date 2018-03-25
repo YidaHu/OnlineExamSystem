@@ -62,11 +62,13 @@ const routes: Routes = [
     {path: 'get-analysis', component: GetAnalysisComponent},
     {path: 'knowledge-analysis', component: KnowledgeAnalysisComponent},
     {path: 'score-analysis', component: ScoreAnalysisComponent},
+
   ]
   },
   // 考试
   {path: 'exam', component: ExamPageComponent},
-  {path: '**', component: ErrorPageComponent}
+  {path: '**', component: ErrorPageComponent},
+
 ];
 
 @NgModule({

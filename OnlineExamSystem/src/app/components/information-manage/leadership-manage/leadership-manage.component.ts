@@ -40,8 +40,7 @@ export class LeadershipManageComponent implements OnInit {
   _loading = true;
   _sortValue = null;
   _filterGender = [
-    {name: 'male', value: false},
-    {name: 'female', value: false}
+    {name: 'male', value: false},    {name: 'female', value: false}
   ];
 
   constructor(private _randomUser: TableServiceService,

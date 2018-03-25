@@ -60,6 +60,7 @@ import {ExamPageComponent} from "./components/exam-page/exam-page.component";
 import {InsertExamComponent} from './components/exam-design/insert-exam/insert-exam.component';
 import {InsertExamService} from "./serve/exam-design/insert-exam.service";
 import { SubjectBindComponent } from './components/information-manage/subject-bind/subject-bind.component';
+import {ExamPageServiceService} from "./serve/exam-page/exam-page-service.service";
 
 @NgModule({
   declarations: [
@@ -92,7 +93,7 @@ import { SubjectBindComponent } from './components/information-manage/subject-bi
     PaperDetailComponent,
     ExamPageComponent,
     InsertExamComponent,
-    SubjectBindComponent
+    SubjectBindComponent,
   ],
   imports: [
     BrowserModule,
@@ -128,7 +129,8 @@ import { SubjectBindComponent } from './components/information-manage/subject-bi
     TitleManageServerService,
     DesignPaperService,
     TestService,
-    InsertExamService
+    InsertExamService,
+    ExamPageServiceService
   ],
   bootstrap: [AppComponent]
 })

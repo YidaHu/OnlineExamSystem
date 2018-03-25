@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {CourseManageServerService} from "../../serve/information-manage/course-manage-server.service";
 import {InsertExamService} from "../../serve/exam-design/insert-exam.service";
+import {NzMessageService} from "ng-zorro-antd";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-main',
@@ -24,8 +26,10 @@ export class MainComponent implements OnInit {
   isCollapsed = false;
   isVisibleMiddle = false;
 
-  constructor(private courseManageServerService: CourseManageServerService
-    , private insertExamService: InsertExamService) {
+  constructor(private courseManageServerService: CourseManageServerService,
+              private insertExamService: InsertExamService,
+              private router: Router,
+              private _message: NzMessageService,) {
   }
 
   ngOnInit() {
@@ -130,6 +134,13 @@ export class MainComponent implements OnInit {
     }).subscribe((data: any) => {
 
       console.log(data)
+      if (data.message = "SUCCESS") {
+        sessionStorage.setItem('EXAMDATA', JSON.stringify(data.data.eoExamPaper.eoQuestionList));
+        sessionStorage.setItem('EXAMANSWER', JSON.stringify(data.data));
+        this.router.navigate(['exam']);
+      } else {
+        this._message.create("error", "不可进入考试!!!");
+      }
     });
   };
 

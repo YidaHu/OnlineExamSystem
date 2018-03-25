@@ -1,6 +1,6 @@
 <div class="container clearfix">
   <div class="con_left">
-      <i class="fa fa-trash-o fa-lg"></i> Delete
+      <!--<i class="fa fa-trash-o fa-lg"></i> Delete-->
 
             <h2 class="con_h">【单项选择题】</h2>
             <div  id="con_select" class="con_select">
@@ -20,7 +20,7 @@
                     </div>
                     <p class="con_title">{{item.title}}</p>
                     <div>
-                      <div class="con_key" *ngFor="let value of item.selectOption;let i = index" (click)="selectClick(index,'s',item.id,i,value)"><span class="con_key_select" >{{list[i]}}</span><span>{{value}}</span></div>
+                      <div class="con_key" *ngFor="let value of item.selectOptions;let i = index" (click)="selectClick(index,'s',item.id,i,value)"><span class="con_key_select" >{{list[i]}}</span><span>{{value}}</span></div>
                   </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                   </div>
                   <p class="con_title">{{item.title}}</p>
                   <div>
-                      <div class="con_key" *ngFor="let value of item.selectOption;let i = index" (click)="selectClick(index,'ss',item.id,i,value)"><span class="con_key_select" >{{list[i]}}</span><span>{{value}}</span></div>
+                      <div class="con_key" *ngFor="let value of item.selectOptions;let i = index" (click)="selectClick(index,'ss',item.id,i,value)"><span class="con_key_select" >{{list[i]}}</span><span>{{value}}</span></div>
                   </div>
               </div>
           </div>
@@ -68,7 +68,7 @@
                   </div>
                   <p class="con_title">{{item.title}}</p>
                   <div>
-                    <div class="con_key" *ngFor="let value of item.selectOption;let i = index" (click)="selectClick(index,'j',item.id,i,value)"><span class="con_key_select" >{{list[i]}}</span><span>{{value}}</span></div>
+                    <div class="con_key" *ngFor="let value of item.selectOptions;let i = index" (click)="selectClick(index,'j',item.id,i,value)"><span class="con_key_select" >{{list[i]}}</span><span>{{value}}</span></div>
                 </div>
               </div>
           </div>
